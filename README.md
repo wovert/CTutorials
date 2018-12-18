@@ -252,7 +252,7 @@ p=0028FF28, p pointer=0028FF2C
 
 ## 数组从0开始
 
-``` C
+```c
 int drinks[] = {4,2,3};
 drinks[0] == *drinks
 drinks[1] == *(drinks+1)
@@ -269,7 +269,7 @@ a == &a[0]
 
 ### 用指针输入数据
 
-```
+```c
 char name[40];
 scanf("%39s",name);
 scanf()函数接受char指针，因为scanf()函数打算要更新数组的内容而不需要变量本身的值，它要的是变量的地址
