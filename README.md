@@ -155,6 +155,9 @@ printf("%.10lf\n", pi); // 3.1415926525
 char card_name[3];
 scanf("%2s",card_name);
 
+// scanf除了%c识别空白字符外，其他都不识别空白字符
+// 注意：多次使用scanf是，请注意保留的输入缓冲区内容
+scanf("%i%c", &c, &num);
 
 ```
 
