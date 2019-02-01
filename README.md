@@ -326,6 +326,17 @@ p=0028FF28, p pointer=0028FF2C
 - sizeof(int) 4字节或8字节
 - sizeof("hi") 3子节，包括\0
 
+- sizeof(变量\常量) 或 sizeof 变量\常量
+- sizeof(数据类型)
+
+### 逗号运算符
+
+```c
+int a = 10;
+int b = 5;
+int result = ((a = a + 5), (b = b + 1)); // 6
+```
+
 ### 字符串指针
 
 - `char msg[] = "Hello World";`
