@@ -171,6 +171,10 @@ scanf("%i%c", &c, &num);
 - 只能检查值类型
 - 在第一个匹配的 case 语句出开始之行代码
 - 在遇到 break 或到达 switch 语句的末尾前，代码会一直运行
+- default 可以放置任意位置
+  - default放置最前面之后，后面的case 失效，至到遇到break才会结束
+
+- 固定值比较实用switch语句, 多个判断逻辑实用if语句
 
 ## function
 
@@ -452,3 +456,12 @@ scanf("%39s",name);
 ## 结构体
 
 > 组合不同数据类型的复合数据类型
+
+```c
+int number = -1;
+scanf("%i", &number); // 10 \n
+
+char tmp;
+scanf("%c", &temp);
+getchar(); 从输入缓冲区中获取字符
+```
