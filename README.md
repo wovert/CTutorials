@@ -68,10 +68,10 @@ $ ./a.out
 
 ### 常用系统函数
 
-- puts("输出内容换行显示")
-- char ex[20];
-  - scanf("%19s", ex); // 用户输入的任意字符保存在ex数组中
-- atoi(字符串); 字符串转整型(<stdlib.h>)
+- `puts("输出内容换行显示")`
+- `char ex[20];`
+  - scanf("%19s", ex);` // 用户输入的任意字符保存在ex数组中
+- `atoi(字符串);` 字符串转整型(<stdlib.h>)
 
 ### C 代码结构
 
@@ -184,10 +184,24 @@ char card_name[3];
 scanf("%2s",card_name);
 
 // scanf除了%c识别空白字符外，其他都不识别空白字符
-// 注意：多次使用scanf是，请注意保留的输入缓冲区内容
+// 注意：多次使用scanf时，请注意保留的输入缓冲区内容
 scanf("%i%c", &c, &num);
 
+
+scanf("%i%c%i", &num1, &charValue, &num2);
+// 123 a 456
+printf("num=%i, char=%c, num2=%i", num1, charValue, num2); // num1=123 char= num2=0
+
+scanf("%i,%c,%i", &num1, &charValue, &num2);
+// 123 a 456
+printf("num=%i, char=%c, num2=%i", num1, charValue, num2); // num1=123, char=a, num2=456
 ```
+
+如果输入时，输入了多个空格、回车、Tab都会被系统忽略掉
+
+利用scanf从输入缓冲区中获取用户输入的
+- 输入缓冲区
+  - 123+空格+a+空格+456
 
 ## 布尔类型
 
