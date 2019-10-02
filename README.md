@@ -489,6 +489,55 @@ scanf("%39s",name);
 
 [示例 const char](./pointer/const_char.c)
 
+## 编译
+
+- 源代码编译为目标文件
+```
+gcc -c *.c
+gcc *.o -o launch
+
+gcc -c thruster.c
+gcc *.o -o launch
+```
+
+寻找编译的文件需要十分机械化的过程
+
+### make 工具自动化构建
+
+怎么知道 `*.o` 文件需要重新编译呢？比较 file.o 和 file.c 的时间戳
+
+make 工具检查源文件和目标文件的时间戳。如果目标文件过期，就会重新编译它
+
+make 需要知道文件之间的依赖关系
+
+- 每个目标，make 需要知道两件事
+  - 依赖项：生成目标需要哪些文件
+  - 生成方法：生成该文件时要用哪些指令
+
+thruster.c 编译成目标代码 thruster.o，依赖项和生成方法分别是什么？
+
+thruster.o 就叫目标，因为生成 truster.o 文件，thruster.c 是依赖项，因为编译器在创建thruster.o时需要它。
+生成方法就是将 thruster.c 转化为 thruster.o 的编译命令
+
+`gcc -c thruster.c` 创建 thruster.o 的规则
+
+- `vim Makefile`
+
+```
+launch.o: launch.c launch.h thruster.h
+	gcc -c launch.c
+thruster.o: thruster.h thruster.c
+	gcc -c thruster.c
+launch: launch.o thruster.o
+	gcc launch.o thruster.o -o launch
+```
+
+- `make launch`
+
+autoconf 用来生成 makefile
+
+ant 和 rake 分别是 Java 和 Ruby 的构建工具
+
 ## 结构体
 
 > 组合不同数据类型的复合数据类型
