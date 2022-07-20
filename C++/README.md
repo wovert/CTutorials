@@ -1,4 +1,4 @@
-# C++
+﻿# C++
 
 - 1. 语法
     - 1.1 通过反汇编窥探底层
@@ -24,3 +24,21 @@
 https://isocpp.org/std/status
 https://www.cnblogs.com/mjios/category/459066.html
 https://www.cheatengine.org/downloads.php
+
+- 逆向工程：IDA Pro
+- Beyond Compare
+- Intel 机器码的白皮书PDF
+
+## 函数重载
+
+> 采用 name mangling 或者 name decoration 技术
+> C++编译器默认会对符号名（比如函数名）进行改编、修饰
+> 重载时会生成多个不同的函数名，不同编译器（MSVC、g++）有不同的生成规则
+
+- 规则
+  - 函数名相同
+  - 参数个数不同、参数类型不同、参数顺序不同
+
+- 注意
+  - 返回值类型与函数重载无关
+  - 调用红函数时，实参的隐式类型转换可能会产生二义性

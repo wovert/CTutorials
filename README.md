@@ -46,7 +46,7 @@
 - 编译：`cc -c 文件名` 翻译我们自己的代码
 - 链接：`cc 文件名` 自己的代码和系统的以及其他依赖的文件代码组合在一起生成可执行文件
 
-```c
+```
 $ cc -c main.c
   -> main.i 替换文件中所有的预处理指令
   -> main.s 汇编
@@ -68,6 +68,8 @@ $ gcc hello.c -o hello.exe
   - 汇编：将汇编语言编程机器语言（二进制语言） `gcc -c hello.s -o hello.o`
   - 链接：链接外部的库(.dll动态链接库 printf函数等) `gcc hello.o -o hello`
 
+
+http://www.dependencywalker.com/
 
 - -E: 只进行预处理
 - -S: 只进行预处理和编译
