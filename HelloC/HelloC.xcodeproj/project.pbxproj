@@ -31,6 +31,20 @@
 		B6BDFB852344974000D65B48 /* launch.c in Sources */ = {isa = PBXBuildFile; fileRef = B6BDFB842344974000D65B48 /* launch.c */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		B63FFFFC288681EA00D86D03 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = file.rcproject;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# rctool\n";
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		B6148C5F2342AD8F00621E66 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -436,6 +450,7 @@
 				B6148C992342B35800621E66 /* CopyFiles */,
 			);
 			buildRules = (
+				B63FFFFC288681EA00D86D03 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -501,7 +516,7 @@
 		B6567FE0233C438B00B42077 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1030;
+				LastUpgradeCheck = 1340;
 				ORGANIZATIONNAME = wovert;
 				TargetAttributes = {
 					B6148C602342AD8F00621E66 = {
@@ -539,6 +554,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = B6567FDF233C438B00B42077;
 			productRefGroup = B6567FE9233C438B00B42077 /* Products */;
@@ -650,6 +666,7 @@
 		B6148C652342AD9000621E66 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -660,6 +677,7 @@
 		B6148C662342AD9000621E66 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -670,6 +688,7 @@
 		B6148C712342B1DE00621E66 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -679,6 +698,7 @@
 		B6148C722342B1DE00621E66 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -688,6 +708,7 @@
 		B6148C7C2342B22900621E66 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -697,6 +718,7 @@
 		B6148C7D2342B22900621E66 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -706,6 +728,7 @@
 		B6148C872342B26400621E66 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -715,6 +738,7 @@
 		B6148C882342B26400621E66 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -724,6 +748,7 @@
 		B6148C922342B2F700621E66 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -733,6 +758,7 @@
 		B6148C932342B2F700621E66 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -742,6 +768,7 @@
 		B6148CA02342B35800621E66 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -751,6 +778,7 @@
 		B6148CA12342B35800621E66 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -783,6 +811,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -842,6 +871,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -871,6 +901,7 @@
 		B6567FF0233C438B00B42077 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -880,6 +911,7 @@
 		B6567FF1233C438B00B42077 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -889,6 +921,7 @@
 		B6BDFB6F2344903500D65B48 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -898,6 +931,7 @@
 		B6BDFB702344903500D65B48 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -907,6 +941,7 @@
 		B6BDFB7E234496CC00D65B48 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -916,6 +951,7 @@
 		B6BDFB7F234496CC00D65B48 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4B9UB6S9G;
 				PRODUCT_NAME = "$(TARGET_NAME)";
