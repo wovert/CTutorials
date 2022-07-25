@@ -31,6 +31,7 @@ int sum(int v1, int v2=2) {
 }
 
 // ÄæÏò¹¤³Ì£ºIDA Pro
+/*
 int main() {
 
 	sum(1);
@@ -50,3 +51,4 @@ int main() {
 	display(100.0);
 	return 0;
 }
+*/

@@ -15,21 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="overload.cpp">
+    <ClCompile Include="add.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="math.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="other.c">
+    <ClCompile Include="entry.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="math.h">
+    <ClInclude Include="add.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
