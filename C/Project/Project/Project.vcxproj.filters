@@ -18,7 +18,34 @@
     <ClCompile Include="add.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="entry.c">
+    <ClCompile Include="array.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="double.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="disBin.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="float.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="func.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="string.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="time.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="point.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="define.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
