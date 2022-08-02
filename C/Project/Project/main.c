@@ -17,7 +17,8 @@ extern void testFloat();
 extern void testFunc();
 extern void testPoint();
 extern void testDefine();
-
+extern void testSort();
+extern void testArray();
 
 void demo() {
 	int a = 3;
@@ -72,11 +73,13 @@ int main() {
 	// test();
 	// array();
 
-				// doubleTest();
+	// doubleTest();
 	// testDisBin();
-// testFloat();
-	testPoint();
+	//testFloat();
+	//testPoint();
 	//testDefine();
+	//testSort();
+	testArray();
 	system("pause");
 	return 0;
 }

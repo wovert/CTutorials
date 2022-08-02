@@ -35,6 +35,9 @@ int main() {
 	// (*p2).month = 5;
 	// *p2 = d2;
 
+
+	// cout 是标砖的输出流对象，打印字符串
+	// endl 是刷新缓冲区，并换行
 	cout << d1.year << endl;
 
 	getchar();

@@ -133,6 +133,7 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="float.c" />
     <ClCompile Include="point.c" />
+    <ClCompile Include="sort.c" />
     <ClCompile Include="string.c" />
     <ClCompile Include="time.c" />
   </ItemGroup>

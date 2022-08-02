@@ -48,6 +48,9 @@
     <ClCompile Include="define.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="sort.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="add.h">
