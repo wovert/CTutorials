@@ -19,6 +19,9 @@ extern void testPoint();
 extern void testDefine();
 extern void testSort();
 extern void testArray();
+extern void testFuncPointer();
+extern void testMalloc();
+extern void testStrFunc();
 
 void demo() {
 	int a = 3;
@@ -67,7 +70,7 @@ void testDisBin() {
 
 
 int main() {
-	// testFunc();
+	 //testFunc();
 
 	// demo();
 	// test();
@@ -79,7 +82,12 @@ int main() {
 	//testPoint();
 	//testDefine();
 	//testSort();
-	testArray();
+	//testArray();
+
+	//testFuncPointer();
+
+	//testMalloc();
+	testStrFunc();
 	system("pause");
 	return 0;
 }

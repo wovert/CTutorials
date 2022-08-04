@@ -333,6 +333,25 @@ printf("num=%i, char=%c, num2=%i", num1, charValue, num2); // num1=123, char=a, 
 - 输入缓冲区
   - 123+空格+a+空格+456
 
+
+#### 字符串函数
+
+> 以str开头的函数遇到'\0'结束
+
+`#include <string.h>;`
+
+- int strlen(const char *str): 长度(不含\0)
+- strcpy/strncpy：拷贝
+  - strcpy: 复制\0
+  - strncpy: 不复制\0
+- strcat/strncat: 连接
+  - char *strcat(char *dest, const char *src)； 将src的字符串拼接到 dest 的末尾(dest第一个\0的位置)
+- strcmp/strncmp: 比较
+- char* strchr(const char *str1, char ch); 在字符串str1中查找字母ch出现的位置，返回第一出现的ch地址，找不到返回NULL
+- char *strstr(const char *s1, const char *s2); 从s1中查找字符串s2，返回第一次s2出现的地址，查找失败返回NULL
+
+
+
 ## 布尔类型
 
 - 0 为假
@@ -565,6 +584,8 @@ p=0028FF28, p pointer=0028FF2C
 - sizeof(变量\常量) 或 sizeof 变量\常量
 - sizeof(数据类型)
 
+不管什么类型的指针，大小只和系统编译器有关系
+
 ### 逗号运算符
 
 ```c
@@ -582,7 +603,7 @@ int result = ((a = a + 5), (b = b + 1)); // 6
 
 - 数组变量可以用作指针变量来使用
 - 数组变量指向数组中第一个元素
-- 函数参数声明为数组，它会当作指针处理
+- **函数参数声明为数组，它会当作指针处理**
 - `sizeof` 运算符返回某条数据占用空间的大小
 - `sizeof(指针)` 32bit OS中返回4，64bit OS中返回8
 
@@ -597,8 +618,8 @@ int result = ((a = a + 5), (b = b + 1)); // 6
 
 ### 数组变量与指针区别
 
-- sizeof(数组变量) 返回数组长度
-- sizeof(指针变量) 返回指针大小 4 or 8
+- sizeof(数组变量) 返回数组的总大小=数组变量类型*数组元素
+- sizeof(指针变量) 返回是数组的首元素地址，即指针大小 4 or 8
 
 - 指针变量是一个用来保存存储器中地址的变量
 - 数组变量使用 & 运算符，结果就是数组变量本身
@@ -641,6 +662,36 @@ int *p2 = arr + 3; // 4
 - *&arr=arr
 - p=&arr
 - *p=*&arr=arr
+
+
+### 二维数组
+
+- 二维数组名：是二维数组的首行地址 + 1 __跳过一行__
+  - arr + 1, arr + 2, arr + 3
+- 对__行地址取*__ 将变成当前行的第0列的列地址
+  - arr[0] == *(arr+0) = *arr
+  - 第2行第2个元素地址：*(arr+1)+2
+  - 第2行第2个元素地址的内容：*(*(arr+1)+2)
+    - *(arr[1]+2) = arr[1][2]
+
+- int arr[3][4];
+  - *arr+2: 第0行第2列的列地址
+  - arr[1]: *(arr+1) 第1行的第0列的列地址
+  - &arr[0]+2: &*(arr+0)+2 = arr + 2,即 第2行的行地址
+  - **arr = *(*(arr+0)) = *(arr[0]+0) = arr[0][0] 第0行的第0个元素值
+
+
+### 数组指针和二维数组
+
+
+- 函数内部操作（读写）**外部数组的元素**，必须将外部数组的**数组名**传递函数
+
+- **二维数组名**作为函数的形参会被优化成**数组指针**
+
+- int arr[5]			==> int *p
+- int arr[3][4]			==> int (*p)[4]
+- int arr[3][4][5]		==> int (*p)[4][5]
+- int arr[3][4][5][6]	==> int (*p)[4][5][6]
 
 
 ### 数组变量不能指向其他地方
@@ -826,6 +877,34 @@ char tmp;
 scanf("%c", &temp);
 getchar(); 从输入缓冲区中获取字符
 ```
+
+
+## malloc/free
+
+> 动态分配内存空间
+
+-  头文件: stdlib.h
+
+- `void *malloc(unsgined int num_size);`  num_size 字节数
+- 返回值
+  - 成功：返回空间的起始地址
+  - 失败：NULL
+- 特点
+  - 返回值要强制类型转换
+  - malloc申请的空间 内容不确定 一般使用 memset进行清空
+  - 多次调用malloc 和第1次malloc 和 第2次malloc 的地址不一定连续
+
+
+- `void free(void *addr);`
+- 释放堆区空间
+
+
+- malloc(总的字节数)
+- calloc(数量*每个占用字节数) 且系统自动清0
+- realloc 动态追加或减少空间
+  - void* realloc(void *s, unsigned int newsize);
+  - unsigned int newsize 是总的占用空间大小
+
 ## ubutnu 
 
 ## 更新

@@ -130,11 +130,14 @@
     <ClCompile Include="disBin.c" />
     <ClCompile Include="double.c" />
     <ClCompile Include="func.c" />
+    <ClCompile Include="funcPointer.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="float.c" />
+    <ClCompile Include="malloc.c" />
     <ClCompile Include="point.c" />
     <ClCompile Include="sort.c" />
     <ClCompile Include="string.c" />
+    <ClCompile Include="str_func.c" />
     <ClCompile Include="time.c" />
   </ItemGroup>
   <ItemGroup>

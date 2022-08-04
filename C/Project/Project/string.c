@@ -1,7 +1,7 @@
 /**
  * ×Ö·û´®×·¼Ó
  */
-void testString(){
+void testAppendStr() {
 	char str1[] = "abcdef";
 	char str2[] = "123456";
 	char dst[100];
@@ -22,4 +22,8 @@ void testString(){
 	dst[i + j] = 0; //×Ö·û´®½áÊø·û
 
 	printf("dst = %s\n", dst);
+}
+
+void testString(){
+	testAppendStr();
 }

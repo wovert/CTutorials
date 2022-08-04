@@ -156,6 +156,21 @@ static void arrayPointer() {
 	printf("%d\n", p[0][3]);
 }
 
+static void array2Pointer() {
+	int arr[3][4] = { {1,2,3,4},{5,6,7,9},{10,11,12,13} };
+	int *p1 = &arr[0][0];
+	int(*p)[4]; // 数值指针
+	p = arr; // p和arr完全等价
+
+	// 用户p和arr取出7的值
+	printf("%d\n", arr[1][2]);
+	printf("%d\n", *(*(arr + 1) + 2));
+	printf("%d\n", p[1][2]);
+	printf("%d\n", *(*(p+1)+2));
+	printf("%d\n", *(p1+6));
+
+}
+
 void testArray() {
 	//array();
 	//arrayPoint();
@@ -163,5 +178,6 @@ void testArray() {
 	//testArr();
 	//testPointSub();
 	//pointArray();
-	arrayPointer();
+	//arrayPointer();
+	array2Pointer();
 }

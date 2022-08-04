@@ -51,6 +51,15 @@
     <ClCompile Include="sort.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="funcPointer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="malloc.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="str_func.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="add.h">
