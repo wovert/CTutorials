@@ -141,6 +141,7 @@
     <ClCompile Include="struct.c" />
     <ClCompile Include="str_func.c" />
     <ClCompile Include="time.c" />
+    <ClCompile Include="typedef.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="add.h" />

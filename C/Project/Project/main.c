@@ -23,6 +23,7 @@ extern void testFuncPointer();
 extern void testMalloc();
 extern void testStrFunc();
 extern void testConst();
+extern void testTypedef();
 
 void demo() {
 	int a = 3;
@@ -90,7 +91,8 @@ int main() {
 	//testMalloc();
 	//testStrFunc();
 	//testConst();
-	testStruct();
+	//testStruct();
+	testTypedef();
 	system("pause");
 	return 0;
 }
