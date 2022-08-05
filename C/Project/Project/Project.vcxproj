@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{E286B273-6FA1-497D-866A-D2FC227F4E57}</ProjectGuid>
-    <RootNamespace>ProjectDemo</RootNamespace>
+    <ProjectGuid>{6A142201-A193-45A6-AF9A-63A9C9E8B3EE}</ProjectGuid>
+    <RootNamespace>Project</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -76,6 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -95,7 +96,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
+      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -123,13 +124,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="math.c" />
-    <ClCompile Include="other.c" />
-    <ClCompile Include="overload.cpp" />
+    <ClCompile Include="add.c" />
+    <ClCompile Include="array.c" />
+    <ClCompile Include="const.c" />
+    <ClCompile Include="define.c" />
+    <ClCompile Include="disBin.c" />
+    <ClCompile Include="double.c" />
+    <ClCompile Include="func.c" />
+    <ClCompile Include="funcPointer.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="float.c" />
+    <ClCompile Include="malloc.c" />
+    <ClCompile Include="point.c" />
+    <ClCompile Include="sort.c" />
+    <ClCompile Include="string.c" />
+    <ClCompile Include="struct.c" />
+    <ClCompile Include="str_func.c" />
+    <ClCompile Include="time.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="math.h" />
+    <ClInclude Include="add.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

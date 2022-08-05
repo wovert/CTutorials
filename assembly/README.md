@@ -1,5 +1,25 @@
 ## 常见汇编指令
 
+## 汇编语言种类
+
+- 8086汇编(16bit)
+- x86汇编(32bit)
+- x64汇编(64bit)
+  - Intel(Windows)
+  - AT&T(Mac)
+- ARM汇编(嵌入式、移动设备)
+
+## 寄存器
+
+- 通用寄存器
+  - 64Bit：RAX/RBX/RCX/RDX: 
+  - 32Bit：EAX/EBX/ECX/EDX: 
+  - 16Bit：AX/BX/CX/DX: 
+	- AH:高字节
+	- AL:低字节
+
+## 汇编指令
+
 | 助记符 | 说明 |
 | ---- | ---- | 
 | MOV | 传送（分配）数值 | 
@@ -11,6 +31,31 @@
 | JMP | 跳转到一个新位置 | 
 | CALL | 跳转到一个子程序  | 
 | POP | 用于取出 Stack 最近写入的值 | 
+
+- mov dest, src
+  - 将src 的内容赋值给dest,  类似于dest=src
+- [地址值]
+  - 存放的是内存地址
+- word 是2字节，dword 是 4字节(double world), qword是8字节(quad word)
+- call 函数地址
+  - 调用函数
+- lea dest, [地址值]
+  - load effect address
+  - mov dest, src
+  - 将地址值赋值给 dest, 类似于 dest = 地址值
+- ret 函数返回
+- xor op1, op2
+  - 将op1和op2异或的结果赋值给op1, 类似于op1=op1^op2
+- add op1, op2
+  - op1=op1+op2
+- sub op1, op2
+   - op1=op1-op2
+- inc op
+  - increase: op=op+1
+- dec op
+- jmp 内存地址
+  - CPU跳转到内存地址，并执行代码
+  - 一般带条件跳转
 
 - 汇编语言程序
 ```
