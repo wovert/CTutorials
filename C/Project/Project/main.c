@@ -89,7 +89,8 @@ int main() {
 
 	//testMalloc();
 	//testStrFunc();
-	testConst();
+	//testConst();
+	testStruct();
 	system("pause");
 	return 0;
 }

@@ -63,6 +63,9 @@
     <ClCompile Include="const.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="struct.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="add.h">
