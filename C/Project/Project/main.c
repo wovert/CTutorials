@@ -22,6 +22,7 @@ extern void testArray();
 extern void testFuncPointer();
 extern void testMalloc();
 extern void testStrFunc();
+extern void testConst();
 
 void demo() {
 	int a = 3;
@@ -87,7 +88,8 @@ int main() {
 	//testFuncPointer();
 
 	//testMalloc();
-	testStrFunc();
+	//testStrFunc();
+	testConst();
 	system("pause");
 	return 0;
 }

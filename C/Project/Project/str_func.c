@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 static void testStrLen() {
 	char buf[] = "hello world";
@@ -131,11 +132,163 @@ static void testStrStr() {
 	printf("%s\n", str);
 }
 
+// 字符串转换函数
+static void testStrToType() {
+	printf("%d\n", atoi("123"));
+	printf("%ld\n", atol("12345"));
+
+	char str[20];
+	strcpy(str, "3.1415926");
+	printf("%.10lf\n", atof(str));
+
+	char buf[128] = "";
+	scanf("%s", buf);
+	printf("%d\n", my_atoi(buf));
+
+}
+
+static int my_atoi(char *str) {
+	// "123"
+	int sum = 0;
+	while (*str != '\0' && (*str >= '0' && *str <= '9' )) {
+		sum = sum * 10 + (*str++) - '0';
+		//str++;
+	}
+	return sum;
+}
+
+
+// 字符串转换函数
+static void testMyAtoi() {
+	char buf[128] = "";
+	scanf("%s", buf);
+	printf("%d\n", my_atoi(buf));
+}
+
+static void testStrTok() {
+	char buf[] = "hehe:haha:xixi:lala";
+	char *arr[32] = {NULL};
+
+	// 第一次切割
+	int i = 0;
+
+	// 第2~n次切割
+	arr[i] = strtok(buf, ":");
+	// 保证上一次切割正常
+	while (arr[i] != NULL) {
+		i++;
+		arr[i] = strtok(NULL, ":");
+	}
+	i = 0;
+	while (arr[i] != NULL) {
+		printf("%s\n", arr[i]);
+		i++;
+	}
+}
+
+static void testStrTokOpt() {
+	char buf[] = "hehe:haha#xixi@lala";
+	//char buf[] = "hehe";
+	char *arr[32] = { buf, NULL };
+
+	// 第一次切割
+	int i = 0;
+
+	// 第2~n次切割
+	//arr[i] = strtok(buf, ":");
+	// 保证上一次切割正常
+	while (arr[i++] = strtok(arr[i], ":#@"));
+
+	i = 0;
+	while (arr[i] != NULL) {
+		printf("%s\n", arr[i]);
+		i++;
+	}
+}
+
+static void testSprintf() {
+	int year = 2022;
+	int month = 8;
+	int day = 5;
+	char buf[] = "";
+
+	sprintf(buf, "%d年%d月%d日", year, month, day);
+	printf("%s\n", buf);
+}
+
+static void testSscanf() {
+	char buf[] = "2020年2月24日";
+	int year = 0;
+	int month = 0;
+	int day = 0;
+	char ch = 0;
+	char str_year[32] = "";
+	char str_month[32] = "";
+	char str_day[32] = "";
+
+	sscanf(buf, "%d年%d月%d日", &year, &month, &day);
+	printf("year=%d\n",		year);
+	printf("month=%d\n",	month);
+	printf("day=%d\n",		day);
+
+	sscanf(buf, "%c", &ch);
+	printf("ch=%c\n", ch);
+
+	sscanf(buf, "%s年%s月%s日", str_year, str_month, str_day);
+	printf("str_year=%s\n", str_year);		// 2020年2月24日
+	printf("str_month=%s\n", str_month);// null
+	printf("str_day=%s\n", str_day);			// null
+
+	int data1 = 0;
+	//sscanf("1234 5678", "1234 %d", &data1); // 5678
+	//sscanf("1234 5678", "%*d %d", &data1); // 5678
+	//sscanf("1234 5678", "%*s %d", &data1); // 5678  s:空格，\0
+
+	// 提取指定宽度的字符串或数据
+	sscanf("12abc5678", "%*5s%d", &data1); // 5678  %*5s配置且丢弃：12abc
+	printf("data1=%d\n", data1);
+
+	// %[a-z] 提取a-z的字符
+	// %[^a-z] 提取非a-z的字符
+
+	int data2 = 0;
+	int data3 = 0;
+	sscanf("12345678", "%*2s%2d%*2d%d", &data2, &data3);
+	printf("data2=%d\n", data2); // 34
+	printf("data3=%d\n", data3); // 78
+
+	char buf2[] = "";
+	sscanf("abcDefABC", "%[a-z]", buf2);
+	printf("buf2=%s\n", buf2); // abc
+
+	char buf3[] = "";
+	sscanf("aaBBcEdef", "%[aBc]", buf3);
+	printf("buf3=%s\n", buf3); // aaBBc
+
+	char buf4[] = "";
+	sscanf("ABCcABC", "%[^abc]", buf4);
+	printf("buf4=%s\n", buf4); // ABC
+
+	char name[] = "";
+	char addr[] = "";
+	sscanf("wovert@qq.com", "%[^@]%@%[^.]", name, addr);
+	printf("id=%s\n", name); // ABC
+	printf("addr=%s\n", addr); // ABC
+
+
+}
+
 void testStrFunc() {
 	//testStrLen();
 	//testStrCpy();
 	//testStrCat();
 	//testStrCmp();
 	//testStrChr();
-	testStrStr();
+	//testStrStr();
+	//testStrToType();
+	//testMyAtoi();
+	//testStrTok();
+	//testStrTokOpt();
+	//testSprintf();
+	testSscanf();
 }

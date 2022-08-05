@@ -349,8 +349,19 @@ printf("num=%i, char=%c, num2=%i", num1, charValue, num2); // num1=123, char=a, 
 - strcmp/strncmp: 比较
 - char* strchr(const char *str1, char ch); 在字符串str1中查找字母ch出现的位置，返回第一出现的ch地址，找不到返回NULL
 - char *strstr(const char *s1, const char *s2); 从s1中查找字符串s2，返回第一次s2出现的地址，查找失败返回NULL
+- memset
+  - void* memset(void *str, char c, int n); src:起始地址, c:填充数据, n:长度
+  - 将src所指向的内存区的前n个全部用C填充，用于清楚指定空间，比如数组或malloc的空间
+  - 返回src地址
 
+- 字符串转换函数 （stdlib.h）
+  - atoi: int atoi(const char *str);
+  - atol: long atol(const char *str);
+  - atof: double atof(const char *str);
 
+- 字符串切割函数 (string.h)
+  - strtok
+    - char *strtok(char s[], const char *delim);
 
 ## 布尔类型
 

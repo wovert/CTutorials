@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="add.c" />
     <ClCompile Include="array.c" />
+    <ClCompile Include="const.c" />
     <ClCompile Include="define.c" />
     <ClCompile Include="disBin.c" />
     <ClCompile Include="double.c" />
