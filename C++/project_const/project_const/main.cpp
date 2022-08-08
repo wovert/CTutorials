@@ -7,8 +7,46 @@ struct Date {
 	int day;
 };
 
+// 自定义数据类型，编译器不会优化
+struct Maker {
+
+	// 构造函数
+	Maker() {
+		a = 100;
+	}
+	int a;
+};
+
+const int gAge = 30;
 int main() {
-	const int age = 30;
+
+	int *gAgeP = (int *)&gAge;
+	//*gAgeP = 2000; // 常量区不能修改
+	cout << "gAgeP:" << *gAgeP << endl;
+	
+	// 禁止优化：使用age常量的区域不进行常量替换操作
+	volatile const int age = 10;
+	int *ageP = (int *)&age;
+	*ageP = 1000;
+	cout << "age:" << age << endl;
+	cout << "*ageP:" << *ageP << endl;
+
+
+	extern const int a;
+	cout << "extern a:" << a << endl;
+
+	int aa = 10;
+	const int b = a; // 如果用变量给const 修饰的局部变量赋值，编译器不会优化
+	int *pp = (int *)&b;
+	*pp = 100;
+	cout << "b=" << b << endl;
+	cout << "*pp=" << *pp << endl;
+
+	const Maker ma;
+	cout << ma.a << endl; // 100
+	Maker *maP = (Maker *)&ma;  
+	maP->a = 200;
+	cout << ma.a << endl; // 200, 没有优化，不能优化自定义数据类型
 
 	// C
 	// struct Date d = { 2022, 3, 8 };

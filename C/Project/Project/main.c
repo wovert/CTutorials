@@ -90,9 +90,9 @@ int main() {
 
 	//testMalloc();
 	//testStrFunc();
-	//testConst();
+	testConst();
 	//testStruct();
-	testTypedef();
+	//testTypedef();
 	system("pause");
 	return 0;
 }

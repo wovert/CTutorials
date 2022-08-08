@@ -1,6 +1,9 @@
 # include <stdio.h>
 # include <string.h>
 
+// 指定对齐规则 min(8, DATA1.b) = 4
+#pragma pack(8)
+
 struct Student {
     int sid;
     char *name;
@@ -158,11 +161,42 @@ static void test04() {
     printf("*(p+8) = %hd\n", *(short *)(p+8));
 }
 
+typedef struct {
+	char a; // 2
+	int b; // 4
+	short c; // 2
+} DATA1;
+
+//  对齐规则
+static void test05() {
+	//printf("%d\n", sizeof(DATA1)); // value(2) = 8
+	//printf("%d\n", sizeof(DATA1)); // value(1) = 7
+	printf("%d\n", sizeof(DATA1)); // value(8) = 4 = 12
+}
+
+
+typedef struct {
+	// 响铃位域 可以压缩（压缩的位数 不能超过成员自身大小）
+	unsigned char a : 2;
+	unsigned char : 2; //  无意义的位段（占2位）
+	unsigned char b : 2;
+
+} BIT_DATA;
+static void test06() {
+	BIT_DATA d;
+	printf("%d\n", sizeof(d)); // 1B
+	d.a = 6; // 0110
+	printf("%u\n", d.a); // 2
+
+}
+
 int main() {
     // test01();
     // test02();
     // test03();
-    test04();
+    //test04();
+	//test05();
+	test06();
     
     return 0;
 }

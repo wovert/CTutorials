@@ -92,5 +92,5 @@ void testStruct() {
 	//demo01();
 	//demo02();
 	//demo03();
-	demo04();
+	//demo04();
 }
