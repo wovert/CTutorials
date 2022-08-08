@@ -69,6 +69,15 @@
     <ClCompile Include="typedef.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="union.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="enum.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="link.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="add.h">

@@ -24,6 +24,9 @@ extern void testMalloc();
 extern void testStrFunc();
 extern void testConst();
 extern void testTypedef();
+extern void testUnion();
+extern void testEnum();
+extern void testLink();
 
 void demo() {
 	int a = 3;
@@ -90,9 +93,12 @@ int main() {
 
 	//testMalloc();
 	//testStrFunc();
-	testConst();
+	//testConst();
 	//testStruct();
 	//testTypedef();
+	//testUnion();
+	//testEnum();
+	testLink();
 	system("pause");
 	return 0;
 }

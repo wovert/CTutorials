@@ -177,17 +177,20 @@ static void test05() {
 
 typedef struct {
 	// 响铃位域 可以压缩（压缩的位数 不能超过成员自身大小）
+	// 低位开始
 	unsigned char a : 2;
-	unsigned char : 2; //  无意义的位段（占2位）
+	unsigned char : 4; //  无意义的位段（占2位）
 	unsigned char b : 2;
-
 } BIT_DATA;
+
 static void test06() {
 	BIT_DATA d;
+	memset(&d, 0, 1);
 	printf("%d\n", sizeof(d)); // 1B
-	d.a = 6; // 0110
+	d.a = 0; //
+	d.b = 3;
 	printf("%u\n", d.a); // 2
-
+	printf("%u\n", *(unsigned char *)&d); // 1100 0000 // 2^6+2^7=64+128=192
 }
 
 int main() {

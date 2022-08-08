@@ -130,8 +130,10 @@
     <ClCompile Include="define.c" />
     <ClCompile Include="disBin.c" />
     <ClCompile Include="double.c" />
+    <ClCompile Include="enum.c" />
     <ClCompile Include="func.c" />
     <ClCompile Include="funcPointer.c" />
+    <ClCompile Include="link.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="float.c" />
     <ClCompile Include="malloc.c" />
@@ -142,6 +144,7 @@
     <ClCompile Include="str_func.c" />
     <ClCompile Include="time.c" />
     <ClCompile Include="typedef.c" />
+    <ClCompile Include="union.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="add.h" />
