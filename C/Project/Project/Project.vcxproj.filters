@@ -78,10 +78,24 @@
     <ClCompile Include="link.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="file.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="rand.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="源.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="add.h">
       <Filter>头文件</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="a.txt">
+      <Filter>源文件</Filter>
+    </Text>
   </ItemGroup>
 </Project>

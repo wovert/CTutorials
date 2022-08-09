@@ -131,6 +131,7 @@
     <ClCompile Include="disBin.c" />
     <ClCompile Include="double.c" />
     <ClCompile Include="enum.c" />
+    <ClCompile Include="file.c" />
     <ClCompile Include="func.c" />
     <ClCompile Include="funcPointer.c" />
     <ClCompile Include="link.c" />
@@ -138,6 +139,7 @@
     <ClCompile Include="float.c" />
     <ClCompile Include="malloc.c" />
     <ClCompile Include="point.c" />
+    <ClCompile Include="rand.c" />
     <ClCompile Include="sort.c" />
     <ClCompile Include="string.c" />
     <ClCompile Include="struct.c" />
@@ -145,9 +147,13 @@
     <ClCompile Include="time.c" />
     <ClCompile Include="typedef.c" />
     <ClCompile Include="union.c" />
+    <ClCompile Include="源.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="add.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="a.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

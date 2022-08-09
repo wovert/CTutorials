@@ -87,10 +87,104 @@ https://www.cheatengine.org/downloads.php
 
 - 第三方框架/库：C语言的开源库
 
-
 - ifndef, #define, #endif 来防止头文件的内容被重复包含
   - 受C/C++标准支持，不受编译器的任何限制
 - progma once 可以防止整个文件的内容被重复包含
   - 有些编译器不支持#progma once(较老编译器不支持，如果GCC3.4版本之前)，兼容性不够好
 
 
+## const
+
+  1. const int data =10; // data先放入符号表
+  2. 对data取地址系统给data开辟空间；
+  3. const int a = b;// b 是变量名 系统直接给a开辟空间 而不放入符号表;
+  4. const 修饰自定义数据 系统为自定义数据开辟空间；
+
+## define
+
+  ```
+  namespae A {
+    #define MY_A 200
+  }
+
+  // MY_A 属于文件，不属于A
+  count << "MY_A=" << MY_A <<endl;
+  ```
+
+## 引用
+
+> 空间取别名
+
+- &是标记作用；
+- 引用创建时，必须初始化
+- 初始化之后不能改变的指向空间
+- 必须引用一块合法的内存空间
+
+
+```
+int a  = 10;
+int &b = a; // 给a的空间取别名叫b
+printf("b=%d\n", b);
+
+void func(int &a) {
+	a = 200;
+}
+
+func(int a);
+printf("a=%d\n", b); // 200
+```
+
+- 引用作为函数的返回值
+  - 不要返回局部变量的引用
+  - static声明的局部变量可以返回引用
+  - func() = 100; 如果函数当左值，那么该函数必须返回引用
+
+### 数组的引用
+
+```
+int arr[] = {1,2,3};
+
+// 1 定义三个整形元素的数组
+typedef int(MY_ARR)[3];
+// 建立引用 int &b=a;
+MY_ARR &arrRef = arr;
+
+// 2 直接定义引用
+int(&arrRef2)5] = arr; // int &b=a
+
+
+// 3 建立引用数组类型
+typedef int(&MY_ARR3)[5];
+MY_ARR3 arrRef3 = arr;
+```
+
+### 常量引用
+
+- 字面量不能赋给引用，但是可以赋给const引用
+- const修饰的引用，不能修改
+
+
+```
+字面量不能赋给引用
+int &ref = 100;
+
+一个字面量赋给常量引用
+```
+// const修饰的有你用赋给字面量
+const int &ref = 100; 
+
+// 以上代码编译器变为以下代码
+int temp = 200;
+const int &ret = temp;
+ret = 200; // 不能通过ret修改值
+
+```
+
+## C和C++的区别
+
+- C语言的结构体不能写函数，C++可以
+- 结构体定义变量时，C++不需要加struct关键字
+- 更佳严格的类型检查
+- const修饰的变量，C++有时没有内存，C语言的都有内存
+- 三目运算符返回的值不一样
+- 引用和C语言的指针功能一样

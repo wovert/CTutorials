@@ -1,4 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <stdlib.h>
+#include <string.h>
+
 using namespace std;
 
 void testConst() {
@@ -93,6 +97,38 @@ void swapRef(int &v1, int &v2) {
 	v2 = tmp;
 }
 
+// 接受指针类型的地址
+void func(char **tmp) {
+	char *p;
+	p = (char *)malloc(64);
+	memset(p, 0, 64);
+	//strcpy(p, "夏红");
+	char cont[] = "夏红";
+	strcpy_s(p, strlen(cont)+1, cont);
+	*tmp = p;
+}
+
+
+// 接受指针类型的地址
+void funcRef(char * &tmp) {
+	char *p;
+	p = (char *)malloc(64);
+	memset(p, 0, 64);
+	//strcpy(p, "夏红");
+	char cont[] = "夏红";
+	strcpy_s(p, strlen(cont) + 1, cont);
+	tmp = p;
+}
+
+
+void test02() {
+	char *mp = NULL;
+	// 传递指针类型的地址
+	//func(&mp);
+	funcRef(mp);
+	cout << mp << endl;
+}
+
 int main() {
 	// testConst();
 	testReference();
@@ -102,6 +138,9 @@ int main() {
 	// swap(&a, &b);
 	swap(a, b);
 	cout << "a=" << a << ",b=" << b << endl;
+
+	// 指针的引用
+	test02();
 
 	getchar();
 	return 0;

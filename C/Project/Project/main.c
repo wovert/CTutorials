@@ -27,6 +27,8 @@ extern void testTypedef();
 extern void testUnion();
 extern void testEnum();
 extern void testLink();
+extern void testRand();
+extern void testFile();
 
 void demo() {
 	int a = 3;
@@ -98,7 +100,9 @@ int main() {
 	//testTypedef();
 	//testUnion();
 	//testEnum();
-	testLink();
+	//testLink();
+	testFile();
+	//testRand();
 	system("pause");
 	return 0;
 }

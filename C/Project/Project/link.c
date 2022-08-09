@@ -7,12 +7,13 @@ typedef struct {
 	struct NODE *next;
 } NODE;
 
-void testLink() {
+// 静态链表
+static void staticLink() {
 	NODE *head = NULL;
 	NODE *pb = NULL;
 
-	NODE n0 = {0, "node0"};
-	NODE n1 = { 1, "node1"};
+	NODE n0 = { 0, "node0" };
+	NODE n1 = { 1, "node1" };
 	NODE n2 = { 2, "node2" };
 	NODE n3 = { 3, "node3" };
 	NODE n4 = { 4, "node4" };
@@ -32,4 +33,14 @@ void testLink() {
 		printf("%d %s\n", pb->id, pb->data);
 		pb = pb->next; // pb指向下一个节点
 	}
+}
+
+// 动态链表
+static void dynamicLink() {
+
+}
+
+void testLink() {
+	//staticLink();
+	dynamicLink();
 }
