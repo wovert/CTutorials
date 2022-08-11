@@ -29,6 +29,7 @@ extern void testEnum();
 extern void testLink();
 extern void testRand();
 extern void testFile();
+extern void charPointerArray();
 
 void demo() {
 	int a = 3;
@@ -101,8 +102,9 @@ int main() {
 	//testUnion();
 	//testEnum();
 	//testLink();
-	testFile();
+	//testFile();
 	//testRand();
+	charPointerArray();
 	system("pause");
 	return 0;
 }

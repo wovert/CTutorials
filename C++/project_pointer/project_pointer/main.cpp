@@ -2,7 +2,6 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
-
 using namespace std;
 
 void testConst() {
@@ -83,7 +82,6 @@ void testReference() {
 	refAge = 20;
 
 	cout << age << endl;
-
 }
 void swap(int *v1, int *v2) {
 	int tmp = *v1;
@@ -121,6 +119,7 @@ void funcRef(char * &tmp) {
 }
 
 
+// 指针的引用
 void test02() {
 	char *mp = NULL;
 	// 传递指针类型的地址

@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="add.c" />
     <ClCompile Include="array.c" />
+    <ClCompile Include="charPointerArr.c" />
     <ClCompile Include="const.c" />
     <ClCompile Include="define.c" />
     <ClCompile Include="disBin.c" />
@@ -138,7 +139,7 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="float.c" />
     <ClCompile Include="malloc.c" />
-    <ClCompile Include="point.c" />
+    <ClCompile Include="pointer.c" />
     <ClCompile Include="rand.c" />
     <ClCompile Include="sort.c" />
     <ClCompile Include="string.c" />

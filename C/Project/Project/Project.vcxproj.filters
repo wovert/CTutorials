@@ -42,9 +42,6 @@
     <ClCompile Include="time.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="point.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="define.c">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -85,6 +82,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="源.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pointer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="charPointerArr.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

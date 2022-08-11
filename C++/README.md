@@ -31,6 +31,30 @@ https://www.cheatengine.org/downloads.php
 - Beyond Compare
 - Intel 机器码的白皮书PDF
 
+## inline
+
+> 内联函数
+
+### 不会成为内联函数
+
+- 存在过多的条件判断语句
+- 函数体过大（50行）
+- 对函数进行取址操作
+- 不存在任何形式的循环语句
+
+### 内联函数优点
+
+- 有宏函数的效率，没有宏函数的缺点
+- 类的成员函数默认加上 inline
+
+## 函数默认参数
+
+- 函数的默认参数后面的参数必须都是默认参数
+- 函数的声明和实现不能同时有函数的默认参数
+
+- 占位参数在也有默认值
+  - `void fun(int a, int=10){}`
+
 ## 函数重载
 
 > 采用 name mangling 或者 name decoration 技术
@@ -115,6 +139,8 @@ https://www.cheatengine.org/downloads.php
 
 > 空间取别名
 
+引用的本质是常量指针
+
 - &是标记作用；
 - 引用创建时，必须初始化
 - 初始化之后不能改变的指向空间
@@ -123,7 +149,7 @@ https://www.cheatengine.org/downloads.php
 
 ```
 int a  = 10;
-int &b = a; // 给a的空间取别名叫b
+int &b = a; // 给a的空间取别名叫b，编译器内部为  int * const b = &a;
 printf("b=%d\n", b);
 
 void func(int &a) {
@@ -164,21 +190,20 @@ MY_ARR3 arrRef3 = arr;
 - const修饰的引用，不能修改
 
 
-```
-字面量不能赋给引用
-int &ref = 100;
+- 字面量不能赋给引用
+  - int &ref = 100;
 
-一个字面量赋给常量引用
-```
-// const修饰的有你用赋给字面量
-const int &ref = 100; 
+- 一个字面量赋给常量引用
+- const修饰的有你用赋给字面量
+- const int &ref = 100; 
 
-// 以上代码编译器变为以下代码
-int temp = 200;
-const int &ret = temp;
-ret = 200; // 不能通过ret修改值
+- 以上代码编译器变为以下代码
+- int temp = 200;
+- const int &ret = temp;
+- ret = 200; // 不能通过ret修改值
 
-```
+### 指针的引用
+
 
 ## C和C++的区别
 
@@ -188,3 +213,14 @@ ret = 200; // 不能通过ret修改值
 - const修饰的变量，C++有时没有内存，C语言的都有内存
 - 三目运算符返回的值不一样
 - 引用和C语言的指针功能一样
+
+## 混合编译步骤
+
+- main.ccp/func.c/fun.h
+
+1. gcc -c fun.c -o fun.o
+2. g++ main.cpp fun.o -o main
+
+## 结构体和类的区别
+
+1. 结构体默认权限是共有的，类的默认权限是私有的
