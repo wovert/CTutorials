@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <string>
+#include <string.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -10,6 +11,24 @@ class Student {
         // char *name;
         // char name[100];
         string name;
+        char *school;
+    public:
+        Student(const char *tmp, int number) {
+            this->number = number;
+            // ä»Žå †åŒºç©ºé—´ç”³è¯·
+            // school = (char *)malloc(strlen(tmp) + 1);
+            school = strdup(tmp);
+            strcpy(school, tmp);
+            cout << "æž„é€ å‡½æ•°" << endl;
+        }
+        ~Student() {
+            // é‡Šæ”¾å †åŒºç©ºé—´
+            cout << "æžæž„å‡½æ•°" << endl;
+            if (school != NULL) {
+                free(school);
+                school = NULL;
+            }
+        }
     public:
         void setNumber(int no) {
             number = no;
@@ -20,18 +39,18 @@ class Student {
         }
         char* getInfo() {
             char *s;
-            sprintf(s, "ÐÕÃû£º%s Ñ§ºÅ:%d\n", name.c_str(), number);
+            sprintf(s, "å§“å%s å¹´é¾„:%d å­¦æ ¡:%s\n", name.c_str(), number, school);
             return s;
         }
 
 };
 
 void test() {
-    Student stu;
-    stu.setNumber(1);
-    // char name[] = "ÕÅÈý";
-    string name = "ÕÅÈý";
-    stu.setName("ÕÅÈý");
+    Student stu("èŒä¸šé«˜ä¸­", 1);
+    // stu.setNumber(1);
+    // char name[] = "å¼ ä¸‰";
+    string name = "å¼ ä¸‰";
+    stu.setName(name);
     printf("%s\n", stu.getInfo());
 }
 
