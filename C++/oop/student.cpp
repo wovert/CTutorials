@@ -15,15 +15,15 @@ class Student {
     public:
         Student(const char *tmp, int number) {
             this->number = number;
-            // ä»Žå †åŒºç©ºé—´ç”³è¯·
+            // ´Ó¶ÑÇø¿Õ¼äÉêÇë
             // school = (char *)malloc(strlen(tmp) + 1);
             school = strdup(tmp);
             strcpy(school, tmp);
-            cout << "æž„é€ å‡½æ•°" << endl;
+            cout << "¹¹Ôìº¯Êý" << endl;
         }
         ~Student() {
-            // é‡Šæ”¾å †åŒºç©ºé—´
-            cout << "æžæž„å‡½æ•°" << endl;
+            // ÊÍ·Å¶ÑÇø¿Õ¼ä
+            cout << "Îö¹¹º¯Êý" << endl;
             if (school != NULL) {
                 free(school);
                 school = NULL;
@@ -37,19 +37,23 @@ class Student {
         void setName(string str) {
             name = str;
         }
-        char* getInfo() {
-            char *s;
-            sprintf(s, "å§“å%s å¹´é¾„:%d å­¦æ ¡:%s\n", name.c_str(), number, school);
-            return s;
-        }
+        // ÀàÄÚÉùÃ÷³ÉÔ±º¯Êý
+        char* getInfo();
 
 };
 
+// ÀàÍâ¶¨Òå³ÉÔ±º¯Êý
+char* Student::getInfo() {
+    char *s;
+    sprintf(s, "ÐÕÃû%s ÄêÁä:%d Ñ§Ð£:%s\n", name.c_str(), number, school);
+    return s;
+}
+
 void test() {
-    Student stu("èŒä¸šé«˜ä¸­", 1);
+    Student stu("Ö°Òµ¸ßÖÐ", 1);
     // stu.setNumber(1);
-    // char name[] = "å¼ ä¸‰";
-    string name = "å¼ ä¸‰";
+    // char name[] = "ÕÅÈý";
+    string name = "ÕÅÈý";
     stu.setName(name);
     printf("%s\n", stu.getInfo());
 }

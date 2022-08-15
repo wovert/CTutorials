@@ -218,8 +218,12 @@ MY_ARR3 arrRef3 = arr;
 
 - main.ccp/func.c/fun.h
 
-1. gcc -c fun.c -o fun.o
+1. gcc -c fun.c -o fun.o 或者 g++ -c data.cpp -o data.o
 2. g++ main.cpp fun.o -o main
+
+## 类
+
+### 类定义在头文件 成员函数在cpp文件中实现
 
 ## 结构体和类的区别
 
