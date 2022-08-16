@@ -37,6 +37,7 @@ class Student {
         void setName(string str) {
             name = str;
         }
+
         // 类内声明成员函数
         char* getInfo();
 
