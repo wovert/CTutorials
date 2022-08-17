@@ -101,7 +101,33 @@ void test07() {
 }
 
 void test08() {
-    cout << "Data::shareData=" << Data::shareData << endl;
+    // 类静态成员
+    // cout << "Data::shareData=" << Data::shareData << endl;
+
+    // 类静态函数
+    cout << "Data::shareData=" << Data::getShareData() << endl;
+}
+
+void test09() {
+    // 类静态成员
+    // cout << "Data::shareData=" << Data::shareData << endl;
+    // 类静态函数
+    cout << "Data::shareData=" << Data::getOnlyData() << endl;
+}
+
+void test10() {
+    Data *p = new Data(2, 30);
+    p->getInfo();
+}
+
+void test11() {
+    // 常对象
+    const Data ob = Data(01, 18); // 显示调用构造函数
+
+    // error: 普通函数存在修改成员变量可能，所以不能调用
+    // ob.setNum(100); // error
+    // 调用常函数
+    ob.envNum();
 }
 
 int main(int argc, char *argvs[]) {
@@ -112,7 +138,10 @@ int main(int argc, char *argvs[]) {
     // test05();
     // test06();
     // test07();
-    test08();
+    // test08();
+    // test09();
+    // test10();
+    test11();
 
     return 0;
 }

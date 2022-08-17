@@ -44,9 +44,17 @@ class Data {
         // 对象成员
         A oba;
         B obb;
-    public:
         static int shareData; // 静态成员变量（类中声明）
+    // public:
+        const static int onlyData; // 类中声明
+        mutable int mnum;
     public:
+        static int getShareData() {
+            return Data::shareData;
+        }
+        static int getOnlyData() {
+            return Data::onlyData;
+        }
         Data() {
             cout << "无参构造函数Data>>>>>>>>" << endl;
         }
@@ -86,6 +94,8 @@ class Data {
         int getAge(void);
         void setName(char *str);
         char *getName(void);
+        void getInfo() const;
+        void envNum() const;
 };
 
 #endif
