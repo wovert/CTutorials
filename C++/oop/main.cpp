@@ -1,5 +1,6 @@
 #include <iostream>
 #include "data.h"
+#include "myarray.h"
 #include <stdlib.h>
 #include <string.h>
 using namespace std;
@@ -130,6 +131,22 @@ void test11() {
     ob.envNum();
 }
 
+void test12() {
+    MyArray arr;
+    cout << "capacity:" << arr.getCapacity() << endl;
+    cout << "size:" << arr.getSize() << endl;
+
+    MyArray arr2(20);
+    cout << "capacity:" << arr2.getCapacity() << endl;
+    cout << "size:" << arr2.getSize() << endl;
+    arr2.pushBack(20);
+    arr2.pushBack(21);
+    arr2.pushBack(22);
+    arr2.pushBack(23);
+    cout << "size:" << arr2.getSize() << endl;
+    cout << arr2.getData(2) << endl;
+}
+
 int main(int argc, char *argvs[]) {
     // test01();
     // test02();
@@ -141,7 +158,8 @@ int main(int argc, char *argvs[]) {
     // test08();
     // test09();
     // test10();
-    test11();
+    // test11();
+    test12();
 
     return 0;
 }
