@@ -2,8 +2,10 @@
 
 ## C++ History
 
+- K&R C 1978
+- C with Classes 1980
 - C++ 98(V1.0)
-- C++ 11(V2.0)
+- **C++ 11(V2.0)**
 
 - C++ 语言
 - C++ 标准库
@@ -20,8 +22,22 @@
   - 软件破解
   - 植物大战僵尸外挂
 
+## C++
+
+> 学习计算机程序设计的核心思想和编程范式（Paradigm）
+
+- 面向对象
+- 高性能
+- 函数式
+- 范式编程
+
+学习抽象思维方式和逻辑方法论
+
+
 ## C++应用领域
 
+- 界面（GUI）
+- Job Opportunifies 工作
 - 游戏（Cocos2d-X）、图像、多媒体、网络、嵌入式
 - 数据库（Oracle、MySQL）、浏览器（Chrome），搜索引擎（ Google）
 - 操作系统、驱动程序、编译器（Gcc、LLVM），编程语言(Swift)
@@ -29,7 +45,17 @@
 - iOS开发（Runtime, AsyncDisplayKit）
 - Android 开发(NDK, fresco[匿名共享内存，Ashmem, Anomymus Shared Memory])
 - Java(JNI)
+- 云计算
+- Libraries
 
+- Microsoft
+- Google
+- Bloomberg(实时股票)
+- MatLAB
+- amazon.com
+- oracle
+- UBISOFT(游戏)
+- UBer
 
 https://isocpp.org/std/status
 https://www.cnblogs.com/mjios/category/459066.html
@@ -38,6 +64,49 @@ https://www.cheatengine.org/downloads.php
 - 逆向工程：IDA Pro
 - Beyond Compare
 - Intel 机器码的白皮书PDF
+
+## 编程的本质
+
+> 寻找算法对应的最基础的代数结构 —— Alexxander Stepanov(STL之父)
+
+- 编程->计算(Computing)
+- 计算->建模(Modeling)
+- 建模->抽象(abstraction)
+- 抽象->范围(context)
+
+在给定范围内，通过抽象和建模的方式来解决计算问题，就是编程
+
+## 编程步骤
+
+- IPO 算法模式：Input/Process/Output
+- 分析
+  - 要解决什么问题
+  - 先决条件，边界条件，已知元素等
+  - 例子：飞机起飞时最大安全重量
+- 设计
+  - 算法和步骤
+- 实现
+  - 编写，运行代码
+  - 测试、调试、优化代码等
+
+## 开发环境
+
+- 必备软件
+  - Virtual Box
+  - MobaXTerm(Win)/Ternimal(Mac/Linux)
+- VM
+  - OS: Debian 10
+  - 编译器：gcc/glibc/gdb, clang, lldb
+  - 编辑器：emacs: Helm, TabNine
+  - 其他：git, fish shell
+
+```
+-Y:图像界面
+ssh -Y -p 3022 user@host
+> emacs test.cpp &
+> g++ test.cpp
+
+```
 
 ## inline
 
