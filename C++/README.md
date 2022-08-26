@@ -106,7 +106,29 @@ ssh -Y -p 3022 user@host
 > emacs test.cpp &
 > g++ test.cpp
 
+
+
+预处理
+> cpp test.cpp > test.i
+
+编译
+> g++ -g -S test.i
+
+汇编
+> as -o test.o test.s
+> gcc -g -c test.c; objdump -d -M inter test.o > test.asm
+
+链接
+> ld -o test test.o ...
+
+
 ```
+
+- [cppreference](https://zh.cppreference.com)
+- [cplusplus](https://cplusplus.com/)
+- [libstdc++](https://gcc.gnu.org/onlinedocs/libstdc++/libstdc++-html-USERS-4.3/)
+- [GDB调试](https://yolinux.com/TUTORIALS/GDB-Commands.html)
+
 
 ## inline
 
@@ -326,3 +348,9 @@ MY_ARR3 arrRef3 = arr;
 - 全局函数
 - 成员函数
 - 类声明
+
+## 查看对象模型
+
+1. 打开VS 2017 开发人员命令提示符
+2. 切换到文件所在目录 cd 
+3. cl /d1 reportSingleClassLayout类名 文件名全程 
