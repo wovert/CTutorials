@@ -141,6 +141,7 @@
     <ClCompile Include="malloc.c" />
     <ClCompile Include="pointer.c" />
     <ClCompile Include="rand.c" />
+    <ClCompile Include="scope.c" />
     <ClCompile Include="sort.c" />
     <ClCompile Include="string.c" />
     <ClCompile Include="struct.c" />

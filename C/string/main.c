@@ -8,6 +8,9 @@ void test_strcmp(void);
 void test_strchr(void);
 void test_strstr(void);
 char* my_strchr(char *str, const char ch);
+void test_strtok(void);
+void test_atotype(void);
+
 
 int main(int argc, char **argv) {
     int i;
@@ -19,8 +22,44 @@ int main(int argc, char **argv) {
     // test_strcat();
     // test_strcmp();
     // test_strchr();
-    test_strstr();
+    // test_strstr();
+    // test_strtok();
+    test_atotype();
     return 0;
+}
+
+void test_atotype(void) {
+    // 0-9的字符和+-号开始转，空格会跳过
+    char num[] = "4544.30#@$-123";
+    int sum = atoi(num);
+    printf("%d\n", sum);
+
+    char str[] = "3";
+    double salary = atof(str);
+    printf("%lf\n", salary);
+}
+
+void test_strtok(void) {
+     char str1[128] = "Hello#wsorld$xhello#wo3rld&h2ow";
+     char *p[10] = {NULL};
+
+    //  char *p1 = strtok(str1, "#"); // str1中将#切割，返回切割前面的字符串
+    //  printf("first=%s\n", p1);
+    //  char *p2 = strtok(NULL, "#"); // "Hello\0world#hello#world#how";
+    //  printf("second=%s[%c]\n", p2, *p2);
+    //  char *p3 = strtok(NULL, "#"); // "Hello\0world#hello#world#how";
+    //  printf("third=%s[%c]\n", p3, *p3);
+
+    int i = 0;
+    do {
+        p[i] = strtok((i == 0? str1 : NULL), "#&$");
+    } while(p[i++] != NULL); // p[i] != NULL i=i+1
+     
+     int j;
+     i--;
+     for(j=0; j<i; j++) {
+        printf("p[%d]=%s\n", j, p[j]);
+     }
 }
 
 void test_strstr(void) {
