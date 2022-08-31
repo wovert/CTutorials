@@ -1,5 +1,17 @@
 ﻿# C++
 
+## C++ Books
+
+- C++ Primer
+- The C++ Programming Language
+- Effective Modern C++
+- Effective C++ Third Edition
+- Effective C++ —— 侯捷
+- The C++ Standard Library
+- STL 源码剖析
+
+
+
 ## C++ History
 
 - K&R C 1978

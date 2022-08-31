@@ -38,25 +38,20 @@ public:
     }
 
     Maker &operator=(const Maker &m) {
-        // 不确定this->pName指向的空间是否能装下stu中的数据，先释放this->pName指向的空间
         if (this->pName != NULL) {
             delete[] this->pName;
             this->pName = NULL;
         }
-        // 申请堆区空间，大小由m确定
         this->pName = new char[strlen(m.pName) + 1];
         strcpy(this->pName, m.pName);
 
-        // 返回对象本身
         return *this;
     }
 
-    // 前置++
     Maker &operator++() {
         ++this->id;
         return *this;
     }
-    // 后置++, int占位参数，后加加
     Maker operator++(int) {
         Maker tmp(*this);
         ++this->id;
@@ -113,22 +108,17 @@ void test04() {
 }
 
 void test05() {
-    Maker m1("张三");
-    Maker m2("李四");
-    Maker m3("王四");
+    Maker m1("????");
+    Maker m2("????");
+    Maker m3("????");
     m1.print();
     m2.print();
     m2.print();
 
-    // m3赋值给m2, m2赋值给m1
-    m1 = m2 = m3; // 赋值操作
+    m1 = m2 = m3;
 
     cout << &(m2=m3) << endl;
     cout << &m2 << endl;
-
-    // 如果返回的是值，m2=m3表达式返回一个新的对象
-    // m1=m2=m3 赋值运算符本意是m3赋值给m2, m2赋值给m1
-    // m2=m3表达式要返回m2这个对象，所以要返回引用
 
     m1.print();
     m2.print();

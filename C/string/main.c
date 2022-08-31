@@ -10,13 +10,14 @@ void test_strstr(void);
 char* my_strchr(char *str, const char ch);
 void test_strtok(void);
 void test_atotype(void);
-
+void test_strtrim(void);
+void test_strrev(void);
 
 int main(int argc, char **argv) {
-    int i;
-    for (i=0; i<argc; i++) {
-        printf("argv[%d]=%s\n", i, argv[i]);
-    }
+    // int i;
+    // for (i=0; i<argc; i++) {
+    //     printf("argv[%d]=%s\n", i, argv[i]);
+    // }
 
     // test_strcpy();
     // test_strcat();
@@ -24,8 +25,40 @@ int main(int argc, char **argv) {
     // test_strchr();
     // test_strstr();
     // test_strtok();
-    test_atotype();
+    // test_atotype();
+    // test_strtrim();
+    test_strrev();
     return 0;
+}
+void test_strrev(void) {
+    char buf[] = "hello";
+    char *start = buf;
+    char *end = &buf[strlen(buf) - 1];
+    while (end > start) {
+        char ch = *end;
+        *end = *start;
+        *start = ch;
+        end--;
+        start++;
+    }
+    printf("%s\n", buf);
+}
+
+void test_strtrim(void) {
+    char buf[] = "     hello world       ";
+    char num[128] = "";
+    char *start = buf; // 第一个字符指针
+    char *end = &buf[strlen(buf)-1]; // 最后一个字符指针
+
+    while(*start == ' ' && *start != 0) {
+        start++;
+    }
+    while(*end == ' ' && end != start) {
+        end--;
+    }
+    printf("%d\n", end-start+1);
+    strncpy(num, start,  end-start+1);
+    printf("%s\n", num);
 }
 
 void test_atotype(void) {
