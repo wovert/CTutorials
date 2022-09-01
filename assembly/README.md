@@ -1,5 +1,7 @@
 ## 常见汇编指令
 
+
+
 ## 汇编语言种类
 
 - 8086汇编(16bit)
@@ -134,16 +136,21 @@ int main() {
 
 ```
 
-把3按照4个字节存入1128h地址中并且占用1128h~112Bh
+把10按照4个字节存入1128h地址中并且占用1128h~112Bh
 mov dword ptr [1128h], 10
 
-从1128h地址取出4个字节放入eax寄存器中
+从1128h地址取出4个字节的值放入eax寄存器中
 mov eax, dword ptr [1128h]
 
 int a = 10;
 mov dword ptr [ebp-0Ch],0Ah
 
-00EFF784
+load effect address: 状态有效地址
+ebp-0Ch的地址值赋给eax
+lea eax, [ebp-0Ch] = mov eax, ebp-0Ch
 
+[可以运算]
 
+mov不能运算
+mov eax, ebp-0Ch
 ```
