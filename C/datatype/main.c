@@ -6,9 +6,9 @@
 //  Copyright © 2019 wovert. All rights reserved.
 //
 
-#include <stdio.h>
+typedef enum COLOR { GREEN, RED, YELLOW} color;
 
-int main(int argc, const char * argv[]) {
+void test01() {
     // int=4byte=-2^31~2^(31-1)
     int num = 17979878977;
     printf("num = %i\n", num);
@@ -30,7 +30,23 @@ int main(int argc, const char * argv[]) {
     // unsigned short => %hu
     // unsigned int => %iu
     // sungined long => %lu
-    
+
+}
+void test02() {
+  color myColor = GREEN;
+  myColor = 10;
+  printf("mycolor=%d\n", myColor);
+  char *p = malloc(10);
+  return 0;
+
+}
+
+#include <stdio.h>
+
+int main(int argc, const char * argv[]) {
+
+    // test01();
+    test02();
     
     return 0;
 }
