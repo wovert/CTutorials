@@ -7,8 +7,8 @@ using namespace std;
 
 
 void test01() {
-    Data ob = Data(01, 18); // ??????¨´?????
-    char *n = (char *)"¡Â??";
+    Data ob = Data(01, 18);
+    char *n = (char *)"Jack";
     ob.setName(n);
     cout << "ob.num=" << ob.getNum() << endl;
     cout << "ob.name=" << ob.getName() << endl;
@@ -16,7 +16,7 @@ void test01() {
     cout << "-------------" << endl;
 
     Data ob2 = Data(ob);
-    char *name = (char *)"?????";
+    char *name = (char *)"Jack";
     ob.setName(name);
     cout << "ob2.num=" << ob2.getNum() << endl;
     cout << "ob2.name=" << ob2.getName() << endl;
@@ -27,7 +27,7 @@ void test01() {
 }
 void test02() {
     Data ob3 = Data(2, 20, 100, 200);
-    char *n3 = (char *)"??????";
+    char *n3 = (char *)"Jack";
     ob3.setName(n3);
     cout << "ob3.num=" << ob3.getNum() << endl;
     cout << "ob3.name=" << ob3.getName() << endl;
@@ -35,27 +35,23 @@ void test02() {
     cout << "-------------" << endl;
 }
 void test03() {
-        // malloc??????¨´????? free ???????????????
     Data *d1 = (Data *)malloc(sizeof(Data));
     if (d1 == NULL) {
-        cout << "???????" << endl;
+        cout << "create malloc error" << endl;
     }
     if (d1 != NULL) {
         free(d1);
     }
-    cout << "----??????????---------" << endl;
     int *p = new int(100);
     cout << "*p=" << *p << endl;
     delete p;
 
-    cout << "----??????????????---------" << endl;
     int *pArr = new int[5]{1,2,3,4,5};
     for (int i=0; i<5; i++) {
         cout << pArr[i] << endl;
     }
     delete [] pArr;
 
-    cout << "----??????????????2---------" << endl;
     // char *pChar = new char[5]{"hello"}; // ????
     // char *pChar = new char[5]{'h','e','l','l','o'};
     char *pChar = new char[5];
@@ -65,9 +61,8 @@ void test03() {
 }
 
 void test04() {
-    cout << "----?????????????---------" << endl;
     Data *pData1 = new Data(2, 30);
-    char *n4 = (char *)"C??";
+    char *n4 = (char *)"Jack";
     pData1->setName(n4);
     cout << "pData1->num=" << pData1->getNum() << endl;
     cout << "pData1->name=" << pData1->getName() << endl;
@@ -78,41 +73,31 @@ void test04() {
 
 void test05() {
 
-
-    cout << "----????????:??¦É?????---------" << endl;
-    // ?????????¦É?????5??
     Data dataArr[5];
 
-    cout << "----????????:?§Ó¦É?????---------" << endl;
     Data dataArr2[5] = {Data(01, 39), Data(02), Data(03, 19, 100, 200)};
 }
 
 void test06() {
-    cout << "----???????????:??¦É?????---------" << endl;
     Data *arr = NULL;
-    arr = new Data[5]; // ?????????¦É?????
+    arr = new Data[5];
     delete [] arr;
 }
 
 void test07() {
-    cout << "----???????????:?§Ó¦É?????---------" << endl;
     Data *arr2 = new Data[5]{Data(1), Data(2, 18), Data(3, 30, 100, 300)};
     delete [] arr2;
     cout << "----end---------" << endl;
 }
 
 void test08() {
-    // ??????
     // cout << "Data::shareData=" << Data::shareData << endl;
 
-    // ???????
     cout << "Data::shareData=" << Data::getShareData() << endl;
 }
 
 void test09() {
-    // ??????
     // cout << "Data::shareData=" << Data::shareData << endl;
-    // ???????
     cout << "Data::shareData=" << Data::getOnlyData() << endl;
 }
 
@@ -122,12 +107,9 @@ void test10() {
 }
 
 void test11() {
-    // ??????
-    const Data ob = Data(01, 18); // ??????¨´?????
+    const Data ob = Data(01, 18);
 
-    // error: ???????????????????????????????????
     // ob.setNum(100); // error
-    // ???¨®?????
     ob.envNum();
 }
 

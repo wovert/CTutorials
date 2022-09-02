@@ -16,15 +16,11 @@ class Student {
     public:
         Student(const char *tmp, int number) {
             this->number = number;
-            // 从堆区空间申请
             // school = (char *)malloc(strlen(tmp) + 1);
             school = strdup(tmp);
             strcpy(school, tmp);
-            cout << "构造函数" << endl;
         }
         ~Student() {
-            // 释放堆区空间
-            cout << "析构函数" << endl;
             if (school != NULL) {
                 free(school);
                 school = NULL;
@@ -39,23 +35,21 @@ class Student {
             name = str;
         }
 
-        // 类内声明成员函数
         char* getInfo();
 
 };
 
-// 类外定义成员函数
 char* Student::getInfo() {
     char *s;
-    sprintf(s, "姓名%s 年龄:%d 学校:%s\n", name.c_str(), number, school);
+    sprintf(s, "锟斤拷锟斤拷%s 锟斤拷锟斤拷:%d 学校:%s\n", name.c_str(), number, school);
     return s;
 }
 
 void test() {
-    Student stu("职业高中", 1);
+    Student stu("职业锟斤拷锟斤拷", 1);
     // stu.setNumber(1);
-    // char name[] = "张三";
-    string name = "张三";
+    // char name[] = "Jack";
+    string name = "锟斤拷锟斤拷";
     stu.setName(name);
     printf("%s\n", stu.getInfo());
 }
