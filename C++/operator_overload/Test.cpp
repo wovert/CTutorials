@@ -17,11 +17,36 @@ public:
     }
 };
 
+class Person {
+public:
+    int pid;
+public:
+    Person(){}
+    Person(int id) {
+        this->pid = id;
+    }
+};
+
+class Student {
+public:
+    int sid;
+public:
+    Student(){}
+    Student(int id) {
+        this->sid = id;
+    }
+};
+
 // 全局方式
 // Maker operator+(Maker &m1, Maker &m2) {
 //     Maker temp(m1.id+m2.id+1000, m1.age+m2.age+1000);
 //     return temp;
 // }
+
+void operator+(Person &p, Student &s) {
+    int sum = p.pid + s.sid;
+    cout << "sum=" << sum << endl;
+}
 
 void test01() {
     Maker m1(1, 20);
@@ -31,7 +56,14 @@ void test01() {
     cout << "m4.id=" << m4.id << ", m4.age=" << m4.age << endl;
 }
 
+void test02() {
+    Person p1(1);
+    Student s1(2);
+    p1 + s1;
+}
+
 int main() {
-    test01();
+    // test01();
+    test02();
     return 0;
 }
