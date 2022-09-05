@@ -30,6 +30,8 @@ extern void testLink();
 extern void testRand();
 extern void testFile();
 extern void charPointerArray();
+extern void scope();
+extern int global_scope_var;
 
 void demo() {
 	int a = 3;
@@ -75,7 +77,10 @@ void testDisBin() {
 
 }
 
-
+void scopeVar() {
+	printf("global_scope_var=%d\n", global_scope_var);
+	scope();
+}
 
 int main() {
 	 //testFunc();
@@ -104,7 +109,8 @@ int main() {
 	//testLink();
 	//testFile();
 	//testRand();
-	charPointerArray();
+	//charPointerArray();
+	scopeVar();
 	system("pause");
 	return 0;
 }

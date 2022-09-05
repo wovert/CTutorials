@@ -1,145 +1,64 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <stdlib.h>
-#include <string.h>
 using namespace std;
 
-void testConst() {
-	int age = 10;
-	int height = 30;
+class Person {
+public:
+	int m_id;
+	int m_age;
+	int m_height;
+	void display() {
+		cout << "Person.m_id=" << this->m_id << endl;
+		cout << "Person.m_age=" << this->m_age << endl;
+		cout << "Person.m_height=" << this->m_height << endl;
+	}
+};
 
-	// const ???ε?????????
+struct Animal {
+	int m_id;
+	int m_age;
+	int m_height;
+	void display() {
+		cout << "animal.m_id=" << m_id << endl;
+		cout << "animal.m_age=" << m_age << endl;
+		cout << "animal.m_height=" << m_height << endl;
+	}
+};
 
-	// *p1???????p1???????
-	const int *p1 = &age;
-	// *p1 = 20;
-	p1 = &height;
-	// *p1 = 40;
+void test02(void) {
+	Person person;
+	person.m_id = 10;
+	person.m_age = 20;
+	person.m_height = 30;
+	// person对象的地址产地给 display 函数的 this
+	person.display();
 
+	Person *p = (Person *)&person.m_age;
+	p->m_id = 40;
+	p->m_age = 50;
 
-	// const int *p1 = &age ???
-	int const *p2 = &age;
-
-	// p3???????*p3 ???????
-	int * const p3 = &age;
-	*p3 = 20; // age = 20
-	// p3 = &height;
-	*p3 = 40; // height = 40;
-
-
-
-	// p4,p5??????? *p4,*p5?????
-	const int * const p4 = &age;
-	int const * const p5 = &age;
-
-	// *p5 = 20;
-	// p5 = &height;
-	// *p5 = 40;
-
-	struct Student { int age; };
-
-	Student stu1 = { 10 };
-	Student stu2 = { 20 };
-
-	// *pStu1 ????? ?????????????, pStu1???????
-	const Student *pStu1 = &stu1;
-
-	// *pStu1????????????
-	// *pStu1 = stu2;
-
-	// ????????????????
-	// (*pStu1).age = 30;
-	// pStu1->age = 30;
-
-	// ????????????????
-	pStu1 = &stu2;
-
-	// pStu2???????*pStu2???????
-	Student * const pStu2 = &stu2;
-
-	// *pStu2????????????stu1
-	*pStu2 = stu1;
-
-	// *pStu2????????stu1??????age???
-	(*pStu2).age = 30;
-
-	// ???????????????
-	pStu2->age = 30;
-
-	// ?????????????
-	//pStu2 = &stu1;
-
-
-	// ???: ????*pStu1???????????????????????????
-	// ???: ????pStu1???????????????????????????
-	// const Student *pStu1 = &stu1;
-	// Student * const pStu2 = &stu2;
+	// 指针p存储的地址值传递给 display 函数的 this
+	p->display();
 }
 
-void testReference() {
-	int age = 10;
-	int &refAge = age;
-	refAge = 20;
+void test01(void) {
+	Animal animal;
+	animal.m_id = 10;
+	animal.m_age = 20;
+	animal.m_height = 30;
+	// person对象的地址产地给 display 函数的 this
+	animal.display();
 
-	cout << age << endl;
-}
-void swap(int *v1, int *v2) {
-	int tmp = *v1;
-	*v1 = *v2;
-	*v2 = tmp;
-}
+	Animal *a = (Animal *)&animal.m_age;
+	a->m_id = 40;
+	a->m_age = 50;
 
-void swapRef(int &v1, int &v2) {
-	int tmp = v1;
-	v1 = v2;
-	v2 = tmp;
-}
-
-// ??????????????
-void func(char **tmp) {
-	char *p;
-	p = (char *)malloc(64);
-	memset(p, 0, 64);
-	//strcpy(p, "???");
-	char cont[] = "???";
-	strcpy_s(p, strlen(cont)+1, cont);
-	*tmp = p;
-}
-
-
-// ??????????????
-void funcRef(char * &tmp) {
-	char *p;
-	p = (char *)malloc(64);
-	memset(p, 0, 64);
-	//strcpy(p, "???");
-	char cont[] = "???";
-	strcpy_s(p, strlen(cont) + 1, cont);
-	tmp = p;
-}
-
-
-// ????????
-void test02() {
-	char *mp = NULL;
-	// ??????????????
-	//func(&mp);
-	funcRef(mp);
-	cout << mp << endl;
+	// 指针p存储的地址值传递给 display 函数的 this
+	a->display();
 }
 
 int main() {
-	// testConst();
-	testReference();
-	
-	int a = 10;
-	int b = 20;
-	// swap(&a, &b);
-	swap(a, b);
-	cout << "a=" << a << ",b=" << b << endl;
-
-	// ????????
-	test02();
+	test01();
+	// test02();
 
 	getchar();
 	return 0;

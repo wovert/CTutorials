@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 	cout << "----------" << endl;
 	int a = 1;
 	int b = 2;
-	(a = b) = 4;
+	(a = b) = 4; // (a=b)=a=4; a=4, b=2
 	cout << "a=" << a << endl; // 4
 	cout << "b=" << b << endl; // 2
 

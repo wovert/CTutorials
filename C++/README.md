@@ -1,27 +1,45 @@
 ﻿# C++
 
+## C++ Books
+
+- C++ Primer
+- The C++ Programming Language
+- Effective Modern C++
+- Effective C++ Third Edition
+- Effective C++ —— 侯捷
+- The C++ Standard Library
+- STL 源码剖析
+
+
+
 ## C++ History
 
+- K&R C 1978
+- C with Classes 1980
 - C++ 98(V1.0)
-- C++ 11(V2.0)
+- **C++ 11(V2.0)**
 
 - C++ 语言
 - C++ 标准库
 
 > C with class
 
-- 1. 语法
-    - 1.1 通过反汇编窥探底层
-- 2. Windows编程
-    - 2.1 Windows API
-    - 2.2 MFC(图形界面)
-- 3. 项目实战
-  - x86 汇编
-  - 软件破解
-  - 植物大战僵尸外挂
+## C++
+
+> 学习计算机程序设计的核心思想和编程范式（Paradigm）
+
+- 面向对象
+- 高性能
+- 函数式
+- 范式编程
+
+学习抽象思维方式和逻辑方法论
+
 
 ## C++应用领域
 
+- 界面（GUI）
+- Job Opportunifies 工作
 - 游戏（Cocos2d-X）、图像、多媒体、网络、嵌入式
 - 数据库（Oracle、MySQL）、浏览器（Chrome），搜索引擎（ Google）
 - 操作系统、驱动程序、编译器（Gcc、LLVM），编程语言(Swift)
@@ -29,7 +47,17 @@
 - iOS开发（Runtime, AsyncDisplayKit）
 - Android 开发(NDK, fresco[匿名共享内存，Ashmem, Anomymus Shared Memory])
 - Java(JNI)
+- 云计算
+- Libraries
 
+- Microsoft
+- Google
+- Bloomberg(实时股票)
+- MatLAB
+- amazon.com
+- oracle
+- UBISOFT(游戏)
+- UBer
 
 https://isocpp.org/std/status
 https://www.cnblogs.com/mjios/category/459066.html
@@ -39,14 +67,133 @@ https://www.cheatengine.org/downloads.php
 - Beyond Compare
 - Intel 机器码的白皮书PDF
 
+## 学习建议
+
+1. 首选**官方资料**（手册、官网、文档）
+2. **英文资料** > 中文资料
+3. 掌握**验证知识点正确性**的方法（掌握汇编语言时最靠谱的验证知识点正确性的方式）
+4. 学会**汇编语言**（掌握**代码的本质、破解、外挂**）
+
+## 编程语言的发展
+
+- 高级语言———编译———> 汇编语言<-反编译—————编译->机器语言——————>计算机
+- 汇编语言与机器语言一一对应，每一条机器指令都有与之对应的汇编指令
+- 汇编语言可以通过编译得到机器语言，机器语言可以通过反编译得到汇编语言
+- **高级语言**可以通过**编译**得到**汇编语言/机器语言**，但**汇编语言/机器语言**几乎**不**可能**还原成高级语言**
+
+```
+	// 00842381  push        4
+	cout << sizeof(int) << endl;
+  cout << 4 << endl;
+
+
+	28: 	struct Date {
+	29: 		int year;
+	30: 		int month;
+	31: 		int day;
+	32: 	};
+	33: 	Date d = { 1,2,3 };
+002623E8  mov         dword ptr [ebp-10h],1
+002623EF  mov         dword ptr [ebp-0Ch],2
+002623F6  mov         dword ptr [ebp-8],3
+	34: 	int array[] = { 1,2,3 };
+002623FD  mov         dword ptr [ebp-24h],1
+00262404  mov         dword ptr [ebp-20h],2
+0026240B  mov         dword ptr [ebp-1Ch],3
+```
+
+- 编译型语言（不依赖虚拟机）： C/C++/OC/Swift
+- 脚本语言：Python/JS/PHP
+- 编译型语言（依赖虚拟机）：Java/Ruby
+
+## 编程的本质
+
+> 寻找算法对应的最基础的代数结构 —— Alexxander Stepanov(STL之父)
+
+- 编程->计算(Computing)
+- 计算->建模(Modeling)
+- 建模->抽象(abstraction)
+- 抽象->范围(context)
+
+在给定范围内，通过抽象和建模的方式来解决计算问题，就是编程
+
+## 编程步骤
+
+- IPO 算法模式：Input/Process/Output
+- 分析
+  - 要解决什么问题
+  - 先决条件，边界条件，已知元素等
+  - 例子：飞机起飞时最大安全重量
+- 设计
+  - 算法和步骤
+- 实现
+  - 编写，运行代码
+  - 测试、调试、优化代码等
+
+## 开发环境
+
+- 必备软件
+  - Virtual Box
+  - MobaXTerm(Win)/Ternimal(Mac/Linux)
+- VM
+  - OS: Debian 10
+  - 编译器：gcc/glibc/gdb, clang, lldb
+  - 编辑器：emacs: Helm, TabNine
+  - 其他：git, fish shell
+
+```
+-Y:图像界面
+ssh -Y -p 3022 user@host
+> emacs test.cpp &
+> g++ test.cpp
+
+
+
+预处理
+> cpp test.cpp > test.i
+
+编译
+> g++ -g -S test.i
+
+汇编
+> as -o test.o test.s
+> gcc -g -c test.c; objdump -d -M inter test.o > test.asm
+
+链接
+> ld -o test test.o ...
+
+
+```
+
+- [cppreference](https://zh.cppreference.com)
+- [cplusplus](https://cplusplus.com/)
+- [libstdc++](https://gcc.gnu.org/onlinedocs/libstdc++/libstdc++-html-USERS-4.3/)
+- [GDB调试](https://yolinux.com/TUTORIALS/GDB-Commands.html)
+
+
 ## inline
 
-> 内联函数
+> `inline`修饰函数的声明或者实现，可以使其成为内联函数
+> 编译器会将函数调用直接展开为函数体代码
+> 减少函数调用的开销
+> 增大代码体积
+
+- 建议声明和实现都增加`inline`修饰
+- 尽量不要超过10行代码的函数
+- 有些函数即使声明为inline, 也不一定会被编译器内联，比如递归函数
+
+### 调试方法
+
+- VS2017开发环境：Release 模式
+  - C/C++ 优化 
+    - 优化：禁用(/Od)，启用时：即使不使用inline也会有inline效果
+    - 内联函数扩展：默认值（不启用）
+      - 启用：任何适用项(/Ob2)
 
 ### 不会成为内联函数
 
 - 存在过多的条件判断语句
-- 函数体过大（50行）
+- 函数体过大（见）
 - 对函数进行取址操作
 - 不存在任何形式的循环语句
 
@@ -59,6 +206,10 @@ https://www.cheatengine.org/downloads.php
 
 - 函数的默认参数后面的参数必须都是默认参数
 - 函数的声明和实现不能同时有函数的默认参数
+- 默认参数只能按照从右到左的顺序
+- 如果函数同时有声明、实现，默认参数只能放在**函数声明中**
+- 默认参数的值可以是常量、全局符号（全局变量、函数名）
+- 函数重载、默认参数有能回产生冲突、二义性（建议优先使用默认参数）
 
 - 占位参数在也有默认值
   - `void fun(int a, int=10){}`
@@ -71,11 +222,34 @@ https://www.cheatengine.org/downloads.php
 
 - 规则
   - 函数名相同
-  - 参数个数不同、参数类型不同、参数顺序不同
+  - **参数个数不同、参数类型不同、参数顺序不同**
 
 - 注意
-  - 返回值类型与函数重载无关
-  - 调用红函数时，实参的隐式类型转换可能会产生二义性
+  - **返回值类型与函数重载无关**
+  - 调用宏函数时，实参的隐式类型转换可能会产生二义性
+
+
+### 逆向工程：IDA Pro
+- VS Debug模式：会有很多调试信息，生成可执行文件比较臃肿
+- VS Release模式：去除调试信息，生成可执行文件比较精简、高效
+
+
+## extern C
+
+> 被`extern C`修饰的代码会按照 **C** 语言的方式**编译**
+> 如果**函数**同时有**声明和实现**，必须**函数声明被extern "C" 修饰**，函数实现可以不修饰
+
+```
+extern "C" void func() {
+  ...
+}
+extern "C" {
+  void func() {
+
+  }
+  void func2() {}
+}
+```
 
 ## 全局变量检测增强
 
@@ -119,11 +293,11 @@ https://www.cheatengine.org/downloads.php
 
 - 第三方框架/库：C语言的开源库
 
-- ifndef, #define, #endif 来防止头文件的内容被重复包含
+- `ifndef, #define, #endif` 来防止头文件的内容被重复包含
   - 受C/C++标准支持，不受编译器的任何限制
-- progma once 可以防止整个文件的内容被重复包含
-  - 有些编译器不支持#progma once(较老编译器不支持，如果GCC3.4版本之前)，兼容性不够好
-
+- `#progma once` 可以防止整个文件的内容被重复包含
+  - 有些编译器不支持`#progma once`(较老编译器不支持，如果GCC3.4版本之前)，兼容性不够好
+ 
 
 ## const
 
@@ -145,7 +319,7 @@ https://www.cheatengine.org/downloads.php
 
 ## 引用
 
-> 空间取别名
+> 空间取**别名**
 
 引用的本质是常量指针
 
@@ -194,6 +368,10 @@ MY_ARR3 arrRef3 = arr;
 
 ### 常量引用
 
+- 引用可以被const修饰，这就就无法通过引用修改数了，可以称为常引用
+- const 必须写在 & 符号的左边，才能算是常引用
+
+
 - 字面量不能赋给引用，但是可以赋给const引用
 - const修饰的引用，不能修改
 
@@ -210,7 +388,16 @@ MY_ARR3 arrRef3 = arr;
 - const int &ret = temp;
 - ret = 200; // 不能通过ret修改值
 
+- 常引用的特点
+  - 可以指向临时数据（常量、表达式、函数返回值等）
+  - 可以指向不同类型的数据
+  - 作为函数参数时（此规则也使用于 const 指针）
+    - 可以接受const和非const实参（非const引用，只能接受非const实参）
+    - 可以跟非const引用构成重载
+
 ### 指针的引用
+
+
 
 
 ## C和C++的区别
@@ -237,6 +424,19 @@ MY_ARR3 arrRef3 = arr;
 
 1. 结构体默认权限是共有的，类的默认权限是私有的
 
+
+### 默认情况下，成员变量的初始化
+
+- 自定义构造函数，除了全局区，其他内存空间的的成员变量默认都不会被初始化，需要手动初始化。
+
+```
+Person() {
+  // 清零初始化
+  memset(this, 0, sizeof(Person));
+}
+```
+
+
 ### static
 
 - 静态变量，在**编译阶段分配空间**，对象还没有创建时，就已经分配空间。
@@ -257,3 +457,9 @@ MY_ARR3 arrRef3 = arr;
 - 全局函数
 - 成员函数
 - 类声明
+
+## 查看对象模型
+
+1. 打开VS 2017 开发人员命令提示符
+2. 切换到文件所在目录 cd 
+3. cl /d1 reportSingleClassLayout类名 文件名全程 
