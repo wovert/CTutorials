@@ -127,6 +127,8 @@ void test12() {
     arr2.pushBack(23);
     cout << "size:" << arr2.getSize() << endl;
     cout << arr2.getData(2) << endl;
+
+    cout << arr2[2] << endl;
 }
 
 
@@ -142,7 +144,7 @@ int main(int argc, char *argvs[]) {
     // test09();
     // test10();
     // test11();
-    // test12();
+    test12();
 
     return 0;
 }

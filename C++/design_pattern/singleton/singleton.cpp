@@ -6,8 +6,20 @@ Singleton::Singleton() {};
 Singleton::Singleton(const Singleton &ob) {};
 
 Singleton* Singleton::getInstance() {
+    if (instance == NULL) {
+        instance = new Singleton();
+    }
     return instance;
 };
+
+
+void Singleton::deleteSingleton() {
+    if (instance != NULL) {
+        delete instance;
+        instance = NULL;
+    }
+}
+
 void Singleton::setData(int data) {
     this->data = data;
 };

@@ -16,6 +16,7 @@ public:
     void setData(int pos, int data);
     int getCapacity(void);
     int getSize(void);
+    int operator[](int index);
 };
 
 

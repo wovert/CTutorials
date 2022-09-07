@@ -133,12 +133,42 @@ void test06() {
     cout << m1.id << endl;
 }
 
+class Person {
+public:
+    int m_age;
+    Person &operator=(const Person &p) {
+        m_age = p.m_age;
+    }
+};
+
+class Student : public Person {
+public:
+    int m_score;
+    Student &operator=(const Student &s) {
+        Person::operator=(s);
+        m_score = s.m_score;
+    }    
+};
+
+void test07() {
+    Student stu1;
+    stu1.m_age = 20;
+    stu1.m_score = 100;
+
+    Student stu2;
+    stu2 = stu1;
+
+    cout << stu2.m_age << endl;
+    cout << stu2.m_score << endl;
+}
+
 int main() {
     // test01();
     // test02();
     // test03();
     // test04();
     // test05();
-    test06();
+    // test06();
+    test07();
     return 0;
 }
