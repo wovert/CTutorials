@@ -1,6 +1,7 @@
 #include <iostream>
 #include "data.h"
-#include "myarray.h"
+#include "person.h"
+#include "myarray.hpp"
 #include <stdlib.h>
 #include <string.h>
 using namespace std;
@@ -114,21 +115,30 @@ void test11() {
 }
 
 void test12() {
-    MyArray arr;
+    MyArray<int> arr;
+    
+    arr.pushBack(1);
+    arr.pushBack(2);
     cout << "capacity:" << arr.getCapacity() << endl;
     cout << "size:" << arr.getSize() << endl;
+    cout << arr;
 
-    MyArray arr2(20);
-    cout << "capacity:" << arr2.getCapacity() << endl;
-    cout << "size:" << arr2.getSize() << endl;
-    arr2.pushBack(20);
-    arr2.pushBack(21);
-    arr2.pushBack(22);
-    arr2.pushBack(23);
-    cout << "size:" << arr2.getSize() << endl;
-    cout << arr2.getData(2) << endl;
+    // MyArray<void *> arr2(20);
+    // cout << "capacity:" << arr2.getCapacity() << endl;
+    // cout << "size:" << arr2.getSize() << endl;
+    // arr2.pushBack(new int(1));
 
-    cout << arr2[2] << endl;
+    // Data *pData = new Data(01, 18);
+    // Person *pPerson = new Person();
+
+    // arr2.pushBack(pData);
+    // arr2.pushBack(pPerson);
+
+    // cout << "size:" << arr2.getSize() << endl;
+    // ((Person *)arr2.getData(2))->print();
+    // ((Data *)arr2.getData(1))->getInfo();
+
+    // cout << arr2[2] << endl;
 }
 
 
