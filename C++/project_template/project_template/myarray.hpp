@@ -59,7 +59,7 @@ void MyArray<Item>::checkIndex(int index) {
 
 template <typename Item>
 void MyArray<Item>::pushBack(Item data) {
-	checkIndex(index);
+	//checkIndex(index);
 	//if (this->m_size >= this->m_capacity) {
 	//	cout << "array is full" << endl;
 	//	// Extend space
