@@ -1,0 +1,12 @@
+OBJS = add.o sub.o mul.o div.o main.o
+TARGET = main
+
+$(TARGET):${OBJS}
+	-gcc $^ -o $@
+
+*.o:*.c
+	@gcc -c $< -o $@
+
+.PHONY:clean
+clean:
+	rm -rf ${OBJS} $(TARGET)
