@@ -9,15 +9,31 @@
 int main(void) {
 
 	int fd = -1;
+	int res = -1;
+
+	char *str = "hello world";
 	// readonly open file
 	//fd = open("txt", O_WRONLY | O_CREAT | O_EXCL, 0644);
-	fd = open("txt", O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	//fd = open("txt", O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	fd = open("txt", O_WRONLY | O_CREAT, 0644);
 	if (-1 == fd) {
 		perror("open");
 		return 1;
 	}
 
 	printf("fd = %d\n", fd);
+
+	// write content
+	res = write(fd, str, strlen(str));
+
+	if (res == -1) {
+		perror("write");
+		close(fd);
+		return 1;
+	}
+
+	printf("write len:%d\n", res);
+
 
 	// close file
 	close(fd);
