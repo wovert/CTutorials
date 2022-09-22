@@ -1,5 +1,8 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include  <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
 
 using namespace std;
 
@@ -60,9 +63,34 @@ void test01(void) {
 	printArray(begin, end);
 }
 
+
+void print(int val) {
+	cout << val << " ";
+}
+
+void test02() {
+	// 容器
+	vector<int> v;
+	v.push_back(10);
+	v.push_back(20);
+	v.push_back(30);
+	v.push_back(40);
+
+	// 获取开始位置的迭代器
+	vector<int>::iterator begin = v.begin();
+	
+	// 获取结束位置的迭代器
+	vector<int>::iterator end = v.end();
+
+	// 遍历算法
+	for_each(begin, end, print);
+	cout << endl;
+}
+
 int main()
 {
-	test01();
+	//test01();
+	test02();
 	getchar();
 	return 0;
 }
