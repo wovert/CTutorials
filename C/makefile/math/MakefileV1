@@ -1,0 +1,2 @@
+test:add.c sub.c mul.c div.c main.c
+	gcc add.c sub.c mul.c div.c main.c -o main
