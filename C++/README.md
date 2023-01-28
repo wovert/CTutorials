@@ -165,6 +165,13 @@ ssh -Y -p 3022 user@host
 
 ```
 
+### Visual studio Community 2017
+
+- 使用 C++ 的桌面开发
+- 编码问题：工具->扩展和更新
+  - forceutf8(with BOM ) 
+
+
 - [cppreference](https://zh.cppreference.com)
 - [cplusplus](https://cplusplus.com/)
 - [libstdc++](https://gcc.gnu.org/onlinedocs/libstdc++/libstdc++-html-USERS-4.3/)
