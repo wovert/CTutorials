@@ -3,7 +3,7 @@
 //  类型说明符
 //
 //  Created by wovert on 2019/10/1.
-//  Copyright © 2019 wovert. All rights reserved.
+//  Copyright © 2019 wovert. All rights reserv ed.
 //
 
 typedef enum COLOR { GREEN, RED, YELLOW} color;
