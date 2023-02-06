@@ -3,4 +3,4 @@ project(HelloWorldCLine C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(HelloWorldCLine main.c)
+add_executable(HelloWorldCLine main.c 01-datatype.c)

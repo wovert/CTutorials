@@ -1,0 +1,3 @@
+D:/development/CTutorials/C/02-datatype/cmake-build-debug/CMakeFiles/02_datatype.dir
+D:/development/CTutorials/C/02-datatype/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/development/CTutorials/C/02-datatype/cmake-build-debug/CMakeFiles/rebuild_cache.dir

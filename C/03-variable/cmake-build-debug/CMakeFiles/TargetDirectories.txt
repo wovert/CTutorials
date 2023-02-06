@@ -1,0 +1,3 @@
+D:/development/CTutorials/C/03-variable/cmake-build-debug/CMakeFiles/03_variable.dir
+D:/development/CTutorials/C/03-variable/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/development/CTutorials/C/03-variable/cmake-build-debug/CMakeFiles/rebuild_cache.dir

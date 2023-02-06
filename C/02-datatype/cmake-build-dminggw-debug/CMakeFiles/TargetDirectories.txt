@@ -1,0 +1,3 @@
+D:/development/CTutorials/C/02-datatype/cmake-build-dminggw-debug/CMakeFiles/02_datatype.dir
+D:/development/CTutorials/C/02-datatype/cmake-build-dminggw-debug/CMakeFiles/edit_cache.dir
+D:/development/CTutorials/C/02-datatype/cmake-build-dminggw-debug/CMakeFiles/rebuild_cache.dir
