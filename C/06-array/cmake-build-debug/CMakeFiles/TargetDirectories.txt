@@ -1,0 +1,3 @@
+D:/development/CTutorials/C/06-array/cmake-build-debug/CMakeFiles/06_array.dir
+D:/development/CTutorials/C/06-array/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/development/CTutorials/C/06-array/cmake-build-debug/CMakeFiles/rebuild_cache.dir
