@@ -1,5 +1,19 @@
 ## 常见汇编指令
 
+## Nodepad++
+
+## NASM 汇编语言编译器
+
+[NASM](https://www.nasm.us/docs.php)
+
+```
+nasm demo.asm -f bin -o demo.bin
+
+```
+
+- Nodepadd++ 中运行->运行
+
+cmd /k pushd "$(CURRENT_DIRECTORY)" & C:\usr\local\NASM\nasm.exe -f bin  "$(FULL_CURRENT_PATH)" -o "$(NAME_PART).bin" & PAUSE & EXIT
 
 
 ## 汇编语言种类

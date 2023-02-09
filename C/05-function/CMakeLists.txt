@@ -3,4 +3,4 @@ project(05_function C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(05_function main.c)
+add_executable(05_function src/main.c)
