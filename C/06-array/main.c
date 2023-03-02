@@ -2,48 +2,56 @@
 
 #define ARRAY_SIZE 10
 
-// é»˜è®¤éƒ½æ˜¯0
+// Ä¬ÈÏ¶¼ÊÇ0
 int global_array[ARRAY_SIZE];
 
 int main() {
 
-  // å®šä¹‰æ•°ç»„
-  auto int array[ARRAY_SIZE];
-  int array0[ 3 + 2]; // ok
+//  // ¶¨ÒåÊý×é
+//  auto int array[ARRAY_SIZE];
+//  int array0[ 3 + 2]; // ok
+//
+//  for (int i = 0; i < ARRAY_SIZE; ++i) {
+//    printf("array[%d]=%c\n", i, array[i]);
+//  }
+//
+//  for (int i = 0; i < ARRAY_SIZE; ++i) {
+//    array[i] = i;
+//  }
+//
+//  for (int i = 0; i < ARRAY_SIZE; ++i) {
+//    printf("array[%d]=%c\n", i, array[i]);
+//  }
+//
+//  // ³õÊ¼»¯ÁÐ±í
+//  int array2[ARRAY_SIZE] = {0,1,2,3,4,5,6,7,8,9};
+//
+//  for (int i = 0; i < ARRAY_SIZE; ++i) {
+//    printf("array2[%d]=%c\n", i, array[i]);
+//  }
+//
+//  // C99
+//  char array_char[5] = {[2] = '0', 'l', 'k'};
+//  for (int i = 0; i < 5; ++i) {
+//    printf("array_char[%d]=%c\n", i, array_char[i]);
+//  }
+//
+//  int value = 2;
+//
+//  // C99, VLA: gcc Ö§³Ö£» MSVC ERROR
+//  int array_size_of_value[value];
+//
+//  const int kSize = 5; // C++ ok
+//  int array_size_of_const[kSize]; // C99, VLA: gcc Ö§³Ö£» MSVC ERROR
 
-  for (int i = 0; i < ARRAY_SIZE; ++i) {
-    printf("array[%d]=%c\n", i, array[i]);
+
+  int num[10] = {0}; // ½«ËùÓÐÊý×éÔªËØ³õÊ¼»¯Îª0
+  for (int i = 0; i < 10; ++i) {
+    printf("num[%d]=%d\n", i, num[i]);
   }
 
-  for (int i = 0; i < ARRAY_SIZE; ++i) {
-    array[i] = i;
-  }
-
-  for (int i = 0; i < ARRAY_SIZE; ++i) {
-    printf("array[%d]=%c\n", i, array[i]);
-  }
-
-  // åˆå§‹åŒ–åˆ—è¡¨
-  int array2[ARRAY_SIZE] = {0,1,2,3,4,5,6,7,8,9};
-
-  for (int i = 0; i < ARRAY_SIZE; ++i) {
-    printf("array2[%d]=%c\n", i, array[i]);
-  }
-
-  // C99
-  char array_char[5] = {[2] = '0', 'l', 'k'};
-  for (int i = 0; i < 5; ++i) {
-    printf("array_char[%d]=%c\n", i, array_char[i]);
-  }
-
-  int value = 2;
-
-  // C99, VLA: gcc æ”¯æŒï¼› MSVC ERROR
-  int array_size_of_value[value];
-
-  const int kSize = 5; // C++ ok
-  int array_size_of_const[kSize]; // C99, VLA: gcc æ”¯æŒï¼› MSVC ERROR
-
+  printf("numÊý×é´óÐ¡%d\n", sizeof(num));
+  printf("numÊý×éÔªËØ¸öÊý%d\n", sizeof(num)/sizeof(num[0 ]));
 
   return 0;
 }

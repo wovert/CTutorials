@@ -1,0 +1,3 @@
+D:/development/CTutorials/C/08-pointer/cmake-build-debug/CMakeFiles/08_pointer.dir
+D:/development/CTutorials/C/08-pointer/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/development/CTutorials/C/08-pointer/cmake-build-debug/CMakeFiles/rebuild_cache.dir

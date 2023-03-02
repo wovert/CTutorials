@@ -1,0 +1,25 @@
+# ninja log v5
+0	87	6994348227576517	CMakeFiles/07_string.dir/main.c.obj	ef4ffdfccaf38500
+88	172	6994348228394832	07_string.exe	e4fe692dfdf7ab81
+1	65	6994348677582611	CMakeFiles/07_string.dir/main.c.obj	ef4ffdfccaf38500
+66	139	6994348678288811	07_string.exe	e4fe692dfdf7ab81
+1	62	6994350825835605	CMakeFiles/07_string.dir/main.c.obj	ef4ffdfccaf38500
+62	128	6994350826456277	07_string.exe	e4fe692dfdf7ab81
+2	65	6994351380018503	CMakeFiles/07_string.dir/main.c.obj	ef4ffdfccaf38500
+65	126	6994351380591372	07_string.exe	e4fe692dfdf7ab81
+1	60	6994352378928302	CMakeFiles/07_string.dir/main.c.obj	ef4ffdfccaf38500
+60	121	6994352379513512	07_string.exe	e4fe692dfdf7ab81
+2	68	6994353681431540	CMakeFiles/07_string.dir/main.c.obj	ef4ffdfccaf38500
+68	128	6994353681987548	07_string.exe	e4fe692dfdf7ab81
+1	55	6994354370922091	CMakeFiles/07_string.dir/main.c.obj	ef4ffdfccaf38500
+56	118	6994354371497534	07_string.exe	e4fe692dfdf7ab81
+2	60	6994354990775274	CMakeFiles/07_string.dir/main.c.obj	ef4ffdfccaf38500
+60	126	6994354991390143	07_string.exe	e4fe692dfdf7ab81
+1	60	6994356206577002	CMakeFiles/07_string.dir/main.c.obj	ef4ffdfccaf38500
+61	120	6994356207144017	07_string.exe	e4fe692dfdf7ab81
+1	65	6994356297370024	CMakeFiles/07_string.dir/main.c.obj	ef4ffdfccaf38500
+65	128	6994356297983431	07_string.exe	e4fe692dfdf7ab81
+2	68	6994356934877826	CMakeFiles/07_string.dir/main.c.obj	ef4ffdfccaf38500
+68	135	6994356935513389	07_string.exe	e4fe692dfdf7ab81
+1	60	6994357114070272	CMakeFiles/07_string.dir/main.c.obj	ef4ffdfccaf38500
+60	120	6994357114639078	07_string.exe	e4fe692dfdf7ab81

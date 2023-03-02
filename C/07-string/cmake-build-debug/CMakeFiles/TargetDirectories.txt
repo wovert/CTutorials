@@ -1,0 +1,3 @@
+D:/development/CTutorials/C/07-string/cmake-build-debug/CMakeFiles/07_string.dir
+D:/development/CTutorials/C/07-string/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/development/CTutorials/C/07-string/cmake-build-debug/CMakeFiles/rebuild_cache.dir
