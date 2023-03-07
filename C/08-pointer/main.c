@@ -6,12 +6,46 @@ void pointStepWidth();
 void yePointer();
 void emptyPointer();
 void anyPointer();
+void pointer();
 int main() {
+//  pointer();
 //  yePointer();
 //  emptyPointer();
-anyPointer();
+//anyPointer();
 //  pointStepWidth();
+
+
   return 0;
+}
+void pointer() {
+  char c = 'a';
+  char *p = &c;
+
+  printf("p=%p\n", p);
+  printf("&c=%p\n", &c);
+
+  char *name = &c;
+  printf("name=%p\n", name);
+
+  char *p1 = p;
+  printf("p=%p\n", p);
+  printf("p1=%p\n", p1);
+
+//  p = NULL;
+
+  char **pp = &p;
+  printf("*pp=%p\n", *pp);
+
+  printf("*p=%c\n", *p);
+  printf("*p1=%c\n", *p1);
+  printf("**pp=%c\n", **pp);
+
+  printf("p+1=%p\n", p+1); // p地址加p指针类型 + 1
+  printf("*p+1=%c\n", *p+1); // p指针指向的空间 + 1
+
+//  printf("*(p+1)=%p\n", *(p+1)) // 野指针
+
+
 }
 
 // 万能指针
