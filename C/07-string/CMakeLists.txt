@@ -3,4 +3,4 @@ project(07_string)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(07_string main_sprintf.c)
+add_executable(07_string main_atoi.c)

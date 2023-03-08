@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "07_string.exe"
+			"path" : "08_pointer.exe"
 		},
 		{
-			"path" : "07_string.pdb"
+			"path" : "08_pointer.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -48,7 +48,7 @@
 			]
 		}
 	],
-	"id" : "07_string::@6890427a1f51a3e7e1df",
+	"id" : "08_pointer::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -68,8 +68,8 @@
 		],
 		"language" : "C"
 	},
-	"name" : "07_string",
-	"nameOnDisk" : "07_string.exe",
+	"name" : "08_pointer",
+	"nameOnDisk" : "08_pointer.exe",
 	"paths" : 
 	{
 		"build" : ".",
@@ -90,7 +90,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "main_sprintf.c",
+			"path" : "main_functionPointerArray.c",
 			"sourceGroupIndex" : 0
 		}
 	],

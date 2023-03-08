@@ -49,8 +49,8 @@ cmake_ninja_workdir = D$:/development/CTutorials/C/07-string/cmake-build-debug-m
 
 build cmake_object_order_depends_target_07_string: phony || CMakeFiles/07_string.dir
 
-build CMakeFiles/07_string.dir/main_sprintf.c.obj: C_COMPILER__07_string_Release D$:/development/CTutorials/C/07-string/main_sprintf.c || cmake_object_order_depends_target_07_string
-  DEP_FILE = CMakeFiles\07_string.dir\main_sprintf.c.obj.d
+build CMakeFiles/07_string.dir/main_atoi.c.obj: C_COMPILER__07_string_Release D$:/development/CTutorials/C/07-string/main_atoi.c || cmake_object_order_depends_target_07_string
+  DEP_FILE = CMakeFiles\07_string.dir\main_atoi.c.obj.d
   FLAGS = -O3 -DNDEBUG -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\07_string.dir
   OBJECT_FILE_DIR = CMakeFiles\07_string.dir
@@ -63,7 +63,7 @@ build CMakeFiles/07_string.dir/main_sprintf.c.obj: C_COMPILER__07_string_Release
 #############################################
 # Link the executable 07_string.exe
 
-build 07_string.exe: C_EXECUTABLE_LINKER__07_string_Release CMakeFiles/07_string.dir/main_sprintf.c.obj
+build 07_string.exe: C_EXECUTABLE_LINKER__07_string_Release CMakeFiles/07_string.dir/main_atoi.c.obj
   FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\07_string.dir

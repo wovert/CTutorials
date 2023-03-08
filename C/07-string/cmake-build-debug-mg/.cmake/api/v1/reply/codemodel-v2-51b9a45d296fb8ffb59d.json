@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"jsonFile" : "directory-.-Release-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.24"
@@ -19,7 +19,7 @@
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "Release",
 			"projects" : 
 			[
 				{
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "07_string::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-07_string-Debug-5ff40dae99514a0be965.json",
+					"jsonFile" : "target-07_string-Release-8dc6d0a259e7f699df05.json",
 					"name" : "07_string",
 					"projectIndex" : 0
 				}
@@ -49,7 +49,7 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/development/CTutorials/C/07-string/cmake-build-debug",
+		"build" : "D:/development/CTutorials/C/07-string/cmake-build-debug-mg",
 		"source" : "D:/development/CTutorials/C/07-string"
 	},
 	"version" : 
