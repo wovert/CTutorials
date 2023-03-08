@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "08_pointer",
+					"name" : "07_string",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "08_pointer::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-08_pointer-Debug-2e8a493679fa6b471699.json",
-					"name" : "08_pointer",
+					"id" : "07_string::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-07_string-Debug-5ff40dae99514a0be965.json",
+					"name" : "07_string",
 					"projectIndex" : 0
 				}
 			]
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/development/CTutorials/C/08-pointer/cmake-build-debug",
-		"source" : "D:/development/CTutorials/C/08-pointer"
+		"build" : "D:/development/CTutorials/C/07-string/cmake-build-debug",
+		"source" : "D:/development/CTutorials/C/07-string"
 	},
 	"version" : 
 	{

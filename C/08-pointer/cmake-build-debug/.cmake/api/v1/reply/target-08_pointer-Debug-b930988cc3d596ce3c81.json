@@ -90,7 +90,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "main.c",
+			"path" : "main_pointerArray.c",
 			"sourceGroupIndex" : 0
 		}
 	],

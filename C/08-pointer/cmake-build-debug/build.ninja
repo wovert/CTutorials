@@ -49,7 +49,7 @@ cmake_ninja_workdir = D$:\development\CTutorials\C\08-pointer\cmake-build-debug\
 
 build cmake_object_order_depends_target_08_pointer: phony || CMakeFiles\08_pointer.dir
 
-build CMakeFiles\08_pointer.dir\main.c.obj: C_COMPILER__08_pointer_Debug D$:\development\CTutorials\C\08-pointer\main.c || cmake_object_order_depends_target_08_pointer
+build CMakeFiles\08_pointer.dir\main_pointerArray.c.obj: C_COMPILER__08_pointer_Debug D$:\development\CTutorials\C\08-pointer\main_pointerArray.c || cmake_object_order_depends_target_08_pointer
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd
   OBJECT_DIR = CMakeFiles\08_pointer.dir
   OBJECT_FILE_DIR = CMakeFiles\08_pointer.dir
@@ -64,7 +64,7 @@ build CMakeFiles\08_pointer.dir\main.c.obj: C_COMPILER__08_pointer_Debug D$:\dev
 #############################################
 # Link the executable 08_pointer.exe
 
-build 08_pointer.exe: C_EXECUTABLE_LINKER__08_pointer_Debug CMakeFiles\08_pointer.dir\main.c.obj
+build 08_pointer.exe: C_EXECUTABLE_LINKER__08_pointer_Debug CMakeFiles\08_pointer.dir\main_pointerArray.c.obj
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
