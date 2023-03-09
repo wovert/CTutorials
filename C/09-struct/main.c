@@ -1,9 +1,10 @@
 # include <stdio.h>
 # include <string.h>
 
-// æŒ‡å®šå¯¹é½è§„åˆ™ min(8, DATA1.b) = 4
+// Ö¸¶¨¶ÔÆë¹æÔò min(8, DATA1.b) = 4
 #pragma pack(8)
 
+// Student ÊÇ½á¹¹ÌåÀàĞÍÃû
 struct Student {
     int sid;
     char *name;
@@ -19,15 +20,23 @@ void s1(struct Student stu) {
 }
 
 static void test01() {
-    struct Student st = {1000, "å¼ ä¸‰", 20};
-    //strcpy(st.name, "æå››");
-    printf("%p: %d %s %d\n", &st, st.sid, st.name, st.age);
-    printf("%p %p %p\n", &st.sid, &st.name, &st.age);
+  // ½á¹¹Ìå³õÊ¼»¯
+  struct Student st = {1000, "ÕÅÈı", 20};
+  printf("&st=%p: st.sid=%d st.name=%s st.age=%d\n", &st, st.sid, st.name, st.age);
+
+  // Ê¹ÓÃ½á¹¹ÌåµØÖ··ÃÎÊ³ÉÔ±
+  printf("&st=%p: (&st)->sid=%d (&st)->name=%s (&st)->age=%d\n", &st, (&st)->sid, (&st)->name, (&st)->age);
+  printf("&st.sid=%p &st.name=%p &st.age=%p\n", &st.sid, &st.name, &st.age);
+
+  struct Student st2 = {.age=23, .sid=100};
+  strcpy_s(st2.name,  sizeof(st2.name)/sizeof(st2.name[0]), "ÀîËÄ");
+//  strcpy(st2.name, "ÀîËÄ");
+  printf("&st2=%p: st2.sid=%d st2.name=%s st2.age=%d\n", &st2, st2.sid, st2.name, st2.age);
 }
 
 static void test02() {
 
-    struct Student st = {1000, "å¼ ä¸‰", 20};
+    struct Student st = {1000, "ÕÅÈı", 20};
     struct Student *pst = &st;
     pst->sid = 99;
     
@@ -40,7 +49,7 @@ static void test02() {
 typedef struct {
     char c; // 1B
     int i; // 4B
-} Data;
+} Data; // Data ½á¹¹Ìå±äÁ¿Ãû
 
 typedef struct {
     int a;
@@ -149,7 +158,7 @@ static void test04() {
     DATA data = {'a', 100, 20};
     char *p = &data;
     printf("c = %hd\n", data.c);
-    // å€ŸåŠ©pè®¿é—®20
+    // ½èÖúp·ÃÎÊ20
     printf("*(p+0) = %hd\n", *(short *)(p+0));
     printf("*(p+1) = %hd\n", *(short *)(p+1));
     printf("*(p+2) = %hd\n", *(short *)(p+2));
@@ -167,7 +176,7 @@ typedef struct {
 	short c; // 2
 } DATA1;
 
-//  å¯¹é½è§„åˆ™
+//  ¶ÔÆë¹æÔò
 static void test05() {
 	//printf("%d\n", sizeof(DATA1)); // value(2) = 8
 	//printf("%d\n", sizeof(DATA1)); // value(1) = 7
@@ -176,10 +185,10 @@ static void test05() {
 
 
 typedef struct {
-	// å“é“ƒä½åŸŸ å¯ä»¥å‹ç¼©ï¼ˆå‹ç¼©çš„ä½æ•° ä¸èƒ½è¶…è¿‡æˆå‘˜è‡ªèº«å¤§å°ï¼‰
-	// ä½ä½å¼€å§‹
+	// ÏìÁåÎ»Óò ¿ÉÒÔÑ¹Ëõ£¨Ñ¹ËõµÄÎ»Êı ²»ÄÜ³¬¹ı³ÉÔ±×ÔÉí´óĞ¡£©
+	// µÍÎ»¿ªÊ¼
 	unsigned char a : 2;
-	unsigned char : 4; //  æ— æ„ä¹‰çš„ä½æ®µï¼ˆå 2ä½ï¼‰
+	unsigned char : 4; //  ÎŞÒâÒåµÄÎ»¶Î£¨Õ¼2Î»£©
 	unsigned char b : 2;
 } BIT_DATA;
 
@@ -194,12 +203,12 @@ static void test06() {
 }
 
 int main() {
-    // test01();
+     test01();
     // test02();
     // test03();
     //test04();
 	//test05();
-	test06();
+//	test06();
     
     return 0;
 }
