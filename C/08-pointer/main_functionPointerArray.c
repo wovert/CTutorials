@@ -3,6 +3,8 @@
 #include <string.h>
 
 
+void demo01();
+void demo02();
 int add(int a, int b) {
   return a + b;
 }
@@ -29,8 +31,7 @@ void changeTrue(int (**p1)(int a, int b)) {
   *p1 = add;
 }
 
-int main() {
-
+void demo01() {
   int *px[10];
 
   // 定义函数指针
@@ -53,6 +54,15 @@ int main() {
 
   changeTrue(&p2);
   printf("p2(a,b)=%d\n", p2(a, b));
+}
+
+
+
+
+int main() {
+
+  demo01();
+
 
   return 0;
 }
