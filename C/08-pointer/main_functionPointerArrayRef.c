@@ -58,8 +58,8 @@ int main() {
 //  (*arr[2])(&prices[2]);
 
   for (int i = 0; i < 3; ++i) {
-    (*(arr[i]))(&prices[i]);
-//    (*(*arr + i*sizeof(RATE_FUNC *)))(&prices[i]);
+//    (*(arr[i]))(&prices[i]);
+    (*(arr + i))(&prices[i]);
 //    printf("pRate[%d]=%p\n", i, ((pRate)(&prices[i]))[i](&prices[i]) );
 
   }
