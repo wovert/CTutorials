@@ -1,0 +1,3 @@
+D:/development/CTutorials/C/11-file/cmake-build-debug/CMakeFiles/11_file.dir
+D:/development/CTutorials/C/11-file/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/development/CTutorials/C/11-file/cmake-build-debug/CMakeFiles/rebuild_cache.dir

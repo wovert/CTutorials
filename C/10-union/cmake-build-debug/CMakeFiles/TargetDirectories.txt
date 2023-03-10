@@ -1,0 +1,3 @@
+D:/development/CTutorials/C/10-union/cmake-build-debug/CMakeFiles/10_union.dir
+D:/development/CTutorials/C/10-union/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/development/CTutorials/C/10-union/cmake-build-debug/CMakeFiles/rebuild_cache.dir

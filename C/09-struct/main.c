@@ -1,5 +1,6 @@
 # include <stdio.h>
 # include <string.h>
+#include <malloc.h>
 
 // 指定对齐规则 min(8, DATA1.b) = 4
 #pragma pack(8)
@@ -7,7 +8,7 @@
 // Student 是结构体类型名
 struct Student {
     int sid;
-    char *name;
+    char name[1024];
     int age;
 };
 
@@ -27,23 +28,78 @@ static void test01() {
   // 使用结构体地址访问成员
   printf("&st=%p: (&st)->sid=%d (&st)->name=%s (&st)->age=%d\n", &st, (&st)->sid, (&st)->name, (&st)->age);
   printf("&st.sid=%p &st.name=%p &st.age=%p\n", &st.sid, &st.name, &st.age);
-
   struct Student st2 = {.age=23, .sid=100};
+  printf("sizeof(st2.name)/sizeof(st2.name[0])=%d\n", sizeof(st2.name)/sizeof(st2.name[0]));
+  printf("sizeof(st2.name)/sizeof(st2.name[0])=%d\n", strlen(st2.name));
+
+
   strcpy_s(st2.name,  sizeof(st2.name)/sizeof(st2.name[0]), "李四");
 //  strcpy(st2.name, "李四");
   printf("&st2=%p: st2.sid=%d st2.name=%s st2.age=%d\n", &st2, st2.sid, st2.name, st2.age);
 }
 
+void memcpy_str(struct Student *, struct Student *);
+
+void memcpy_str(struct Student *x, struct Student *y) {
+  memset( x , 0 ,sizeof(x));
+  memcpy(x, y, sizeof(x)); // 长度字节单位
+}
+
+typedef struct {
+  int id;
+  char *name;
+  char desc[1024];
+} Tea;
+
 static void test02() {
 
     struct Student st = {1000, "张三", 20};
-    struct Student *pst = &st;
+    struct Student st2;
+
+    // 1. 复制数据
+//    memcpy_str(&st2, &st);
+
+    // 2. 复制数据
+//    st2.sid = st.sid;
+//    st2.age = st.age;
+//    strcpy_s(st2.name, sizeof(st.name)/sizeof(st.name[0]), st.name);
+
+    // 3. 复制数据 相同类型可以赋值
+    st2 = st;
+
+  printf("sid=%d name=%s age=%d\n", st.sid, st.name, st.age);
+  printf("sid=%d name=%s age=%d\n", st2.sid, st2.name, st2.age);
+
+//    struct Student *pst = &st;
+    struct Student *pst = malloc(sizeof(struct Student));
     pst->sid = 99;
     
-    printf("%p\n", pst);
-    printf("%p\n", &pst->sid);
+    printf("pst地址=%p\n", pst);
+    printf("pst的首个成员地址=%p, 值=%d\n", &pst->sid, pst->sid);
     
     s1(st);
+
+    printf("------------------\n");
+
+    Tea *p = (Tea *)malloc(sizeof(Tea));
+    p->id = 100;
+    p->name = "红茶"; // ok: 红茶再常量区，name 在堆空间引用常量区的地址
+    char n[1024] = "茶名";
+
+
+    p->name = (char *)malloc(128);
+    // error: p->name 是野指针，不知道指向哪里，所以不能赋值内容
+    // 解决方法：必须分配内存空间
+    strcpy_s(p->name, 128, "白茶");
+
+    printf("p->id=%d\n", p->id);
+    printf("p->name=%s\n", p->name);
+
+
+    // 释放内存
+    free(p->name);
+    free(p);
+
 }
 
 typedef struct {
@@ -203,8 +259,8 @@ static void test06() {
 }
 
 int main() {
-     test01();
-    // test02();
+//     test01();
+     test02();
     // test03();
     //test04();
 	//test05();

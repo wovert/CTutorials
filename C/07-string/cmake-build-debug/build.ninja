@@ -49,7 +49,7 @@ cmake_ninja_workdir = D$:\development\CTutorials\C\07-string\cmake-build-debug\
 
 build cmake_object_order_depends_target_07_string: phony || CMakeFiles\07_string.dir
 
-build CMakeFiles\07_string.dir\main_atoi.c.obj: C_COMPILER__07_string_Debug D$:\development\CTutorials\C\07-string\main_atoi.c || cmake_object_order_depends_target_07_string
+build CMakeFiles\07_string.dir\main.c.obj: C_COMPILER__07_string_Debug D$:\development\CTutorials\C\07-string\main.c || cmake_object_order_depends_target_07_string
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd
   OBJECT_DIR = CMakeFiles\07_string.dir
   OBJECT_FILE_DIR = CMakeFiles\07_string.dir
@@ -64,7 +64,7 @@ build CMakeFiles\07_string.dir\main_atoi.c.obj: C_COMPILER__07_string_Debug D$:\
 #############################################
 # Link the executable 07_string.exe
 
-build 07_string.exe: C_EXECUTABLE_LINKER__07_string_Debug CMakeFiles\07_string.dir\main_atoi.c.obj
+build 07_string.exe: C_EXECUTABLE_LINKER__07_string_Debug CMakeFiles\07_string.dir\main.c.obj
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

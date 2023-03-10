@@ -12,6 +12,16 @@ void getRandNumber();
 void connectString();
 void compareString();
 int main() {
+
+  char cont[] = "ÏÄºì";
+  char *p = malloc(sizeof(cont));
+  char *p2 = malloc(sizeof(cont));
+  printf("cont length=%d sizeof(cont)=%d\n", strlen(cont), sizeof(cont));
+  strcpy_s(p, strlen(cont)+1, cont);
+  strcpy_s(p2, sizeof(cont), cont);
+  printf("p=%s\n", p);
+  printf("p2=%s\n", p2);
+
 //  getOneChar();
 //  getStringByScanf();
 //  getStringByGets();
@@ -25,12 +35,12 @@ int main() {
 
   compareString();
 }
-// æ¯”è¾ƒå­—ç¬¦ä¸²
+// ±È½Ï×Ö·û´®
 void compareString() {
   char str1[1024] = "";
   char str2[1024] = "";
 
-  // è·å–åŒ…æ‹¬\nçš„å­—ç¬¦ä¸²
+  // »ñÈ¡°üÀ¨\nµÄ×Ö·û´®
   fgets(str1, sizeof(str1), stdin);
   fgets(str2, sizeof(str2), stdin);
 
@@ -43,7 +53,7 @@ void compareString() {
   printf("str1[%d]=%d, %c\n", str1len, str1[str1len-1], str1[str1len-1]);
   printf("str2[%d]=%d, %c\n", str2len, str1[str2len-1], str2[str2len-1]);
 
-  // å»æ‰ \n
+  // È¥µô \n
   str1[str1len - 1] = '\0';
   str2[str2len - 1] = '\0';
 
@@ -88,22 +98,22 @@ void connectString() {
 
 }
 void getRandNumber() {
-  int t = time(NULL); // è·å¾—å½“å‰æ—¶é—´ s
-  srand(time(NULL)); // è®¾ç½®éšæœºç§å­æ•°
-  int a = rand(); // éšæœºæ•°
+  int t = time(NULL); // »ñµÃµ±Ç°Ê±¼ä s
+  srand(time(NULL)); // ÉèÖÃËæ»úÖÖ×ÓÊı
+  int a = rand(); // Ëæ»úÊı
   printf("a=%d\n", a);
 
-  int b = rand(); // éšæœºæ•°
+  int b = rand(); // Ëæ»úÊı
   printf("a=%d\n", b);
 
 }
 void outPutString() {
   char buf[1024] = "hello world";
 
-  puts(buf); // æ•°ç»„é¦–å…ƒç´ åœ°å€ï¼Œæœ‰æ¢è¡Œ
+  puts(buf); // Êı×éÊ×ÔªËØµØÖ·£¬ÓĞ»»ĞĞ
   printf("abc\n");
 
-  fputs(buf, stdout); // æ²¡æœ‰æ¢è¡Œ
+  fputs(buf, stdout); // Ã»ÓĞ»»ĞĞ
   printf("abc\n");
 
 }
@@ -111,15 +121,15 @@ void outPutString() {
 #define NUMBER 1024
 void getStringByFgets() {
   char num[NUMBER];
-  fgets(num, sizeof(num), stdin); // ä» std è¯»å–å­—ç¬¦ä¸²è¯»å–çš„numæ•°ç»„ä¸­, æœ€å¤§å¯ä»¥è¯»å–sizeof(num) - 1 ä¸ªå­—ç¬¦
+  fgets(num, sizeof(num), stdin); // ´Ó std ¶ÁÈ¡×Ö·û´®¶ÁÈ¡µÄnumÊı×éÖĞ, ×î´ó¿ÉÒÔ¶ÁÈ¡sizeof(num) - 1 ¸ö×Ö·û
   printf("strlen(num)=%d\n", strlen(num)); // 4
 //
 
 
 //  if ((strlen(num) + 1) <= NUMBER) {
-    num[strlen(num) - 1] = '\0'; // å»æ‰ \n
+    num[strlen(num) - 1] = '\0'; // È¥µô \n
 //  } else {
-//    num[strlen(num)] = '\0'; // å»æ‰ \n
+//    num[strlen(num)] = '\0'; // È¥µô \n
 //  }
 
 
@@ -133,17 +143,17 @@ void getStringByGets() {
   printf("num=%s\n", num);
 }
 
-// ä»é”®ç›˜è·å–ä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œé‡åˆ°ç©ºç™½å­—ç¬¦ï¼ˆ\t \n ç©ºæ ¼ï¼‰ç»“æŸ
+// ´Ó¼üÅÌ»ñÈ¡Ò»¸ö×Ö·û´®£¬Óöµ½¿Õ°××Ö·û£¨\t \n ¿Õ¸ñ£©½áÊø
 void getStringByScanf() {
   char num[6] = "";
   scanf("%s", num);
 
-  // %s: å­—ç¬¦æ•°ç»„é¦–å…ƒç´ åœ°å€
-  // å­˜æ”¾è¯»å–å­—ç¬¦çš„ç©ºé—´ä¸è¶³ï¼Œç»§ç»­å‘åå­˜æ”¾é€ æˆå†…å­˜æ±¡æŸ“
+  // %s: ×Ö·ûÊı×éÊ×ÔªËØµØÖ·
+  // ´æ·Å¶ÁÈ¡×Ö·ûµÄ¿Õ¼ä²»×ã£¬¼ÌĞøÏòºó´æ·ÅÔì³ÉÄÚ´æÎÛÈ¾
   printf("num=%s sizeof(num)=%d, strlen(num)=%d\n", num, sizeof(num), strlen(num));
 }
 
-// ä»é”®ç›˜è·å–ä¸€ä¸ªå­—ç¬¦
+// ´Ó¼üÅÌ»ñÈ¡Ò»¸ö×Ö·û
 void getOneChar() {
   char ch = 0;
   char ch2 = 0;
