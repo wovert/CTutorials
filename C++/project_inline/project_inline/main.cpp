@@ -1,30 +1,30 @@
-#include <iostream>
+ï»¿#include <iostream>
 
 using namespace std;
 
-inline int sum();
+inline int sum(int, int);
 
-// ¿ª±Ù
+// å¼€è¾Ÿ
 inline int sum(int a, int b) {
 	return a + b;
 }
 
-// ÆÕÍ¨º¯Êý£º¿ª±ÙÕ»¿Õ¼ä
+// æ™®é€šå‡½æ•°ï¼šå¼€è¾Ÿæ ˆç©ºé—´
 int normalFunc(int a, int b) {
 	return a + b;
 }
-// »ØÊÕÕ»¿Õ¼ä
+// å›žæ”¶æ ˆç©ºé—´
 
 int main(int argc, char *argv[])
 {
-	// µ÷ÓÃº¯Êý¿ª±ÙÄÚ´æ¿Õ¼ä
-	int result = normalFunc(10, 20);
+	// è°ƒç”¨å‡½æ•°å¼€è¾Ÿå†…å­˜ç©ºé—´
+	int result = normalFunc(10, 30);
 
 	cout << "result=" << result << endl;
 
-	// ±àÒëÆ÷´Ë´¦Ìæ»»º¯Êý´úÂë£¬²»´æÔÚº¯Êýµ÷ÓÃ ´úÂë±äÎª int c = 20 + 40;
-	// 1.ÓÃÓÚº¯Êý´úÂëÌå»ý²»´ó
-	// 2.Æµ·±µ÷ÓÃº¯ÊýÊÇÊ¹ÓÃinline
+	// ç¼–è¯‘å™¨æ­¤å¤„æ›¿æ¢å‡½æ•°ä»£ç ï¼Œä¸å­˜åœ¨å‡½æ•°è°ƒç”¨ ä»£ç å˜ä¸º int c = 20 + 40;
+	// 1.ç”¨äºŽå‡½æ•°ä»£ç ä½“ç§¯ä¸å¤§
+	// 2.é¢‘ç¹è°ƒç”¨å‡½æ•°æ˜¯ä½¿ç”¨inline
 	int c = sum(10, 20);
 
 	cout << "c=" << c << endl;
