@@ -10,8 +10,6 @@ void demo01() {
 	cout << s1 << endl;
 
 
-
-
 	MyString s2(3, 'b');
 
 	cout << s2 << endl;
