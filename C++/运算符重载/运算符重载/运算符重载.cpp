@@ -205,7 +205,7 @@ istream &operator>>(istream &in, Person &p) {
 }
 
 ostream &operator<<(ostream &out, const Student &s) {
-	cout << s.mid << endl;
+	out << s.mid << endl;
 	return out;
 }
 
