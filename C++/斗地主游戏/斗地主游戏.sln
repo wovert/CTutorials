@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.33026.149
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "斗地主游戏", "斗地主游戏\斗地主游戏.vcxproj", "{128D9052-F4CC-4421-8664-06B233F4CB29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{128D9052-F4CC-4421-8664-06B233F4CB29}.Debug|x64.ActiveCfg = Debug|x64
+		{128D9052-F4CC-4421-8664-06B233F4CB29}.Debug|x64.Build.0 = Debug|x64
+		{128D9052-F4CC-4421-8664-06B233F4CB29}.Debug|x86.ActiveCfg = Debug|Win32
+		{128D9052-F4CC-4421-8664-06B233F4CB29}.Debug|x86.Build.0 = Debug|Win32
+		{128D9052-F4CC-4421-8664-06B233F4CB29}.Release|x64.ActiveCfg = Release|x64
+		{128D9052-F4CC-4421-8664-06B233F4CB29}.Release|x64.Build.0 = Release|x64
+		{128D9052-F4CC-4421-8664-06B233F4CB29}.Release|x86.ActiveCfg = Release|Win32
+		{128D9052-F4CC-4421-8664-06B233F4CB29}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {86BCDDCA-9DCC-4FE1-95EA-249733788266}
+	EndGlobalSection
+EndGlobal

@@ -160,23 +160,10 @@ void test05() {
 		++begin;
 		cout << endl;
 	}
-
 }
-void stringFunc01() {
-	// string 构造函数
-	string s1;
-	string s2(10, 'a');
-	string s3(s2);
-	string s4("hello");
 
-	// 赋值操作
-
-
-
-}
 int main() {
-	stringFunc01();
-	test05();
+	//test05();
 	//test04();
 	//test03();
 	//test02();

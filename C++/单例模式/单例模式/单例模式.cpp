@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -36,13 +37,75 @@ Single *Single::single = new Single();
 //int Single::a = 20;
 
 
-int main()
-{
+class SqlQuery {
+private:
+	SqlQuery(const string &conn, const string &username, const string &password) {
+		m_conn = conn;
+		m_username = username;
+		m_password = password;
+		cout << "SqlQuery 构造函数" << endl;
+	}
+	SqlQuery(const SqlQuery &s) {
+		cout << "SqlQuery 拷贝函数" << endl;
+	}
+public:
+	~SqlQuery() {
+		cout << "SqlQuery 析构函数" << endl;
+	}
+	int query() {
+		return 0;
+	}
+private:
+	string m_conn;
+	string m_username;
+	string m_password;
+public:
+	static SqlQuery *sqlQuery;
+	static SqlQuery *getSqlQuyery() {
+		return sqlQuery;
+	}
+};
+
+
+void singleTest() {
 	Single *single1 = Single::getSingle();
 	//Single single2 = *single1;
 	Single *single3 = Single::getSingle();
 	Single *single4 = Single::getSingle();
 
 	delete single1;
+}
+
+void sqlQueryTest() {
+	string conn = "mysql://localhost:3306/test/";
+	string username = "root";
+	string password = "root";
+	
+	fstream fs("./config.txt");
+	char str[1024];
+	int index = 0;
+	while (fs.getline(str, 1024)) {
+		if (index == 0) {
+			conn = str;
+		}
+		else if (index == 1) {
+			username = str;
+		}
+		else if (index == 2) {
+			password = str;
+		}
+		index++;
+	}
+
+	printf("conn:%s\n", conn.c_str());
+	printf("username:%s\n", username.c_str());
+	printf("password:%s\n", password.c_str());
+}
+
+
+int main()
+{	
+	sqlQueryTest();
+	//singleTest();
 	return 0;
 }
