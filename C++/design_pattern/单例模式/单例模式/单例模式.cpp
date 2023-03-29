@@ -1,5 +1,9 @@
 ﻿#include <iostream>
 #include <fstream>
+#include <chrono>
+
+#include "DBConfig.h"
+#include <thread>
 
 using namespace std;
 
@@ -36,23 +40,32 @@ Single *Single::single = new Single();
 // 报错 下面代码执行时，还没有分配空间，所以不能赋值
 //int Single::a = 20;
 
+long long getTime()
+{
+	std::chrono::time_point<std::chrono::system_clock, std::chrono::milliseconds> tp
+		= std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now());
+	auto temp = std::chrono::duration_cast<std::chrono::milliseconds>(tp.time_since_epoch());
+
+	return (long long)temp.count();
+}
 
 class SqlQuery {
-private:
+public:
 	SqlQuery(const string &conn, const string &username, const string &password) {
+		//cout << "SqlQuery 构造函数" << endl;
 		m_conn = conn;
 		m_username = username;
 		m_password = password;
-		cout << "SqlQuery 构造函数" << endl;
 	}
 	SqlQuery(const SqlQuery &s) {
-		cout << "SqlQuery 拷贝函数" << endl;
+		//cout << "SqlQuery 拷贝函数" << endl;
 	}
 public:
 	~SqlQuery() {
-		cout << "SqlQuery 析构函数" << endl;
+		//cout << "SqlQuery 析构函数" << endl;
 	}
 	int query() {
+		//cout << "SQL 查询操作" << endl;
 		return 0;
 	}
 private:
@@ -67,6 +80,16 @@ public:
 };
 
 
+void func()
+{
+	for (int i = 0; i < 100; i++) {
+		//long long startTime = getTime();
+		DBConfig::getInstance();
+		//long long endTime = getTime();
+		//printf("Time:%lld\n", endTime - startTime);
+		printf("Query:%d\n", i);
+	}
+}
 void singleTest() {
 	Single *single1 = Single::getSingle();
 	//Single single2 = *single1;
@@ -77,29 +100,11 @@ void singleTest() {
 }
 
 void sqlQueryTest() {
-	string conn = "mysql://localhost:3306/test/";
-	string username = "root";
-	string password = "root";
-	
-	fstream fs("./config.txt");
-	char str[1024];
-	int index = 0;
-	while (fs.getline(str, 1024)) {
-		if (index == 0) {
-			conn = str;
-		}
-		else if (index == 1) {
-			username = str;
-		}
-		else if (index == 2) {
-			password = str;
-		}
-		index++;
-	}
+	std::thread t1(func);
+	std::thread t2(func);
 
-	printf("conn:%s\n", conn.c_str());
-	printf("username:%s\n", username.c_str());
-	printf("password:%s\n", password.c_str());
+	t1.join();
+	t2.join();
 }
 
 
