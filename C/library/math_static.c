@@ -8,6 +8,7 @@ int main() {
   int x = 10;
   int y = 5;
 
+  printf("静态库编译\n");
   printf("x + y = %d\n", add(x, y));
   printf("x - y = %d\n", sub(x, y));
   printf("x * y = %d\n", mul(x, y));
