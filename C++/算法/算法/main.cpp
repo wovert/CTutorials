@@ -74,8 +74,89 @@ void test02() {
 	for_each(v2.begin(), v2.end(), [](int val) {cout << val << " "; });
 }
 
+
+// 普通函数进行适配
+void myprint(int val) {
+	cout << val << " ";
+}
+
+void test03() {
+	vector<int> v;
+	v.push_back(8);
+	v.push_back(2);
+	v.push_back(3);
+	v.push_back(5);
+	v.push_back(1);
+	v.push_back(3);
+
+	for_each(v.begin(), v.end(), myprint);
+}
+
+// 普通函数进行适配
+// 第一步：两个参数
+void myprint2(int v1, int v2) {
+	cout << v1 + v2 << " ";
+}
+
+//  适配
+void test04() {
+	vector<int> v;
+	v.push_back(8);
+	v.push_back(2);
+	v.push_back(3);
+	v.push_back(5);
+	v.push_back(1);
+	v.push_back(3);
+
+	// 第二部：普通函数变为函数对象 ptr_fun
+	for_each(v.begin(), v.end(), bind2nd(ptr_fun(myprint2), 100));
+}
+
+
+
+// 成员函数进行适配
+class Maker {
+public:
+	Maker(string name, int age) {
+		this->name = name;
+		this->age = age;
+	}
+	void MyMakerPrint() {
+		cout << "Name:" << this->name << " age:" << this->age << endl;
+	}
+public:
+	string name;
+	int age;
+};
+
+
+
+void test05() {
+	vector<Maker> v;
+	v.push_back(Maker("aa", 10));
+	v.push_back(Maker("bb", 20));
+	v.push_back(Maker("cc", 30));
+	v.push_back(Maker("dd", 40));
+	v.push_back(Maker("ee", 50));
+	v.push_back(Maker("ff", 60));
+
+	// 第二部：容器存储的对象，用mem_fun_ref 适配他的成员函数
+	for_each(v.begin(), v.end(), mem_fun_ref(&Maker::MyMakerPrint));
+
+	vector<Maker *> vp;
+	vp.push_back(new Maker("aa", 10));
+	vp.push_back(new Maker("bb", 20));
+	vp.push_back(new Maker("cc", 30));
+	vp.push_back(new Maker("dd", 40));
+
+	// 容器存储的对象，用mem_fun 适配他的成员函数
+	for_each(vp.begin(), vp.end(), mem_fun(&Maker::MyMakerPrint));
+}
 int main() {
-	test02();
+	test05();
+	//test04();
+	//test03();
+	//test02();
 	//test01();
 	return 0;
 }
