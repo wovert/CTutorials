@@ -5,7 +5,7 @@
 #include "div.h"
 
 int main() {
-  int x = 10;
+  int x = 200;
   int y = 5;
 
   printf("x + y = %d\n", add(x, y));
