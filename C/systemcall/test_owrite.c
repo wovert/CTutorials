@@ -13,6 +13,9 @@ int main(void) {
 
 	char *str = "hello world";
 	// readonly open file
+	// O_EXCL: if file exists show error
+	// O_CREAT: if file not exists create file
+	// O_TRUNC: if file exists empty content
 	//fd = open("txt", O_WRONLY | O_CREAT | O_EXCL, 0644);
 	//fd = open("txt", O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	fd = open("txt", O_WRONLY | O_CREAT, 0644);
