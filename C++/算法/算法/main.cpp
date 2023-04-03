@@ -130,7 +130,6 @@ public:
 };
 
 
-
 void test05() {
 	vector<Maker> v;
 	v.push_back(Maker("aa", 10));
@@ -152,8 +151,97 @@ void test05() {
 	// 容器存储的对象，用mem_fun 适配他的成员函数
 	for_each(vp.begin(), vp.end(), mem_fun(&Maker::MyMakerPrint));
 }
+
+struct MyPrint6 {
+public:
+	MyPrint6() {
+		a = 0;
+	}
+	void operator()(const int &val) {
+		cout << val << " ";
+		a++;
+	}
+public:
+	int a;
+};
+
+// 遍历算法
+void test06() {
+	vector<int> v;
+	v.push_back(8);
+	v.push_back(2);
+	v.push_back(3);
+	v.push_back(5);
+	//for_each(v.begin(), v.end(), [](int val) {cout << val << endl; });
+	
+	
+	MyPrint6 m2 = for_each(v.begin(), v.end(), MyPrint6());
+	cout << endl << m2.a << endl; // 4
+}
+
+struct MyAdd {
+	int operator()(int val) {
+		return val + 100;
+	}
+};
+
+// 搬运：转换容器
+void test07() {
+	vector<int> v;
+	v.push_back(8);
+	v.push_back(2);
+	v.push_back(3);
+	v.push_back(5);
+
+	vector<int> v2;
+	v2.resize(v.size()); // 手动分配空间
+
+	transform(v.begin(), v.end(), v2.begin(), MyAdd());
+	for_each(v2.begin(), v2.end(), [](int val)->void {cout << val << endl; });
+
+
+}
+
+struct MyAdd2 {
+	int operator()(int v1, int v2) {
+		return v1 + v2;
+	}
+};
+
+// 两个容器中的元素放入第三个容器中
+void test08() {
+	vector<int> v;
+	v.push_back(8);
+	v.push_back(2);
+	v.push_back(3);
+	v.push_back(5);
+
+	vector<int> v2;
+	v2.push_back(18);
+	v2.push_back(12);
+	v2.push_back(13);
+	v2.push_back(15);
+
+	vector<int> v3;
+	int a = 0;
+	if (v.size() > v2.size()) {
+		a = v.size();
+	}
+	else {
+		a = v2.size();
+	}
+	v3.resize(a); // 手动分配空间
+
+	transform(v.begin(), v.end(), v2.begin(), v3.begin(), MyAdd2());
+	for_each(v3.begin(), v3.end(), [](int val)->void {cout << val << endl; });
+
+
+}
 int main() {
-	test05();
+	test08();
+	//test07();
+	//test06();
+	//test05();
 	//test04();
 	//test03();
 	//test02();
