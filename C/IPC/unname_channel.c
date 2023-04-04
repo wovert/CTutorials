@@ -34,19 +34,19 @@ int main() {
     // read from channel: wait for parent write into channel => block
     res = read(fds[0], buf, SIZE);
 
-   if (res < 0) {
-     perror("read");
-     exit(-1);
-   }
+    if (res < 0) {
+      perror("read");
+      exit(-1);
+    }
 
-  // view buffer pipe size
-  printf("fds[0]=%d, pipe size :%ld\n", fds[0], fpathconf(fds[0], _PC_PIPE_BUF));
-  printf("fds[1]=%d, pipe size :%ld\n", fds[1], fpathconf(fds[1], _PC_PIPE_BUF));
-
-
+    // view buffer pipe size
+    printf("fds[0]=%d, pipe size :%ld\n", fds[0], fpathconf(fds[0], _PC_PIPE_BUF));
+    printf("fds[1]=%d, pipe size :%ld\n", fds[1], fpathconf(fds[1], _PC_PIPE_BUF));
 
 
-   printf("child process buf:%s\n", buf);
+
+
+    printf("child process buf:%s\n", buf);
 
     // close read
     close(fds[0]);

@@ -10,48 +10,51 @@
 
 int main(void) {
 
-	int fd = -1;
-	int res = -1;
-	char buf[SIZE];
+  int fd = -1;
+  int res = -1;
+  char buf[SIZE];
 
 
-	fd = open("lseek.txt", O_RDWR | O_CREAT, 0644);
-	if (-1 == fd) {
-		perror("open");
-		return 1;
-	}
+  // 1. 打开文件
+  fd = open("lseek.txt", O_RDWR | O_CREAT, 0644);
+  if (-1 == fd) {
+    perror("open");
+    return 1;
+  }
 
-	printf("fd = %d\n", fd);
-
-	
-	// lseek
-	write(fd, "ABCDEFG", 7);
-
-	res = lseek(fd, 32, SEEK_SET);
-
-	if (res == -1) {
-		perror("lseek");
-		close(fd);
-		return 1;
-	}
+  printf("fd = %d\n", fd);
 
 	
-	write(fd, "1234567890", 10);
+  // lseek
+  write(fd, "ABCDEFG", 7);
 
-	// reset offset seek init start
-	//lseek(fd, 0, SEEK_SET);
-	lseek(fd, 32, SEEK_SET);
+  // SEEK_SET 文件开头偏移32个字节
+  res = lseek(fd, 32, SEEK_SET);
 
-	memset(buf, 0, SIZE);
+  if (res == -1) {
+    perror("lseek");
+    close(fd);
+    return 1;
+  }
 
-	read(fd, buf, SIZE);
+	
+  write(fd, "1234567890", 10);
 
-	printf("read res=%d  buf=%s\n", res, buf);
+  // reset offset seek init start
+  lseek(fd, 0, SEEK_SET);
+  //lseek(fd, 32, SEEK_SET);
+
+  memset(buf, 0, SIZE);
+
+
+  read(fd, buf, SIZE);
+
+  printf("read res=%d  buf=%s\n", res, buf);
 
 
 
-	// close file
-	close(fd);
+  // close file
+  close(fd);
 
-	return 0;
+  return 0;
 }

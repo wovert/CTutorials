@@ -17,7 +17,8 @@ int main() {
   	perror("fork");
 	return 1;
   }
-  
+ 
+  // 父进程 
   if (pid > 0) {
     printf("parent child start\n");
     sleep(1);
@@ -25,6 +26,7 @@ int main() {
     exit(0);
   } 
   
+  // 子进程
   while(1) {
     printf("Child process running...");
     sleep(1);

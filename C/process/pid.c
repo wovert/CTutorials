@@ -7,8 +7,13 @@ int main(void) {
   pid_t ppid = -1;
   pid_t pgpid = -1;
 
+  // 当前进程号
   pid = getpid();
+
+  // 当前父进程号
   ppid = getppid();
+
+  // 当前进程组号 get process group id
   pgpid = getpgid(pid);
   
   printf("pid = %d\n", pid);

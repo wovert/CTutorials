@@ -33,7 +33,7 @@ int main() {
   // parent process block wait for child process exit
   //res = wait(&status);
   //res = waitpid(-1, &status, 0); // equal wait()
-  res = waitpid(-1, &status, WNOHANG); // nonblock
+  res = waitpid(-1, &status, WNOHANG); // WNOHANG: nonblock
   if (res == -1) {
     perror("wait");
     return 1;
