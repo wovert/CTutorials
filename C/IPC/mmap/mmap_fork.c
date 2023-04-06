@@ -34,6 +34,7 @@ int main() {
 
   close(fd);
 
+  // create child process
   pid = fork();
   if (pid == -1) {
     perror("fork");
