@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <unistd.h>
 #include <pthread.h>
 
 int num = 100;
@@ -10,17 +10,23 @@ int num = 100;
 void *fun(void *arg) {
   printf("线程1 tid: %lu\n", pthread_self());
   int i;
-  for(i=0;i<5;i++) {
-    printf("child thread do working %d\n", i);
+  for(i='A';i<='Z';i++) {
+    if ('W' == i) {
+      pthread_exit((void *)0xc);
+    }
+    putchar(i);
+    fflush(stdout); // 刷新缓冲区
     sleep(1);
   }
   return (void *)0x3;
 }
 
-// 回收线程的资源
+
+// 线程退出
 int main(void) {
   int res = -1;
   void *resp = NULL;
+  
   pthread_t tid;
   memset(&tid, 0, sizeof(tid));
 
@@ -41,15 +47,25 @@ int main(void) {
 
   printf("主线程------tid:%lu\n", pthread_self());
 
-  // 等待线程结束 阻塞
+
+  sleep(3);
+  printf("主线产生睡眠3秒 取消子线程..\n");
+  pthread_cancel(tid);
+
+
+  // 线程资源回收
   res = pthread_join(tid, &resp);
   if (0 != res) {
     printf("pthread_join failed...\n");
     return 1;
   }
+  printf("线程1结束\n");
 
-  printf("resp= %p\n", resp);
+  printf("主线程 resp= %p\n", resp);
   printf("主线程退出...\n");
+
+
+  free(p);
 
   getchar();
   return 0;

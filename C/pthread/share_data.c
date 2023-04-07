@@ -10,10 +10,10 @@ int num = 100;
 // 线程调度之后执行的任务
 void *fun(void *arg) {
   int *pn = (int *) arg;
-  printf("before in fun number=%d, *pn=%d\n", num, *pn);
+  printf("线程1 before in fun number=%d, *pn=%d\n", num, *pn);
   num++;
   (*pn)++;
-  printf("after in fun number=%d, *pn=%d\n", num, *pn);
+  printf("线程1 after in fun number=%d, *pn=%d\n", num, *pn);
 
   printf("线程1 tid: %lu\n", pthread_self());
   return NULL;
@@ -23,15 +23,19 @@ void *fun(void *arg) {
 void *fun1(void *arg) {
   int var = (int)(long)arg;
   printf("线程2 tid: %lu var=%d \n", pthread_self(), var);
-  printf("before in fun1 number=%d\n", num);
+  printf("线程2 before in fun1 number=%d\n", num);
   num++;
-  printf("after in fun1 number=%d\n", num);
+  printf("线程2 after in fun1 number=%d\n", num);
   return NULL;
 }
+
+// 数据段和堆
 int main(void) {
   int res = -1;
+
   pthread_t tid;
   pthread_t tid2;
+
   memset(&tid, 0, sizeof(tid));
   memset(&tid2, 0, sizeof(tid2));
 
@@ -62,6 +66,7 @@ int main(void) {
     return 1;
   }
   printf("在主线程 end number=%d, p=%d\n", num, *p);
+  free(p);
   printf("按下任意键线程退出\n");
   getchar();
   return 0;
