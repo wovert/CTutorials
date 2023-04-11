@@ -26,7 +26,8 @@ int main() {
     printf("Child process end!!!\n");
     exit(0);
   } 
-  
+ 
+  // 父进程没有处理子进程回收资源，子进程变成僵尸进程 
   //getchar();
   sleep(100);
   printf("Parentn wake up exit...\n");

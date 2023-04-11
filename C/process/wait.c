@@ -28,7 +28,7 @@ int main() {
     }
     exit(10);
   } 
-  
+  // 父进程代码： 因为上面exit(10)
   printf("Parent wait child exit\n");
   // parent process block wait for child process exit
   res = wait(&status);

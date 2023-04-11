@@ -13,14 +13,23 @@ void *fun(void *arg) {
 
 // 线程调度之后执行的任务
 void *fun1(void *arg) {
+  // 强制转换类型
   int var = (int)(long)arg;
   printf("线程2 tid: %lu var=%d \n", pthread_self(), var);
   return NULL;
 }
+
+
+// 数据段和堆
 int main(void) {
   int res = -1;
+
   pthread_t tid = 0;
   pthread_t tid2 = 0;
+
+  memset(&tid, 0, sizeof(tid));
+  memset(&tid2, 0, sizeof(tid2));
+  
 
   // create pthread
   res = pthread_create(&tid, NULL, fun, NULL);

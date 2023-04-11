@@ -28,6 +28,7 @@ int main() {
   
   while (1) {
     memset(buf, 0, SIZE);
+    // block
     res = read(fd, buf, SIZE);
     if (res <= 0) {
       perror("read");
