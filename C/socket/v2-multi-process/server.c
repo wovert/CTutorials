@@ -76,9 +76,9 @@ int main(int argc, char *argv[]) {
   while(1) {
  
     // 提取连接
-    //client_fd = accept(sock_fd, (struct sockaddr *)&cliaddr, &len);
+    client_fd = accept(sock_fd, (struct sockaddr *)&cliaddr, &len);
 
-
+    /*
     again:
     if ((client_fd = accept(sock_fd, (struct sockaddr *)&cliaddr, &len)) < 0) {
       if ((errno == ECONNABORTED) || (errno == EINTR))//如果是被信号中断和软件层次中断,不能退出
@@ -88,7 +88,7 @@ int main(int argc, char *argv[]) {
 	exit(-1);
       }  
     }
-
+    */
 
 
     char ip[16] = "";
@@ -147,7 +147,8 @@ int main(int argc, char *argv[]) {
       // 回收子进程资源
       // 注册信号回调 
       struct sigaction act;
-      act.sa_flags = 0;
+      //act.sa_flags = 0;
+      act.sa_flags = SA_RESTART;
       act.sa_handler = free_process;
       sigemptyset(&act.sa_mask);
       
