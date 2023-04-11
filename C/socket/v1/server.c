@@ -41,9 +41,10 @@ int main(int argc, char *argv[]) {
   client_fd = accept(sock_fd, (struct sockaddr *)&cliaddr, &len);
 
 
-  char *ip;
+  char ip[16] = "";
   short port;
-  ip = inet_ntop(AF_INET, &cliaddr.sin_addr.s_addr, ip, 16);
+  printf("新的连接\n");
+  inet_ntop(AF_INET, &cliaddr.sin_addr.s_addr, ip, 16);
   port = ntohs(cliaddr.sin_port);
 
   printf("new Client ip=%s port=%d\n", ip, port);

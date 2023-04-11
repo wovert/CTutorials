@@ -8,21 +8,25 @@
 #include <sys/wait.h>
 
 
-#define SOCKET_IP "172.23.19.206"
+#define SOCKET_IP "172.22.29.39"
 #define SOCKET_PORT 8000
 #define BUF_SIZE 1024
 
 
 void free_process(int sig) {
+
   pid_t pid;
   while(1) {
   
-    // 等待任意的子进程
+    // 非阻塞方式等待任意的子进程
     pid = waitpid(-1, NULL, WNOHANG);
+    
+    printf("捕获到信号：%d pid=%d\n", sig, pid);
     if (pid <= 0) { // 小于0 没有要等待的子进程，全部推出了 0=没有进程 没有退
+      //printf("没有要等的子进程或者没有进程\n");
       break;
     } else {
-      printf("子进程 pid=%d\n", pid);
+      printf("子进程 pid=%d terminated.\n", pid);
     }
   }
 
@@ -31,10 +35,14 @@ void free_process(int sig) {
 
 // 多进程并发服务器
 int main(int argc, char *argv[]) {
-	
+
+  // 信号集	
   sigset_t set;
   sigemptyset(&set);
+
   sigaddset(&set, SIGCHLD);
+  
+  // 设置屏蔽编号为SIGCHLD的信号
   sigprocmask(SIG_BLOCK, &set, NULL);
 
   // 1.创建套接字
@@ -69,9 +77,9 @@ int main(int argc, char *argv[]) {
     // 提取连接
     client_fd = accept(sock_fd, (struct sockaddr *)&cliaddr, &len);
 
-    char *ip;
+    char ip[16] = "";
     short port;
-    ip = inet_ntop(AF_INET, &cliaddr.sin_addr.s_addr, ip, 16);
+    inet_ntop(AF_INET, &cliaddr.sin_addr.s_addr, ip, 16);
     port = ntohs(cliaddr.sin_port);
 
     printf("新的客户端连接 ip=%s port=%d\n", ip, port);
@@ -123,16 +131,15 @@ int main(int argc, char *argv[]) {
     } else {
       close(client_fd);
       // 回收子进程资源
-      // 注册信号回调
-     
-      /* 
+      // 注册信号回调 
       struct sigaction act;
       act.sa_flags = 0;
       act.sa_handler = free_process;
       sigemptyset(&act.sa_mask);
+      
       sigaction(SIGCHLD, &act, NULL);
       sigprocmask(SIG_UNBLOCK, &set, NULL);
-      */
+      
     }
   }
   
