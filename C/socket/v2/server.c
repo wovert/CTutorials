@@ -5,6 +5,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <signal.h>
+#include <errno.h>
 #include <sys/wait.h>
 
 
@@ -75,7 +76,20 @@ int main(int argc, char *argv[]) {
   while(1) {
  
     // 提取连接
-    client_fd = accept(sock_fd, (struct sockaddr *)&cliaddr, &len);
+    //client_fd = accept(sock_fd, (struct sockaddr *)&cliaddr, &len);
+
+
+    again:
+    if ((client_fd = accept(sock_fd, (struct sockaddr *)&cliaddr, &len)) < 0) {
+      if ((errno == ECONNABORTED) || (errno == EINTR))//如果是被信号中断和软件层次中断,不能退出
+        goto again;
+      else {
+        perror("accept error");
+	exit(-1);
+      }  
+    }
+
+
 
     char ip[16] = "";
     short port;
