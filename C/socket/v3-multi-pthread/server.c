@@ -64,19 +64,14 @@ int main(int argc, char *argv[]) {
   pthread_attr_init(&attr);
   pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
 
-  // 信号集	
-  sigset_t set;
-  sigemptyset(&set);
-
-  sigaddset(&set, SIGCHLD);
-  
-  // 设置屏蔽编号为SIGCHLD的信号
-  sigprocmask(SIG_BLOCK, &set, NULL);
-
   // 1.创建套接字
   int sock_fd;
   sock_fd = socket(AF_INET, SOCK_STREAM, 0);
 
+  // 1.1 端口复用
+  int opt = 1;
+  setsockopt(sock_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+  
   // 2.绑定
   struct sockaddr_in addr;
   addr.sin_family = AF_INET; // ipv4
