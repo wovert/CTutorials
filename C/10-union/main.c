@@ -20,18 +20,16 @@ void main() {
   tmp.c = 0x04030201;
 
   printf("a=%#X b=%#X c=%#X\n", tmp.a, tmp.b, tmp.c);
+  printf("a=%p b=%p c=%p\n", (char *)&tmp.a, (short *)&tmp.b, (int *)&tmp.c);
   printf("sizeof(union)=%d\n", sizeof(tmp)); // 4
-
-  // 验证当前计算机是否是大端还是小端
 
   printf("buf[0]=%#x\n", tmp.buf[0]);
   if (tmp.buf[0] == 0x01) {
-    printf("当前计算机是小端模式\n");
+    printf("Big-Endian\n");
   } else {
-    printf("当前计算机是大端模式\n");
+    printf("Little-Endian\n");
   }
 
-  // 枚举类型
   enum COLOR color = RED;
   printf("color=%d\n", color);
 

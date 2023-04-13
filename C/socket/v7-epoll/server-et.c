@@ -174,7 +174,7 @@ int main(int argc, char *argv[]) {
 	    
               //printf("客户端信息：%s\n", buf);
               write(STDOUT_FILENO, buf, 4);
-              write(evs[i].data.fd, buf, count);
+              //write(evs[i].data.fd, buf, count);
 	    }
 	  }
         }
