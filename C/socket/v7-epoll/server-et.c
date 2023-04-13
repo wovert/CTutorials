@@ -7,8 +7,10 @@
 #include <sys/types.h>
 #include <sys/time.h>
 #include <ctype.h>
+#include <fcntl.h>
 #include <sys/epoll.h>
 #include <errno.h>
+#include <error.h>
 
 #define SOCKET_IP "172.22.21.3"
 #define SOCKET_PORT 8000
@@ -105,6 +107,7 @@ int main(int argc, char *argv[]) {
   epoll_ctl(epfd, EPOLL_CTL_ADD, lfd, &ev);
   while(1) {
     nready = epoll_wait(epfd, evs, 1024, -1);
+    printf("\nepoll wait---------------------------\n");
     if (nready < 0) {
       perror("");
       break;
@@ -126,30 +129,53 @@ int main(int argc, char *argv[]) {
           port = ntohs(cliaddr.sin_port);
           printf("新的客户端连接 ip=%s port=%d\n", ip, port);
 
+          // 设置cfd为非阻塞
+	  int flags = fcntl(cfd, F_GETFL); // 获得cfd的标志位
+          flags |= O_NONBLOCK;
+	  fcntl(cfd, F_SETFL, flags);
+
 	  // cfd上树
 	  ev.data.fd = cfd;
-	  ev.events = EPOLLIN;
+	  ev.events = EPOLLIN | EPOLLET; // 边缘触发
 	  epoll_ctl(epfd, EPOLL_CTL_ADD, cfd, &ev);
 
 	} else if (evs[i].events & EPOLLIN) {
-	  // cfd变化，而且是读事件变化
-          char buf[BUF_SIZE] = "";
-          int count = 0;
-          count = read(evs[i].data.fd, buf, sizeof(buf));
-          //printf("count=%d\n", count);
+	  while(1){
+	    // cfd变化，而且是读事件变化
+            //char buf[BUF_SIZE] = "";
+            char buf[4] = "";
+            int count = 0;
 
-          if (count < 0) {
-            perror("");
-	    // 下数
-	    epoll_ctl(epfd, EPOLL_CTL_DEL, evs[i].data.fd, &evs[i]);
-	  } else if (count == 0) {
-	    printf("client [%d] close\n", i);
-	    close(evs[i].data.fd);
-	    epoll_ctl(epfd, EPOLL_CTL_DEL, evs[i].data.fd, &evs[i]);
-	  } else {
+	    // read 非阻塞
+            count = read(evs[i].data.fd, buf, sizeof(buf));
+            //printf("count=%d\n", count);
+
+
+	    // 如果读一个缓冲区没有数据，如果是带阻塞，就阻塞等等
+	    // 如果非阻塞，缓冲区没有数据返回值等于-1， 并且会将errno值设置为 EAGAIN
+            if (count < 0) {
+	      // 缓冲区读干净了，跳转循环，继续监听
+	      if (errno == EAGAIN) {
+	        break;
+	      }
+
+	      // 普通错误
+              perror("");
+	      close(evs[i].data.fd);
+	      // 下树
+	      epoll_ctl(epfd, EPOLL_CTL_DEL, evs[i].data.fd, &evs[i]);
+	      break; 
+	    } else if (count == 0) {
+	      printf("client [%d] close\n", i);
+	      close(evs[i].data.fd);
+	      epoll_ctl(epfd, EPOLL_CTL_DEL, evs[i].data.fd, &evs[i]);
+	      break;
+	    } else {
 	    
-            printf("客户端信息：%s\n", buf);
-            write(evs[i].data.fd, buf, count);
+              //printf("客户端信息：%s\n", buf);
+              write(STDOUT_FILENO, buf, 4);
+              write(evs[i].data.fd, buf, count);
+	    }
 	  }
         }
       }
