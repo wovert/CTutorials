@@ -16,11 +16,13 @@
 
 - K&R C 1978
 - C with Classes 1980
-- C++ 98(V1.0)
+- **C++ 98(V1.0)**
 - **C++ 11(V2.0)**
+- C++ 14
 
-- C++ 语言
-- C++ 标准库
+- C++
+  - C++ 语言
+  - C++ 标准库
 
 > C with class
 
@@ -38,11 +40,11 @@
 
 ## C++应用领域
 
-- 界面（GUI）
+- GUI
 - Job Opportunifies 工作
-- 游戏（Cocos2d-X）、图像、多媒体、网络、嵌入式
-- 数据库（Oracle、MySQL）、浏览器（Chrome），搜索引擎（ Google）
-- 操作系统、驱动程序、编译器（Gcc、LLVM），编程语言(Swift)
+- Game（Cocos2d-X）、图像、多媒体、网络、嵌入式
+- Database（Oracle、MySQL）、浏览器（Chrome），搜索引擎（ Google）
+- OS、驱动程序、编译器（Gcc、LLVM），编程语言(Swift)
 - HPC(High Performance Computing)高新能计算
 - iOS开发（Runtime, AsyncDisplayKit）
 - Android 开发(NDK, fresco[匿名共享内存，Ashmem, Anomymus Shared Memory])
@@ -425,7 +427,7 @@ MY_ARR3 arrRef3 = arr;
 
 ## 类
 
-### 类定义在头文件 成员函数在cpp文件中实现
+类定义在头文件 成员函数在cpp文件中实现
 
 ## 结构体和类的区别
 
