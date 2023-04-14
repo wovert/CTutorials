@@ -16,13 +16,22 @@
 
 - K&R C 1978
 - C with Classes 1980
-- C++ 98(V1.0)
+- **C++ 98(V1.0)**
 - **C++ 11(V2.0)**
+- C++ 14
 
-- C++ 语言
-- C++ 标准库
+- C++
+  - C++ 语言
+  - C++ 标准库
 
 > C with class
+
+
+## C VS C++
+
+- C: type(Data,Functions) => variables
+- C++: class(Data, Functions) => objects
+
 
 ## C++
 
@@ -38,11 +47,11 @@
 
 ## C++应用领域
 
-- 界面（GUI）
+- GUI
 - Job Opportunifies 工作
-- 游戏（Cocos2d-X）、图像、多媒体、网络、嵌入式
-- 数据库（Oracle、MySQL）、浏览器（Chrome），搜索引擎（ Google）
-- 操作系统、驱动程序、编译器（Gcc、LLVM），编程语言(Swift)
+- Game(Cocos*)、图像、多媒体、网络、嵌入式
+- Database（Oracle、MySQL）、浏览器（Chrome），搜索引擎（ Google）
+- OS、驱动程序、编译器（Gcc、LLVM），编程语言(Swift)
 - HPC(High Performance Computing)高新能计算
 - iOS开发（Runtime, AsyncDisplayKit）
 - Android 开发(NDK, fresco[匿名共享内存，Ashmem, Anomymus Shared Memory])
@@ -62,6 +71,9 @@
 https://isocpp.org/std/status
 https://www.cnblogs.com/mjios/category/459066.html
 https://www.cheatengine.org/downloads.php
+
+
+## Tools
 
 - 逆向工程：IDA Pro
 - Beyond Compare
@@ -162,7 +174,6 @@ ssh -Y -p 3022 user@host
 链接
 > ld -o test test.o ...
 
-
 ```
 
 ### Visual studio Community 2017
@@ -258,6 +269,31 @@ extern "C" {
 }
 ```
 
+## C++ 头文件布局
+
+```
+#ifndef __COMPLEX__
+#define __COMPLEX__
+
+#include <cmath>
+
+// 1. forward declarations 前置声明
+class ostream;
+class Complex;
+
+// 2. class declarations 类声明
+class Complex {
+  ...
+};
+
+// 3. class defination 类定义
+Complex::function ...
+
+#endif
+```
+
+
+
 ## 全局变量检测增强
 
 - int a = 10; // 赋值，当作定义
@@ -270,7 +306,7 @@ extern "C" {
 - 定义变量时不需要是以哦那个struct
 - 机构体内可以写函数
 
-##  更严格的类型转换
+## 更严格的类型转换
 
 - 不能隐式转换 `char *p = malloc(64);` 必须强制类型转换 `char *p = (char *)malloc(64);` 
 
@@ -405,8 +441,6 @@ MY_ARR3 arrRef3 = arr;
 ### 指针的引用
 
 
-
-
 ## C和C++的区别
 
 - C语言的结构体不能写函数，C++可以
@@ -425,7 +459,7 @@ MY_ARR3 arrRef3 = arr;
 
 ## 类
 
-### 类定义在头文件 成员函数在cpp文件中实现
+类定义在头文件 成员函数在cpp文件中实现
 
 ## 结构体和类的区别
 
