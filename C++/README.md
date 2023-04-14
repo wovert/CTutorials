@@ -26,6 +26,13 @@
 
 > C with class
 
+
+## C VS C++
+
+- C: type(Data,Functions) => variables
+- C++: class(Data, Functions) => objects
+
+
 ## C++
 
 > 学习计算机程序设计的核心思想和编程范式（Paradigm）
@@ -42,7 +49,7 @@
 
 - GUI
 - Job Opportunifies 工作
-- Game（Cocos2d-X）、图像、多媒体、网络、嵌入式
+- Game(Cocos*)、图像、多媒体、网络、嵌入式
 - Database（Oracle、MySQL）、浏览器（Chrome），搜索引擎（ Google）
 - OS、驱动程序、编译器（Gcc、LLVM），编程语言(Swift)
 - HPC(High Performance Computing)高新能计算
@@ -64,6 +71,9 @@
 https://isocpp.org/std/status
 https://www.cnblogs.com/mjios/category/459066.html
 https://www.cheatengine.org/downloads.php
+
+
+## Tools
 
 - 逆向工程：IDA Pro
 - Beyond Compare
@@ -164,7 +174,6 @@ ssh -Y -p 3022 user@host
 链接
 > ld -o test test.o ...
 
-
 ```
 
 ### Visual studio Community 2017
@@ -260,6 +269,31 @@ extern "C" {
 }
 ```
 
+## C++ 头文件布局
+
+```
+#ifndef __COMPLEX__
+#define __COMPLEX__
+
+#include <cmath>
+
+// 1. forward declarations 前置声明
+class ostream;
+class Complex;
+
+// 2. class declarations 类声明
+class Complex {
+  ...
+};
+
+// 3. class defination 类定义
+Complex::function ...
+
+#endif
+```
+
+
+
 ## 全局变量检测增强
 
 - int a = 10; // 赋值，当作定义
@@ -272,7 +306,7 @@ extern "C" {
 - 定义变量时不需要是以哦那个struct
 - 机构体内可以写函数
 
-##  更严格的类型转换
+## 更严格的类型转换
 
 - 不能隐式转换 `char *p = malloc(64);` 必须强制类型转换 `char *p = (char *)malloc(64);` 
 
@@ -405,8 +439,6 @@ MY_ARR3 arrRef3 = arr;
     - 可以跟非const引用构成重载
 
 ### 指针的引用
-
-
 
 
 ## C和C++的区别
