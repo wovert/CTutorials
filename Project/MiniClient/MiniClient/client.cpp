@@ -14,6 +14,12 @@
 
 using namespace std;
 
+
+struct DataPackage {
+	int age;
+	char name[32];
+};
+
 int main() {
 	// startup Windows socket 2.x env
 	WORD ver = MAKEWORD(2, 2);
@@ -38,10 +44,10 @@ int main() {
 
 	int ret = connect(_sock, (struct sockaddr *)&_sin, sizeof(sockaddr_in));
 	if (SOCKET_ERROR == ret) {
-		printf("connect failed");
+		printf("connect failed\n");
 	}
 	else {
-		printf("connect success!");
+		printf("connect success!\n");
 	}
 
 	// 3. receive from server data
@@ -57,7 +63,8 @@ int main() {
 		}
 		int clen = recv(_sock, recvMsg, 1024, 0);
 		if (clen > 0) {
-			printf("Server Message: %s\n", recvMsg);
+			DataPackage* dp = (DataPackage *)recvMsg;
+			printf("Server Data name:%d age:%s\n", dp->age, dp->name);
 		}
 	}
 

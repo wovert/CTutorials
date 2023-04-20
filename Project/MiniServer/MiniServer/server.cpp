@@ -13,6 +13,40 @@
 
 using namespace std;
 
+struct DataPackage {
+	int age;
+	char name[32];
+};
+
+
+
+enum CMD {
+	CMD_LOGIN,
+	CMD_LOGOUT,
+	CMD_ERROR
+};
+
+struct DataHeader {
+	short dataLenth; // data length
+	short cmd; // command
+};
+struct Login {
+	char username[32];
+	char password[32];
+};
+
+struct LoginResult {
+	int result;
+};
+
+struct Logout {
+	char username[32];
+};
+
+struct LogoutResult {
+	int result;
+};
+
 int main() {
 	// startup Windows socket 2.x env
 	WORD ver = MAKEWORD(2, 2);
@@ -51,26 +85,51 @@ int main() {
 	if (INVALID_SOCKET == _cSock) {
 		printf("Access failed\n");
 	}
-	printf("New client IP:%s\n", inet_ntoa(clientAddr.sin_addr));
+	printf("New client socket=%d, IP:%s\n", (int)_cSock, inet_ntoa(clientAddr.sin_addr));
 
 
 	char recvMsg[1024] = "";
+
 	while (true) {
+		DataHeader header = {};
 
 		// 5. receive data from client
-		int nLen = recv(_cSock, recvMsg, 1024, 0);
+		int nLen = recv(_cSock, (char *)&header, sizeof(DataHeader), 0);
 		if (nLen <= 0) {
 			printf("Client closed\n");
 			break;
 		}
-		printf("Client Message: %s\n", recvMsg);
-		if (0 == strcmp(recvMsg, "getName")) {
-			char sendMsg[] = "Hello, I'm Bob";
-			send(_cSock, sendMsg, strlen(sendMsg) + 1, 0);
+		printf("command: %d, dataLenth: %d\n", header.cmd, header.dataLenth);
+
+		switch (header.cmd) {
+			case CMD_LOGIN: {
+				Login login = {};
+				recv(_cSock, (char *)&login, sizeof(Login), 0);
+
+				// check username and password
+				LoginResult ret = {0};
+				send(_cSock, (const char*)&header, sizeof(DataHeader), 0);
+				send(_cSock, (const char*)&ret, sizeof(LoginResult), 0);
+			}
+			break;
+			case CMD_LOGOUT: {
+				Logout logout = {};
+				recv(_cSock, (char *)&logout, sizeof(Logout), 0);
+
+				LogoutResult ret = { 0 };
+				send(_cSock, (const char*)&header, sizeof(DataHeader), 0);
+				send(_cSock, (const char*)&ret, sizeof(LogoutResult), 0);
+			}	
+			break;
+			default:
+				header.cmd = CMD_ERROR;
+				header.dataLenth = 0;
+				send(_cSock, (const char*)&header, sizeof(DataHeader), 0);
 		}
-		else if(0 == strcmp(recvMsg, "getAge")) {
-			char sendMsg[] = "My age is 18old";
-			send(_cSock, sendMsg, strlen(sendMsg) + 1, 0);
+		if (0 == strcmp(recvMsg, "getInfo")) {
+			DataPackage dp = { 18, "AI聊天" };
+			printf("Client getInfo\n");
+			send(_cSock, (const char*)&dp, sizeof(DataPackage), 0);
 		}
 		else {
 			char sendMsg[] = "hello, I'm Server.";
