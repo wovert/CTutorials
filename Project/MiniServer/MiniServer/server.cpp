@@ -22,28 +22,48 @@ struct DataPackage {
 
 enum CMD {
 	CMD_LOGIN,
+	CMD_LOGIN_RESULT,
 	CMD_LOGOUT,
+	CMD_LOGOUT_RESULT,
 	CMD_ERROR
 };
 
 struct DataHeader {
-	short dataLenth; // data length
 	short cmd; // command
+	short dataLenth; // data length
 };
-struct Login {
+struct Login: public DataHeader {
+	Login() {
+		cmd = CMD_LOGIN;
+		dataLenth = sizeof(Login);
+	}
 	char username[32];
 	char password[32];
 };
 
-struct LoginResult {
+struct LoginResult: public DataHeader{
+	LoginResult() {
+		cmd = CMD_LOGIN_RESULT;
+		dataLenth = sizeof(LoginResult);
+		result = 0;
+	}
 	int result;
 };
 
-struct Logout {
+struct Logout: public DataHeader {
+	Logout() {
+		cmd = CMD_LOGOUT;
+		dataLenth = sizeof(Logout);
+	}
 	char username[32];
 };
 
-struct LogoutResult {
+struct LogoutResult: public DataHeader {
+	LogoutResult() {
+		cmd = CMD_LOGOUT_RESULT;
+		dataLenth = sizeof(LogoutResult);
+		result = 0;
+	}
 	int result;
 };
 
@@ -65,7 +85,7 @@ int main() {
 		printf("Bind failed\n");
 	}
 	else {
-		printf("Bind success\n");
+		printf("绑定套接字成功\n");
 	}
 
 	// 3. listen port
@@ -73,7 +93,7 @@ int main() {
 		printf("Listen failed\n");
 	}
 	else {
-		printf("Listen success\n");
+		printf("监听端口成功\n");
 	}
 
 	// 4. accept
@@ -88,52 +108,63 @@ int main() {
 	printf("New client socket=%d, IP:%s\n", (int)_cSock, inet_ntoa(clientAddr.sin_addr));
 
 
-	char recvMsg[1024] = "";
+
 
 	while (true) {
-		DataHeader header = {};
+		// 缓冲区
+		char recvMsg[1024] = "";
 
-		// 5. receive data from client
-		int nLen = recv(_cSock, (char *)&header, sizeof(DataHeader), 0);
+		//DataHeader header = {};
+
+		//// 5. receive data from client
+		//int nLen = recv(_cSock, (char *)&header, sizeof(DataHeader), 0);
+		
+		int nLen = recv(_cSock, (char *)&recvMsg, sizeof(DataHeader), 0);
+		printf("recvMsg=%s\n", recvMsg);
+		DataHeader* header = (DataHeader*)recvMsg;
+		
 		if (nLen <= 0) {
 			printf("Client closed\n");
 			break;
 		}
-		printf("command: %d, dataLenth: %d\n", header.cmd, header.dataLenth);
 
-		switch (header.cmd) {
+		switch (header->cmd) {
 			case CMD_LOGIN: {
-				Login login = {};
-				recv(_cSock, (char *)&login, sizeof(Login), 0);
+				
+				//recv(_cSock, (char *)&login + sizeof(DataHeader), sizeof(Login) - sizeof(DataHeader), 0);
+								//printf("收到命令: CMD_LOGIN 数据长度: %d, username=%s, passwod=%s\n", 
+				//	login.dataLenth, login.username, login.password);
+
+
+				recv(_cSock, recvMsg + sizeof(DataHeader), header->dataLenth - sizeof(DataHeader), 0);
+				Login* login = (Login *)recvMsg;
+
+				printf("收到命令: CMD_LOGIN 数据长度: %d, username=%s, passwod=%s\n",
+					login->dataLenth, login->username, login->password);
 
 				// check username and password
-				LoginResult ret = {0};
-				send(_cSock, (const char*)&header, sizeof(DataHeader), 0);
+				LoginResult ret;
 				send(_cSock, (const char*)&ret, sizeof(LoginResult), 0);
 			}
 			break;
 			case CMD_LOGOUT: {
-				Logout logout = {};
-				recv(_cSock, (char *)&logout, sizeof(Logout), 0);
+				
+				//recv(_cSock, (char *)&logout + sizeof(DataHeader), sizeof(Logout) - sizeof(DataHeader), 0);
+				//printf("收到命令: CMD_LOGOUT 数据长度: %d, username=%s\n",
+				//	logout.dataLenth, logout.username);
 
-				LogoutResult ret = { 0 };
-				send(_cSock, (const char*)&header, sizeof(DataHeader), 0);
+				recv(_cSock, recvMsg + sizeof(DataHeader), header->dataLenth - sizeof(DataHeader), 0);
+				Logout* logout = (Logout *)recvMsg;
+				printf("收到命令: CMD_LOGOUT 数据长度: %d, username=%s\n",
+					logout->dataLenth, logout->username);
+
+				LogoutResult ret;
 				send(_cSock, (const char*)&ret, sizeof(LogoutResult), 0);
 			}	
 			break;
 			default:
-				header.cmd = CMD_ERROR;
-				header.dataLenth = 0;
-				send(_cSock, (const char*)&header, sizeof(DataHeader), 0);
-		}
-		if (0 == strcmp(recvMsg, "getInfo")) {
-			DataPackage dp = { 18, "AI聊天" };
-			printf("Client getInfo\n");
-			send(_cSock, (const char*)&dp, sizeof(DataPackage), 0);
-		}
-		else {
-			char sendMsg[] = "hello, I'm Server.";
-			send(_cSock, sendMsg, strlen(sendMsg) + 1, 0);
+				DataHeader header = {CMD_ERROR, 0};
+				send(_cSock, (const char*)&header, sizeof(header), 0);
 		}
 
 	}

@@ -20,6 +20,53 @@ struct DataPackage {
 	char name[32];
 };
 
+enum CMD {
+	CMD_LOGIN,
+	CMD_LOGIN_RESULT,
+	CMD_LOGOUT,
+	CMD_LOGOUT_RESULT,
+	CMD_ERROR
+};
+
+struct DataHeader {
+	short cmd; // command
+	short dataLenth; // data length
+};
+struct Login : public DataHeader {
+	Login() {
+		cmd = CMD_LOGIN;
+		dataLenth = sizeof(Login);
+	}
+	char username[32];
+	char password[32];
+};
+
+struct LoginResult : public DataHeader {
+	LoginResult() {
+		cmd = CMD_LOGIN_RESULT;
+		dataLenth = sizeof(LoginResult);
+		result = 0;
+	}
+	int result;
+};
+
+struct Logout : public DataHeader {
+	Logout() {
+		cmd = CMD_LOGOUT;
+		dataLenth = sizeof(Logout);
+	}
+	char username[32];
+};
+
+struct LogoutResult : public DataHeader {
+	LogoutResult() {
+		cmd = CMD_LOGOUT_RESULT;
+		dataLenth = sizeof(LogoutResult);
+		result = 0;
+	}
+	int result;
+};
+
 int main() {
 	// startup Windows socket 2.x env
 	WORD ver = MAKEWORD(2, 2);
@@ -33,7 +80,7 @@ int main() {
 
 	}
 	else {
-		printf("Socket succes!\n");
+		printf("创建套接字!\n");
 	}
 
 	// 2. connect server
@@ -47,7 +94,7 @@ int main() {
 		printf("connect failed\n");
 	}
 	else {
-		printf("connect success!\n");
+		printf("连接成功!\n");
 	}
 
 	// 3. receive from server data
@@ -56,15 +103,38 @@ int main() {
 	while (true) {
 		scanf("%s", sendMsg);
 		if (0 == strcmp(sendMsg, "exit")) {
+			printf("收到退出命令eixt\n");
 			break;
+	
+		} else if(0 == strcmp(sendMsg, "login")) {
+			
+			Login login;
+			strcpy(login.username, "admin");
+			strcpy(login.password, "123456");
+
+			// send message to server
+			send(_sock, (const char*)&login, sizeof(login), 0);
+
+			// receive message from server
+			LoginResult loginRet;
+			recv(_sock, (char *)&loginRet, sizeof(loginRet), 0);
+
+			printf("LoginResult: %d\n", loginRet.result);
+
+		} else if (0 == strcmp(sendMsg, "logout")) {
+			
+			Logout logout;
+			strcpy(logout.username, "admin");
+			send(_sock, (const char*)&logout, sizeof(logout), 0);
+
+			// receive message from server
+			LogoutResult loginRet = {};
+			recv(_sock, (char *)&loginRet, sizeof(loginRet), 0);
+
+			printf("LogoutResult: %d\n", loginRet.result);
 		}
 		else {
-			send(_sock, sendMsg, strlen(sendMsg) + 1, 0);
-		}
-		int clen = recv(_sock, recvMsg, 1024, 0);
-		if (clen > 0) {
-			DataPackage* dp = (DataPackage *)recvMsg;
-			printf("Server Data name:%d age:%s\n", dp->age, dp->name);
+			printf("收到不支持命令，请重新输入\n");
 		}
 	}
 
