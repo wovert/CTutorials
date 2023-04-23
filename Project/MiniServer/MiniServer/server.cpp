@@ -165,7 +165,9 @@ int main() {
 		// int nfds fd_set集合中所有描述符(socket)的范围，而不是数量
 		// 所有文件描述符最大值 +1 在Windows OS 这个值可以写0
 		// *readfds, *writefds, exceptfds, *timeout
-		int ret = select(_sock + 1, &readFd, &writeFd, &exceptFd, NULL);
+		// NULL: 永久等待
+		timeval t = { 0, 0 }; // 马上返回结果
+		int ret = select(_sock + 1, &readFd, &writeFd, &exceptFd, &t);
 		if (ret < 0) {
 			printf("select任务结束\n");
 			break;
