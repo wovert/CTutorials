@@ -26,6 +26,7 @@ enum CMD {
 	CMD_LOGIN_RESULT,
 	CMD_LOGOUT,
 	CMD_LOGOUT_RESULT,
+	CMD_NEW_USER_JOIN,
 	CMD_ERROR
 };
 
@@ -68,6 +69,16 @@ struct LogoutResult: public DataHeader {
 	int result;
 };
 
+
+struct NewUserJoin : public DataHeader {
+	NewUserJoin() {
+		cmd = CMD_NEW_USER_JOIN;
+		dataLenth = sizeof(NewUserJoin);
+		scok = 0;
+	}
+	int scok;
+};
+
 // 客户端连接
 vector<SOCKET> g_clients;
 
@@ -79,7 +90,7 @@ int processor(SOCKET _cSock) {
 	DataHeader* header = (DataHeader*)recvMsg;
 
 	if (nLen <= 0) {
-		printf("Client closed\n");
+		printf("Client<Socket=%d> closed\n", _cSock);
 		return -1;
 	}
 
@@ -88,7 +99,7 @@ int processor(SOCKET _cSock) {
 		recv(_cSock, recvMsg + sizeof(DataHeader), header->dataLenth - sizeof(DataHeader), 0);
 		Login* login = (Login *)recvMsg;
 
-		printf("收到命令: CMD_LOGIN 数据长度: %d, username=%s, passwod=%s\n",
+		printf("收到<Socket=%d>命令: CMD_LOGIN 数据长度: %d, username=%s, passwod=%s\n", _cSock,
 			login->dataLenth, login->username, login->password);
 
 		// check username and password
@@ -99,7 +110,7 @@ int processor(SOCKET _cSock) {
 	case CMD_LOGOUT: {
 		recv(_cSock, recvMsg + sizeof(DataHeader), header->dataLenth - sizeof(DataHeader), 0);
 		Logout* logout = (Logout *)recvMsg;
-		printf("收到命令: CMD_LOGOUT 数据长度: %d, username=%s\n",
+		printf("收到<Socket=%d>命令: CMD_LOGOUT 数据长度: %d, username=%s\n", _cSock,
 			logout->dataLenth, logout->username);
 
 		LogoutResult ret;
@@ -144,15 +155,17 @@ int main() {
 
 	while (true) {
 		
-		// 伯克里 socket
-		fd_set readFd;
+		// 伯克里套接字 BSD socket
+		fd_set readFd; // 描述符（socket）集合
 		fd_set writeFd;
 		fd_set exceptFd;
 
+		// 清理集合
 		FD_ZERO(&readFd);
 		FD_ZERO(&writeFd);
 		FD_ZERO(&exceptFd);
 
+		// 将描述符（socket）加入集合
 		FD_SET(_sock, &readFd);
 		FD_SET(_sock, &writeFd);
 		FD_SET(_sock, &exceptFd);
@@ -165,17 +178,18 @@ int main() {
 		// int nfds fd_set集合中所有描述符(socket)的范围，而不是数量
 		// 所有文件描述符最大值 +1 在Windows OS 这个值可以写0
 		// *readfds, *writefds, exceptfds, *timeout
-		// NULL: 永久等待
-		timeval t = { 0, 0 }; // 马上返回结果
+		// NULL: 永久等待直到有数据才会返回
+		timeval t = { 1, 0 }; // 马上返回结果
 		int ret = select(_sock + 1, &readFd, &writeFd, &exceptFd, &t);
 		if (ret < 0) {
 			printf("select任务结束\n");
 			break;
 		}
+		//printf("空闲时间处理其他业务...\n");
 
-		// 有可读数据
+		// 判断描述符（socket）是否在集合中
 		if (FD_ISSET(_sock, &readFd)) {
-			FD_CLR(_sock, &readFd);
+			FD_CLR(_sock, &readFd); // 在集合中清空描述符（socket）
 
 			sockaddr_in clientAddr;
 			int addrLen = sizeof(sockaddr_in);
@@ -186,6 +200,13 @@ int main() {
 			if (INVALID_SOCKET == _cSock) {
 				printf("access failed\n");
 			}
+
+			// 广播
+			for (int n = (int)g_clients.size() - 1; n >= 0; n--) {
+				NewUserJoin userJoin;
+				send(g_clients[n], (const char *)&userJoin, sizeof(NewUserJoin), 0);
+			}
+
 			g_clients.push_back(_cSock);
 			printf("新的客户端连接 socket=%d, IP:%s\n", (int)_cSock, inet_ntoa(clientAddr.sin_addr));
 		}
