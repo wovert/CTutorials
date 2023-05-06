@@ -1,16 +1,26 @@
-﻿#define WIN32_LEAN_AND_MEAN
-#define _WINSOCK_DEPRECATED_NO_WARNINGS
+﻿#ifdef _WIN32
+	#define WIN32_LEAN_AND_MEAN
+	#define _WINSOCK_DEPRECATED_NO_WARNINGS
+	#define _CRT_SECURE_NO_WARNINGS
+	#include <Windows.h>
+	#include <WinSock2.h>
+	// load dynamic library
+	#pragma comment(lib, "ws2_32.lib")
+#else
+	#include <unistd.h> // uni std
+	#include <arpa/inet.h>
+	#include <string.h>
 
-#include <Windows.h>
-#include <WinSock2.h>
+	#define SOCKET int
+	#define INVALID_SOCKET (SOCKET)(-0)
+	#define SOCKET_ERROR (-1)
+#endif
+
 #include <stdio.h>
 #include <vector>
 
 #define SERVER_PORT 9000
 #define SERVER_IP "127.0.0.1"
-
-// load dynamic library
-#pragma comment(lib, "ws2_32.lib")
 
 using namespace std;
 
@@ -18,8 +28,6 @@ struct DataPackage {
 	int age;
 	char name[32];
 };
-
-
 
 enum CMD {
 	CMD_LOGIN,
@@ -85,12 +93,12 @@ vector<SOCKET> g_clients;
 int processor(SOCKET _cSock) {
 	// 缓冲区
 	char recvMsg[1024] = "";
-	int nLen = recv(_cSock, (char *)&recvMsg, sizeof(DataHeader), 0);
+	int nLen = (int)recv(_cSock, (char *)&recvMsg, sizeof(DataHeader), 0);
 	printf("recvMsg=%s\n", recvMsg);
 	DataHeader* header = (DataHeader*)recvMsg;
 
 	if (nLen <= 0) {
-		printf("Client<Socket=%d> closed\n", _cSock);
+		printf("客户端<Socket=%d>已退出，任务结束\n", _cSock);
 		return -1;
 	}
 
@@ -121,14 +129,16 @@ int processor(SOCKET _cSock) {
 		DataHeader header = { CMD_ERROR, 0 };
 		send(_cSock, (const char*)&header, sizeof(header), 0);
 	}
-
+	return 0;
 }
 
 int main() {
+#ifdef _WIN32
 	// startup Windows socket 2.x env
 	WORD ver = MAKEWORD(2, 2);
 	WSADATA dat;
 	WSAStartup(ver, &dat);
+#endif
 
 	// 1. create socket
 	SOCKET _sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -137,7 +147,14 @@ int main() {
 	sockaddr_in _sin = {};
 	_sin.sin_family = AF_INET;
 	_sin.sin_port = htons(SERVER_PORT); // host to net unsgined short
+	
+#ifdef _WIN32
 	_sin.sin_addr.S_un.S_addr = INADDR_ANY;
+#else
+	_sin.sin_addr.s_addr = INADDR_ANY;
+#endif
+
+
 	if (SOCKET_ERROR == bind(_sock, (sockaddr *)&_sin, sizeof(_sin))) {
 		printf("Bind failed\n");
 	}
@@ -170,9 +187,14 @@ int main() {
 		FD_SET(_sock, &writeFd);
 		FD_SET(_sock, &exceptFd);
 
+		SOCKET maxSock = _sock;
+
 		// 遍历访问客户端连接
 		for (int n = (int)g_clients.size()-1; n >= 0; n--) {
 			FD_SET(g_clients[n], &readFd);
+			if (maxSock < g_clients[n]) {
+				maxSock = g_clients[n];
+			}
 		}
 
 		// int nfds fd_set集合中所有描述符(socket)的范围，而不是数量
@@ -180,7 +202,7 @@ int main() {
 		// *readfds, *writefds, exceptfds, *timeout
 		// NULL: 永久等待直到有数据才会返回
 		timeval t = { 1, 0 }; // 马上返回结果
-		int ret = select(_sock + 1, &readFd, &writeFd, &exceptFd, &t);
+		int ret = select(maxSock + 1, &readFd, &writeFd, &exceptFd, &t);
 		if (ret < 0) {
 			printf("select任务结束\n");
 			break;
@@ -196,7 +218,12 @@ int main() {
 			SOCKET _cSock = INVALID_SOCKET;
 
 			// accept client
+#ifdef _WIN32
 			_cSock = accept(_sock, (sockaddr *)&clientAddr, &addrLen);
+#else
+			_cSock = accept(_sock, (sockaddr *)&clientAddr, (socklen_t *)&addrLen);
+#endif
+
 			if (INVALID_SOCKET == _cSock) {
 				printf("access failed\n");
 			}
@@ -212,18 +239,30 @@ int main() {
 		}
 
 		// 遍历访问客户端连接
-		for (int n=0; n<readFd.fd_count; n++) {
-			if (-1 == processor(readFd.fd_array[n])) {
-				auto iter = find(g_clients.begin(), g_clients.end(), readFd.fd_array[n]);
-				if (iter != g_clients.end()) {
-					g_clients.erase(iter);
+		//for (int n=0; n<readFd.fd_count; n++) {
+		//	if (-1 == processor(readFd.fd_array[n])) {
+		//		auto iter = find(g_clients.begin(), g_clients.end(), readFd.fd_array[n]);
+		//		if (iter != g_clients.end()) {
+		//			g_clients.erase(iter);
+		//		}
+		//	}
+		//}
+		for (int n = (int)g_clients.size() - 1; n >= 0; n--) {
+			if (FD_ISSET(g_clients[n], &readFd)) {
+				if (-1 == processor(g_clients[n])) {
+					// 自动推导类型
+					auto iter = g_clients.begin() + n; //std::vector<SOCKET>::iterator iter = g_clients.begin() + n;
+					if (iter != g_clients.end()) {
+						g_clients.erase(iter);
+					}
 				}
 			}
 		}
 
-	}
 
-	for (int n = g_clients.size() - 1; n >= 0; n--) {
+	}
+#ifdef _WIN32
+	for (int n = (int)g_clients.size() - 1; n >= 0; n--) {
 		closesocket(g_clients[n]);
 	}
 
@@ -232,6 +271,11 @@ int main() {
 
 	// clean Windows socket Env
 	WSACleanup();
-
+#else
+	for (int n = (int)g_clients.size() - 1; n >= 0; n--) {
+		close(g_clients[n]);
+	}
+	close(_sock);
+#endif
 	return 0;
 }

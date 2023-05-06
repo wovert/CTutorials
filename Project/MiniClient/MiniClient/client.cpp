@@ -1,9 +1,19 @@
-﻿#define WIN32_LEAN_AND_MEAN
-#define _WINSOCK_DEPRECATED_NO_WARNINGS
-#define _CRT_SECURE_NO_WARNINGS
+﻿#ifdef _WIN32
+	#define WIN32_LEAN_AND_MEAN
+	#define _WINSOCK_DEPRECATED_NO_WARNINGS
+	#define _CRT_SECURE_NO_WARNINGS
+	#include <Windows.h>
+	#include <WinSock2.h>
+#else
+	#include <unistd.h> // uni std
+	#include <arpa/inet.h>
+	#include <string.h>
 
-#include <Windows.h>
-#include <WinSock2.h>
+	#define SOCKET int
+	#define INVALID_SOCKET (SOCKET)(-0)
+	#define SOCKET_ERROR (-1)
+#endif
+
 #include <stdio.h>
 #include <thread>
 
@@ -81,7 +91,7 @@ struct NewUserJoin : public DataHeader {
 int processor(SOCKET _cSock) {
 	// 缓冲区
 	char recvMsg[1024] = "";
-	int nLen = recv(_cSock, (char *)&recvMsg, sizeof(DataHeader), 0);
+	int nLen = (int)recv(_cSock, (char *)&recvMsg, sizeof(DataHeader), 0);
 	printf("recvMsg=%s\n", recvMsg);
 	DataHeader* header = (DataHeader*)recvMsg;
 
@@ -113,7 +123,7 @@ int processor(SOCKET _cSock) {
 		}
 		break;
 	}
-	return 1;
+	return 0;
 };
 
 bool g_bRun = true;
@@ -145,11 +155,12 @@ void cmdThread(SOCKET _sock) {
 }
 
 int main() {
+#ifdef _WIN32
 	// startup Windows socket 2.x env
 	WORD ver = MAKEWORD(2, 2);
 	WSADATA dat;
 	WSAStartup(ver, &dat);
-
+#endif
 	// 1. create socket
 	SOCKET _sock = socket(AF_INET, SOCK_STREAM, 0);
 	if (INVALID_SOCKET == _sock) {
@@ -164,7 +175,13 @@ int main() {
 	sockaddr_in _sin = {};
 	_sin.sin_family = AF_INET; // IPv4
 	_sin.sin_port = htons(SERVER_PORT); // Port
+
+#ifdef _WIN32
 	_sin.sin_addr.S_un.S_addr = inet_addr("127.0.0.1"); // IP
+#else
+	_sin.sin_addr.s_addr = inet_addr("192.168.23.10"); // IP
+#endif
+
 
 	int ret = connect(_sock, (struct sockaddr *)&_sin, sizeof(sockaddr_in));
 	if (SOCKET_ERROR == ret) {
@@ -187,7 +204,7 @@ int main() {
 		FD_ZERO(&fdReads);
 		FD_SET(_sock, &fdReads);
 		timeval t = { 1, 0 };
-		int ret = select(_sock, &fdReads, 0, 0, &t);
+		int ret = select(_sock+1, &fdReads, 0, 0, &t);
 		if (ret < 0) {
 			printf("select task1 end\n");
 			break;
@@ -203,11 +220,15 @@ int main() {
 		//Sleep(2000);
 	}
 
+
+
+#ifdef _WIN32
 	// 4. close socket
 	closesocket(_sock);
-
 	// clean Windows socket Env
 	WSACleanup();
-
+#else
+	close(_sock);
+#endif
 	return 0;
 }
