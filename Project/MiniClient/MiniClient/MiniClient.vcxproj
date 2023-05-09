@@ -139,6 +139,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="client.cpp" />
+    <ClCompile Include="MiniTCPClilent.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MessageHeader.hpp" />
+    <ClInclude Include="MiniTCPClient.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <vector>
 
-#define SERVER_PORT 9000
+#define SERVER_PORT 9002
 #define SERVER_IP "127.0.0.1"
 
 using namespace std;
@@ -40,12 +40,12 @@ enum CMD {
 
 struct DataHeader {
 	short cmd; // command
-	short dataLenth; // data length
+	short dataLength; // data length
 };
 struct Login: public DataHeader {
 	Login() {
 		cmd = CMD_LOGIN;
-		dataLenth = sizeof(Login);
+		dataLength = sizeof(Login);
 	}
 	char username[32];
 	char password[32];
@@ -54,7 +54,7 @@ struct Login: public DataHeader {
 struct LoginResult: public DataHeader{
 	LoginResult() {
 		cmd = CMD_LOGIN_RESULT;
-		dataLenth = sizeof(LoginResult);
+		dataLength = sizeof(LoginResult);
 		result = 0;
 	}
 	int result;
@@ -63,7 +63,7 @@ struct LoginResult: public DataHeader{
 struct Logout: public DataHeader {
 	Logout() {
 		cmd = CMD_LOGOUT;
-		dataLenth = sizeof(Logout);
+		dataLength = sizeof(Logout);
 	}
 	char username[32];
 };
@@ -71,7 +71,7 @@ struct Logout: public DataHeader {
 struct LogoutResult: public DataHeader {
 	LogoutResult() {
 		cmd = CMD_LOGOUT_RESULT;
-		dataLenth = sizeof(LogoutResult);
+		dataLength = sizeof(LogoutResult);
 		result = 0;
 	}
 	int result;
@@ -81,7 +81,7 @@ struct LogoutResult: public DataHeader {
 struct NewUserJoin : public DataHeader {
 	NewUserJoin() {
 		cmd = CMD_NEW_USER_JOIN;
-		dataLenth = sizeof(NewUserJoin);
+		dataLength = sizeof(NewUserJoin);
 		scok = 0;
 	}
 	int scok;
@@ -94,7 +94,7 @@ int processor(SOCKET _cSock) {
 	// 缓冲区
 	char recvMsg[1024] = "";
 	int nLen = (int)recv(_cSock, (char *)&recvMsg, sizeof(DataHeader), 0);
-	printf("recvMsg=%s\n", recvMsg);
+	printf("nLen=%d\n", nLen);
 	DataHeader* header = (DataHeader*)recvMsg;
 
 	if (nLen <= 0) {
@@ -104,11 +104,11 @@ int processor(SOCKET _cSock) {
 
 	switch (header->cmd) {
 	case CMD_LOGIN: {
-		recv(_cSock, recvMsg + sizeof(DataHeader), header->dataLenth - sizeof(DataHeader), 0);
+		recv(_cSock, recvMsg + sizeof(DataHeader), header->dataLength - sizeof(DataHeader), 0);
 		Login* login = (Login *)recvMsg;
 
 		printf("收到<Socket=%d>命令: CMD_LOGIN 数据长度: %d, username=%s, passwod=%s\n", _cSock,
-			login->dataLenth, login->username, login->password);
+			login->dataLength, login->username, login->password);
 
 		// check username and password
 		LoginResult ret;
@@ -116,10 +116,10 @@ int processor(SOCKET _cSock) {
 	}
 					break;
 	case CMD_LOGOUT: {
-		recv(_cSock, recvMsg + sizeof(DataHeader), header->dataLenth - sizeof(DataHeader), 0);
+		recv(_cSock, recvMsg + sizeof(DataHeader), header->dataLength - sizeof(DataHeader), 0);
 		Logout* logout = (Logout *)recvMsg;
 		printf("收到<Socket=%d>命令: CMD_LOGOUT 数据长度: %d, username=%s\n", _cSock,
-			logout->dataLenth, logout->username);
+			logout->dataLength, logout->username);
 
 		LogoutResult ret;
 		send(_cSock, (const char*)&ret, sizeof(LogoutResult), 0);
@@ -156,7 +156,7 @@ int main() {
 
 
 	if (SOCKET_ERROR == bind(_sock, (sockaddr *)&_sin, sizeof(_sin))) {
-		printf("Bind failed\n");
+		printf("绑定失败\n");
 	}
 	else {
 		printf("绑定套接字成功\n");
