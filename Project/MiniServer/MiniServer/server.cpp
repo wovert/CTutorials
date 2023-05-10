@@ -132,7 +132,7 @@ int processor(SOCKET _cSock) {
 	return 0;
 }
 
-int main() {
+int main2() {
 #ifdef _WIN32
 	// startup Windows socket 2.x env
 	WORD ver = MAKEWORD(2, 2);

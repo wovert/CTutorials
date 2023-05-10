@@ -139,7 +139,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="client.cpp" />
-    <ClCompile Include="MiniTCPClilent.cpp" />
+    <ClCompile Include="MiniTCPClient.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MessageHeader.hpp" />

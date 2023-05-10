@@ -5,22 +5,22 @@
 
 
 #ifdef _WIN32
-	#define WIN32_LEAN_AND_MEAN
-	#define _WINSOCK_DEPRECATED_NO_WARNINGS
-	#define _CRT_SECURE_NO_WARNINGS
-	#include <Windows.h>
-	#include <WinSock2.h>
+#define WIN32_LEAN_AND_MEAN
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
+#include <Windows.h>
+#include <WinSock2.h>
 
-	// load dynamic library
-	#pragma comment(lib, "ws2_32.lib")
+// load dynamic library
+#pragma comment(lib, "ws2_32.lib")
 #else
-	#include <unistd.h> // uni std
-	#include <arpa/inet.h>
-	#include <string.h>
+#include <unistd.h> // uni std
+#include <arpa/inet.h>
+#include <string.h>
 
-	#define SOCKET int
-	#define INVALID_SOCKET (SOCKET)(-0)
-	#define SOCKET_ERROR (-1)
+#define SOCKET int
+#define INVALID_SOCKET (SOCKET)(-0)
+#define SOCKET_ERROR (-1)
 #endif
 
 #include <stdio.h>
@@ -33,9 +33,9 @@
 
 
 #ifdef _WIN32
-	#define SERVER_IP "127.0.0.1"
+#define SERVER_IP "127.0.0.1"
 #else
-	#define SERVER_IP "192.168.23.10"
+#define SERVER_IP "192.168.23.10"
 #endif
 
 
@@ -69,7 +69,7 @@ public:
 			printf("<socket=%d>关闭旧连接。\n", this->_sock);
 			this->close();
 		}
-		
+
 		// 1. 建立 socket
 		this->_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 		if (INVALID_SOCKET == this->_sock) {
@@ -109,7 +109,7 @@ public:
 		else {
 			printf("socket=<%d>连接服务器socket=<%s:%d>成功。\n", this->_sock, ip, port);
 		}
-}
+	}
 	/**
 	 * 关闭socket
 	 */
@@ -179,7 +179,7 @@ public:
 	 * 发送数据
 	 */
 	int sendData(DataHeader* header) {
-		if(isRun() && header) {
+		if (isRun() && header) {
 			printf("dataLenth=%d\n", header->dataLength);
 			return send(this->_sock, (const char*)header, header->dataLength, 0);
 		}
@@ -191,22 +191,22 @@ public:
 	 */
 	void onNetMsg(DataHeader* header) {
 		switch (header->cmd) {
-			case CMD_LOGIN_RESULT: {
-				LoginResult* loginResult = (LoginResult *)header;
-				printf("socket=<%d>收到服务器消息: CMD_LOGIN_RESULT 数据长度: %d\n", this->_sock, loginResult->dataLength);
-			}
-			break;
+		case CMD_LOGIN_RESULT: {
+			LoginResult* loginResult = (LoginResult *)header;
+			printf("socket=<%d>收到服务器消息: CMD_LOGIN_RESULT 数据长度: %d\n", this->_sock, loginResult->dataLength);
+		}
+							   break;
 
-			case CMD_LOGOUT_RESULT: {
-				LogoutResult* logoutResult = (LogoutResult *)header;
-				printf("socket=<%d>收到服务器消息: CMD_LOGOUT_RESULT  数据长度: %d\n", this->_sock, logoutResult->dataLength);
-			}break;
+		case CMD_LOGOUT_RESULT: {
+			LogoutResult* logoutResult = (LogoutResult *)header;
+			printf("socket=<%d>收到服务器消息: CMD_LOGOUT_RESULT  数据长度: %d\n", this->_sock, logoutResult->dataLength);
+		}break;
 
-			case CMD_NEW_USER_JOIN: {
-				NewUserJoin* newUserJoin = (NewUserJoin *)header;
-				printf("socket=<%d>收到服务器消息: CMD_NEW_USER_JOIN  数据长度: %d\n", this->_sock, newUserJoin->dataLength);
-			}
-			break;
+		case CMD_NEW_USER_JOIN: {
+			NewUserJoin* newUserJoin = (NewUserJoin *)header;
+			printf("socket=<%d>收到服务器消息: CMD_NEW_USER_JOIN  数据长度: %d\n", this->_sock, newUserJoin->dataLength);
+		}
+								break;
 		}
 	}
 
@@ -220,10 +220,3 @@ public:
 };
 
 #endif
-
-
-
-
-
-
-
