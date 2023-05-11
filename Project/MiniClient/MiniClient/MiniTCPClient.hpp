@@ -31,6 +31,9 @@
 #define SERVER_PORT_3 9002
 #define ERROR_CODE (-1)
 
+// 缓冲区最小单位大小
+#define RECV_BUF_SIZE 10240 // 10KB
+
 
 #ifdef _WIN32
 #define SERVER_IP "127.0.0.1"
@@ -131,6 +134,7 @@ public:
 	/**
 	 * 处理网络消息
 	 */
+	int _mCount = 1;
 	bool onRun() {
 		if (isRun()) {
 			fd_set fdReads;
@@ -138,6 +142,7 @@ public:
 			FD_SET(this->_sock, &fdReads);
 			timeval t = { 1, 0 };
 			int ret = select(this->_sock + 1, &fdReads, 0, 0, &t);
+			//printf("select ret=%d count=%d\n", ret, _mCount++);
 			if (ret < 0) {
 				printf("<socket=%d>select任务结束1\n", this->_sock);
 				this->close();
@@ -156,22 +161,56 @@ public:
 		return false;
 	}
 
-	/**
-	 * 接受数据:处理粘包
-	 */
-	int recvData(SOCKET _cSock) {
-		// 缓冲区
-		char recvMsg[1024] = "";
-		int nLen = (int)recv(_cSock, (char *)&recvMsg, sizeof(DataHeader), 0);
-		DataHeader* header = (DataHeader*)recvMsg;
 
+	// 接受缓冲区
+	char _recvMsg[RECV_BUF_SIZE] = { 0 }; // 10KB
+
+	// 第二缓冲区 消息缓冲区
+	char _recvMsgBuf[RECV_BUF_SIZE*10] = {0}; // 100KB
+
+	// 消息缓冲区数据尾部位置
+	int _lastPos = 0;
+
+	/**
+	 * 接受数据:处理粘包和少包
+	 */
+	int recvData(SOCKET cSock) {
+
+		//int nLen = (int)recv(_cSock, (char *)&recvMsg, sizeof(DataHeader), 0);
+		int nLen = (int)recv(cSock, (char *)&_recvMsg, RECV_BUF_SIZE, 0);
+		//printf("接受服务器数据nLen=%d\n", nLen);
 		if (nLen <= 0) {
-			printf("与服务器socket=<%d>断开连接，任务结束\n", this->_sock);
+			printf("与服务器socket=<%d>断开连接，任务结束\n", cSock);
 			return -1;
 		}
 
-		recv(_cSock, recvMsg + sizeof(DataHeader), header->dataLength - sizeof(DataHeader), 0);
-		this->onNetMsg(header);
+		// 将收取的数据拷贝到消息缓冲区
+		memcpy(_recvMsgBuf + _lastPos, _recvMsg, nLen);
+
+		// 消息缓冲区的数据尾部位置后移
+		_lastPos += nLen;
+
+		// 如果消息缓冲区的数据长度大于消息头DataHeader长度
+		while (_lastPos >= sizeof(DataHeader)) {
+			// 就可以知道当前消息体的长度
+			DataHeader* header = (DataHeader*)_recvMsgBuf;
+
+			// 如果消息缓冲区的数据长度大于消息长度，保证数据包完整
+			if (_lastPos >= header->dataLength) {
+				// 消息缓冲区剩余未处理数据的长度
+				int newPos = _lastPos - header->dataLength;
+				// 处理网络消息
+				this->onNetMsg(header);
+				// 消息缓冲区剩余未处理数据前移
+				memcpy(_recvMsgBuf, _recvMsgBuf + header->dataLength, newPos);
+				// 消息缓冲区的数据尾部位置前移
+				_lastPos = newPos;
+			}
+			else {
+				// 消息缓冲区剩余数据不够一条完整消息
+				break;
+			}
+		}
 		return 0;
 	};
 
@@ -180,7 +219,7 @@ public:
 	 */
 	int sendData(DataHeader* header) {
 		if (isRun() && header) {
-			printf("dataLenth=%d\n", header->dataLength);
+			//printf("dataLenth=%d\n", header->dataLength);
 			return send(this->_sock, (const char*)header, header->dataLength, 0);
 		}
 		return SOCKET_ERROR;
@@ -191,22 +230,30 @@ public:
 	 */
 	void onNetMsg(DataHeader* header) {
 		switch (header->cmd) {
-		case CMD_LOGIN_RESULT: {
-			LoginResult* loginResult = (LoginResult *)header;
-			printf("socket=<%d>收到服务器消息: CMD_LOGIN_RESULT 数据长度: %d\n", this->_sock, loginResult->dataLength);
-		}
-							   break;
+			case CMD_LOGIN_RESULT: {
+				LoginResult* loginResult = (LoginResult *)header;
+				//printf("socket=<%d>收到服务器消息: CMD_LOGIN_RESULT 数据长度: %d\n", this->_sock, loginResult->dataLength);
+			}
+			break;
 
-		case CMD_LOGOUT_RESULT: {
-			LogoutResult* logoutResult = (LogoutResult *)header;
-			printf("socket=<%d>收到服务器消息: CMD_LOGOUT_RESULT  数据长度: %d\n", this->_sock, logoutResult->dataLength);
-		}break;
+			case CMD_LOGOUT_RESULT: {
+				LogoutResult* logoutResult = (LogoutResult *)header;
+				//printf("socket=<%d>收到服务器消息: CMD_LOGOUT_RESULT  数据长度: %d\n", this->_sock, logoutResult->dataLength);
+			}break;
 
-		case CMD_NEW_USER_JOIN: {
-			NewUserJoin* newUserJoin = (NewUserJoin *)header;
-			printf("socket=<%d>收到服务器消息: CMD_NEW_USER_JOIN  数据长度: %d\n", this->_sock, newUserJoin->dataLength);
-		}
-								break;
+			case CMD_NEW_USER_JOIN: {
+				NewUserJoin* newUserJoin = (NewUserJoin *)header;
+				//printf("socket=<%d>收到服务器消息: CMD_NEW_USER_JOIN  数据长度: %d\n", this->_sock, newUserJoin->dataLength);
+			}
+			break;
+			case CMD_ERROR: {
+				printf("socket=<%d>收到服务器错误消息: CMD_ERROR 数据长度: %d\n", this->_sock, header->dataLength);
+			}
+			break;
+			default: {
+				printf("socket=<%d>收到服务器未定义消息: 数据长度: %d\n", this->_sock, header->dataLength);
+			}
+
 		}
 	}
 

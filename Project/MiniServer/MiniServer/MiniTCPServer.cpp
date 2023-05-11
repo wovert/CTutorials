@@ -15,16 +15,17 @@ int main() {
 	server.bindIpPort(SERVER_IP, SERVER_PORT);
 	server.listenPort(LISTERN_NUMBER);
 
-	MiniTCPServer server2;
-	server2.bindIpPort(SERVER_IP, SERVER_PORT_2);
-	server2.listenPort(LISTERN_NUMBER);
+	//MiniTCPServer server2;
+	//server2.bindIpPort(SERVER_IP, SERVER_PORT_2);
+	//server2.listenPort(LISTERN_NUMBER);
 
-	while (server.isRun() || server.isRun()) {
+	while (server.isRun()) {
+	//while (server.isRun() || server.isRun()) {
 		server.onRun();
-		server2.onRun();
+		//server2.onRun();
 	}
 	server.close();
-	server2.close();
+	//server2.close();
 
 	printf("服务端已退出。\n");
 	getchar();

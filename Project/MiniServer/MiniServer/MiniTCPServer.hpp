@@ -164,6 +164,7 @@ public:
 	/**
 	 * 处理网络消息
 	 */
+	int _mCount = 1;
 	bool onRun() {
 		if (isRun()) {
 			// 伯克里套接字 BSD socket
@@ -197,6 +198,7 @@ public:
 			// NULL: 永久等待直到有数据才会返回
 			timeval t = { 1, 0 }; // 马上返回结果
 			int ret = select(maxSock + 1, &readFd, &writeFd, &exceptFd, &t);
+			//printf("select ret=%d count=%d\n", ret, _mCount++);
 			if (ret < 0) {
 				printf("select任务结束\n");
 				this->close();
@@ -227,23 +229,29 @@ public:
 		return false;
 	}
 
+	// 第2缓冲区
+	char recvMsg[409600] = ""; // 双缓冲
+
 	/**
 	 * 接受数据:处理粘包 拆分包
 	 */
 	int recvData(SOCKET _cSock) {
-		// 缓冲区
-		char recvMsg[1024] = "";
-		int nLen = (int)recv(_cSock, (char *)&recvMsg, sizeof(DataHeader), 0);
-		printf("nLen=%d\n", nLen);
-		DataHeader* header = (DataHeader*)recvMsg;
 
-		if (nLen <= 0) {
-			printf("客户端<Socket=%d>已退出，任务结束\n", _cSock);
-			return -1;
-		}
+		//int nLen = (int)recv(_cSock, (char *)&recvMsg, sizeof(DataHeader), 0);
+		int nLen = (int)recv(_cSock, (char *)&recvMsg, 409600, 0);
+		//printf("nLen=%d\n", nLen);
 
-		recv(_cSock, recvMsg + sizeof(DataHeader), header->dataLength - sizeof(DataHeader), 0);
-		this->onNetMsg(_cSock, header);
+		LoginResult ret;
+		sendData(_cSock, &ret);
+		//DataHeader* header = (DataHeader*)recvMsg;
+
+		//if (nLen <= 0) {
+		//	printf("客户端<Socket=%d>已退出，任务结束\n", _cSock);
+		//	return -1;
+		//}
+
+		//recv(_cSock, recvMsg + sizeof(DataHeader), header->dataLength - sizeof(DataHeader), 0);
+		//this->onNetMsg(_cSock, header);
 
 		return 0;
 	}
@@ -259,9 +267,8 @@ public:
 			printf("收到<Socket=%d>命令: CMD_LOGIN 数据长度: %d, username=%s, passwod=%s\n", _cSock,
 				login->dataLength, login->username, login->password);
 
-			// check username and password
 			LoginResult ret;
-			send(_cSock, (const char*)&ret, sizeof(LoginResult), 0);
+			sendData(_cSock, &ret);
 		}
 						break;
 		case CMD_LOGOUT: {
@@ -270,12 +277,12 @@ public:
 				logout->dataLength, logout->username);
 
 			LogoutResult ret;
-			send(_cSock, (const char*)&ret, sizeof(LogoutResult), 0);
+			sendData(_cSock, &ret);
 		}
 						 break;
 		default:
 			DataHeader header = { CMD_ERROR, 0 };
-			send(_cSock, (const char*)&header, sizeof(header), 0);
+			sendData(_cSock, &header);
 		}
 	}
 

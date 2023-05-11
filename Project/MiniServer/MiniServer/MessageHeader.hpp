@@ -35,6 +35,7 @@ struct LoginResult : public DataHeader {
 		result = 0;
 	}
 	int result;
+	char data[2046];
 };
 
 struct Logout : public DataHeader {

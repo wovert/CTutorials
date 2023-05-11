@@ -12,9 +12,10 @@ using namespace std;
 // 命令线程
 void cmdThread(MiniTCPClient* client) {
 	while (1) {
-		char sendMsg[1024] = "";
+		//char sendMsg[1024] = "";
+		char sendMsg[1024] = "login";
 
-		scanf("%s", sendMsg); // 阻塞
+		//scanf("%s", sendMsg); // 阻塞
 		if (0 == strcmp(sendMsg, "exit")) {
 			client->close();
 			printf("退出cmdThread线程\n");
