@@ -107,7 +107,7 @@ int processor(SOCKET _cSock) {
 		recv(_cSock, recvMsg + sizeof(DataHeader), header->dataLength - sizeof(DataHeader), 0);
 		Login* login = (Login *)recvMsg;
 
-		printf("收到<Socket=%d>命令: CMD_LOGIN 数据长度: %d, username=%s, passwod=%s\n", _cSock,
+		printf("收到<Socket=%d>命令: CMD_LOGIN 数据长度: %d, username=%s, passwod=%s\n", (int)_cSock,
 			login->dataLength, login->username, login->password);
 
 		// check username and password
@@ -118,7 +118,7 @@ int processor(SOCKET _cSock) {
 	case CMD_LOGOUT: {
 		recv(_cSock, recvMsg + sizeof(DataHeader), header->dataLength - sizeof(DataHeader), 0);
 		Logout* logout = (Logout *)recvMsg;
-		printf("收到<Socket=%d>命令: CMD_LOGOUT 数据长度: %d, username=%s\n", _cSock,
+		printf("收到<Socket=%d>命令: CMD_LOGOUT 数据长度: %d, username=%s\n", (int)_cSock,
 			logout->dataLength, logout->username);
 
 		LogoutResult ret;

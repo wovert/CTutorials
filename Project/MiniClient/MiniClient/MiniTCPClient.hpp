@@ -32,7 +32,9 @@
 #define ERROR_CODE (-1)
 
 // 缓冲区最小单位大小
-#define RECV_BUF_SIZE 10240 // 10KB
+#ifndef RECV_BUF_SIZE
+	#define RECV_BUF_SIZE 10240 // 10KB
+#endif
 
 
 #ifdef _WIN32
@@ -89,7 +91,7 @@ public:
 	 */
 	int connectServer(const char* ip, const unsigned short port) {
 		if (INVALID_SOCKET == this->_sock) {
-			printf("建立socket=<%d>连接。\n", this->_sock);
+			printf("建立socket=<%d>连接。\n", (int)this->_sock);
 			this->initSocket();
 		}
 
@@ -144,14 +146,14 @@ public:
 			int ret = select(this->_sock + 1, &fdReads, 0, 0, &t);
 			//printf("select ret=%d count=%d\n", ret, _mCount++);
 			if (ret < 0) {
-				printf("<socket=%d>select任务结束1\n", this->_sock);
+				printf("<socket=%d>select任务结束1\n", (int)this->_sock);
 				this->close();
 				return false;
 			}
 			if (FD_ISSET(this->_sock, &fdReads)) {
 				FD_CLR(this->_sock, &fdReads);
 				if (-1 == this->recvData(this->_sock)) {
-					printf("<socket=%d>select任务结束2\n", this->_sock);
+					printf("<socket=%d>select任务结束2\n", (int)this->_sock);
 					this->close();
 					return false;
 				}

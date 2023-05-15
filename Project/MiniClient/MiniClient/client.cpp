@@ -203,7 +203,7 @@ int main2() {
 		FD_ZERO(&fdReads);
 		FD_SET(_sock, &fdReads);
 		timeval t = { 1, 0 };
-		int ret = select(_sock+1, &fdReads, 0, 0, &t);
+		int ret = (int)select(_sock+1, &fdReads, 0, 0, &t);
 		if (ret < 0) {
 			printf("select task1 end\n");
 			break;
