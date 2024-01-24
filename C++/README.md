@@ -189,6 +189,19 @@ ssh -Y -p 3022 user@host
 - [GDB调试](https://yolinux.com/TUTORIALS/GDB-Commands.html)
 
 
+
+## 常量和变量
+
+```c++
+#define D_YEAR 2019;
+
+int year { 2019 };
+year = 2020;
+
+const int year_fix { 2019 };
+
+```
+
 ## inline
 
 > `inline`修饰函数的声明或者实现，可以使其成为内联函数

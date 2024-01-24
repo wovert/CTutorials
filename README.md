@@ -144,26 +144,7 @@ http://www.dependencywalker.com/
 
 如果没有这些目录：`$ xcode-select --install`
 
-### 快捷键
 
-- VS
-  - 自动格式化：Ctrl+k, Ctrl+f
-  - 注释代码：Ctrl+k, Ctrl+c
-  - 取消注释代码：Ctrl+k, Ctrl+u
-  - 设置断点：F9
-  - 调试运行：F5
-  - 不调试运行：Ctrl+F5
-  - 编译不运行：Ctrl+Shift+b
-  - 调试next: F10
-  - 调试step: F11
-  - 选中内容上下挪动：Alt + 上下箭头
-- QT
-  - 自动格式化代码：Ctrl+i
-  - 注释/取消注释：Ctrl+/
-  - 自动完成类函数定义：Alt+Enter
-  - .h文件和对应.cpp文件切换：F4
-  - 设置断点：F9
-  - 调试运行：F5
 
 ### 常用系统函数
 

@@ -2,6 +2,32 @@
 
 > C 语言用来**创建空间小**、**速度快**、**可移植性**高的程序。它比其他语言的抽象层次更低，更接近**机器语言**。大多数**操作系统**、其他**计算机语言**和大多数**游戏**软件都是C语言写的。
 
+## C语言学习目录
+
+- 基本语法
+  - 数据类型
+  - 输入和输入
+  - 运算符
+  - 控制语句
+- 核心语法
+- 高级语法
+  - 结构体
+  - 枚举
+  - 共同体
+  - 位域
+
+## 开发环境搭建
+
+1. VMware Workstation Pro 15.5
+
+https://pan.baidu.com/s/1rrn85iObeHi8_h21omFk_g xh7g
+
+2. Ubuntu 18.04
+
+https://pan.baidu.com/s/1dKvaJVKeVbYwgMpQ_YFkjp yagh
+
+
+
 ## Overview C
 
 ### 语言的工作方式

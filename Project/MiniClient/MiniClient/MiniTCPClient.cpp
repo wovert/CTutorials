@@ -46,7 +46,8 @@ int main() {
 
 	// Windows limit socket: 64个默认网络连接
 	// Linux limit socsket: 1000个默认网络连接
-	MiniTCPClient* clients[SOCKET_MAX];
+	const int cCount = FD_SETSIZE - 1; // 63客户端连接 + 1个服务器主机=64
+	MiniTCPClient* clients[cCount];
 	for (int i = 0; i < SOCKET_MAX; i++) {
 		clients[i] = new MiniTCPClient();
 		clients[i]->connectServer(SERVER_IP, SERVER_PORT);
